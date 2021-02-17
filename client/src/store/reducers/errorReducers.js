@@ -1,0 +1,13 @@
+import { GET_ERRORS } from '../actions/types';
+
+export const initialState = {};
+
+export const reducer = function(state = initialState, action) {
+  switch (action.type) {
+    case GET_ERRORS:
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
