@@ -1,0 +1,35 @@
+{
+    "version": "1.0.0",
+    "name": "mern-passport-template",
+    "license": "MIT",
+    "description": "Starter MERN application with Passport user authentication using JSON Web Tokens.",
+    "main": "server.js",
+    "scripts": {
+        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+        "start:prod": "node server.js",
+        "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+        "client": "npm start --prefix client",
+        "install": "npm install --prefix client",
+        "build": "npm run build --prefix client",
+        "heroku-postbuild": "npm run build"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "concurrently": "~4.1.2",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "if-env": "~1.0.4",
+        "is-empty": "^1.2.0",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "~4.17.20",
+        "mongoose": "~5.11.15",
+        "passport": "~0.4.1",
+        "passport-jwt": "^4.0.0",
+        "validator": "^11.1.0"
+    },
+    "devDependencies": {
+        "nodemon": "~1.19.4"
+    }
+}
