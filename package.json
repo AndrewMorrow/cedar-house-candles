@@ -10,7 +10,8 @@
         "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
         "client": "npm start --prefix client",
         "build": "npm run build --prefix client",
-        "heroku-postbuild": "npm run build"
+        "heroku-postbuild": "npm run build",
+        "lint": "eslint --fix --ext .js,.jsx ."
     },
     "dependencies": {
         "axios": "^0.21.1",
