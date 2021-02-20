@@ -88,6 +88,11 @@ const Navbar = (props) => {
                                     <MenuItem
                                         onClick={() => handleMenuClick('/')}
                                     >
+                                        Home
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => handleMenuClick('/about')}
+                                    >
                                         About
                                     </MenuItem>
                                     <MenuItem
@@ -112,12 +117,18 @@ const Navbar = (props) => {
                                     className={classes.button}
                                     onClick={() => handleButtonClick('/')}
                                 >
+                                    Home
+                                </Button>
+                                <Button
+                                    className={classes.button}
+                                    onClick={() => handleButtonClick('/about')}
+                                >
                                     About
                                 </Button>
                                 <Button
                                     className={classes.button}
                                     onClick={() =>
-                                        handleButtonClick('/portfolio')
+                                        handleButtonClick('/cart')
                                     }
                                 >
                                     Cart
@@ -125,7 +136,7 @@ const Navbar = (props) => {
                                 <Button
                                     className={classes.button}
                                     onClick={() =>
-                                        handleButtonClick('/contact')
+                                        handleButtonClick('/login')
                                     }
                                 >
                                     Login
