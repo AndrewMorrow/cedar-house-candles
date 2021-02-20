@@ -6,7 +6,7 @@ import { setCurrentUser, logoutUser } from './store/actions/authActions';
 import { Store } from './store';
 
 import './App.css';
-
+import Footer from './components/partials/Footer';
 import Navbar from './components/partials/Navbar';
 import Landing from './components/pages/Landing';
 import Register from './components/pages/Register';
@@ -44,6 +44,7 @@ const App = () => {
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );
