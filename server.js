@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 // Routes
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
+import productRoutes from "./routes/products.js";
 import passConfig from "./config/passport.js";
 dotenv.config();
 
@@ -35,6 +36,9 @@ app.use("/api/auth", authRoutes);
 
 // For all authenticated routes, make sure to use this
 app.use("/api/users", requiresAuth, usersRoutes);
+
+// Product data routes
+app.use("/api/products", productRoutes);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
