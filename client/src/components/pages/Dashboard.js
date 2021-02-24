@@ -24,6 +24,7 @@ const Dashboard = props => {
   };
 
   return (
+    <main>
     <div className="container valign-wrapper" style={{ height: '75vh' }}>
       <div className="row">
         <div className="col s12 center-align">
@@ -50,6 +51,7 @@ const Dashboard = props => {
         </div>
       </div>
     </div>
+    </main>
   );
 };
 

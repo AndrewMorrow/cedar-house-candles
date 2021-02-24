@@ -1,19 +1,21 @@
 {
     "version": "1.0.0",
-    "name": "mern-passport-template",
+    "name": "cedar-house-candles",
     "license": "MIT",
-    "description": "Starter MERN application with Passport user authentication using JSON Web Tokens.",
+    "description": "Cedar House Candle Ecommerce Site",
     "main": "server.js",
+    "type": "module",
     "scripts": {
         "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
         "start:prod": "node server.js",
         "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
         "client": "npm start --prefix client",
-        "install": "npm install --prefix client",
         "build": "npm run build --prefix client",
-        "heroku-postbuild": "npm run build"
+        "heroku-postbuild": "npm run build",
+        "lint": "eslint --fix --ext .js,.jsx ."
     },
     "dependencies": {
+        "@material-ui/core": "^4.11.3",
         "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",

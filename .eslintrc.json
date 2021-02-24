@@ -33,6 +33,7 @@
         "indent": ["error", 4],
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
-        "radix": "off"
+        "radix": "off",
+        "sourceType": "module"
     }
 }
