@@ -12,7 +12,9 @@
         "client": "npm start --prefix client",
         "build": "npm run build --prefix client",
         "heroku-postbuild": "npm run build",
-        "lint": "eslint --fix --ext .js,.jsx ."
+        "lint": "eslint --fix --ext .js,.jsx .",
+        "data:import": "node seeder",
+        "data:destroy": "node seeder -d"
     },
     "dependencies": {
         "@material-ui/core": "^4.11.3",
