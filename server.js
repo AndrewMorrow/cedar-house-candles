@@ -1,33 +1,25 @@
-require("dotenv").config();
-
-const path = require("path");
-const express = require("express");
-const mongoose = require("mongoose");
-const passport = require("passport");
+import dotenv from "dotenv";
+import path from "path";
+import express from "express";
+import passport from "passport";
+import connectDB from "./config/db.js";
 // Middleware packages
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 // Routes
-const authRoutes = require("./routes/auth");
-const usersRoutes = require("./routes/users");
+import authRoutes from "./routes/auth.js";
+import usersRoutes from "./routes/users.js";
+dotenv.config();
 
 const PORT = process.env.PORT || 3001;
+
+// connect to mongo
+connectDB();
 
 const app = express();
 
 // Middleware packages
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Mongoose connection to MongoDB. (https://mongoosejs.com/docs/guide.html)
-mongoose.connect(
-    process.env.MONGODB_URI || `mongodb://localhost:27017/${process.env.MONGODB_DATABASE}`,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    },
-)
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log(err));
 
 // Passport JWT setup.
 app.use(passport.initialize());
