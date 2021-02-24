@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
         margin: '0px 8px',
         color: 'white',
     },
+    appBar: {
+        backgroundColor: '#212121',
+    },
 }));
 
 const Navbar = (props) => {
@@ -52,7 +55,7 @@ const Navbar = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         Cedar House Candles
@@ -91,14 +94,14 @@ const Navbar = (props) => {
                                         Home
                                     </MenuItem>
                                     <MenuItem
-                                        onClick={() => handleMenuClick('/about')}
+                                        onClick={() =>
+                                            handleMenuClick('/about')
+                                        }
                                     >
                                         About
                                     </MenuItem>
                                     <MenuItem
-                                        onClick={() =>
-                                            handleMenuClick('/cart')
-                                        }
+                                        onClick={() => handleMenuClick('/cart')}
                                     >
                                         Portfolio
                                     </MenuItem>
@@ -127,17 +130,13 @@ const Navbar = (props) => {
                                 </Button>
                                 <Button
                                     className={classes.button}
-                                    onClick={() =>
-                                        handleButtonClick('/cart')
-                                    }
+                                    onClick={() => handleButtonClick('/cart')}
                                 >
                                     Cart
                                 </Button>
                                 <Button
                                     className={classes.button}
-                                    onClick={() =>
-                                        handleButtonClick('/login')
-                                    }
+                                    onClick={() => handleButtonClick('/login')}
                                 >
                                     Login
                                 </Button>
