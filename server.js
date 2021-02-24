@@ -10,14 +10,17 @@ import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 import productRoutes from "./routes/products.js";
 import passConfig from "./config/passport.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
 // connect to mongo
 connectDB();
 
 const app = express();
+
+app.use(express.json());
 
 // Middleware packages
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,6 +42,10 @@ app.use("/api/users", requiresAuth, usersRoutes);
 
 // Product data routes
 app.use("/api/products", productRoutes);
+
+// Custom Error handlers
+app.use(notFound);
+app.use(errorHandler);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
