@@ -8,6 +8,7 @@ const Landing = props => {
   console.log({ state, props });
 
   return (
+    <main>
     <div className="container valign-wrapper" style={{ height: '75vh' }}>
       <div className="row">
         <div className="col s12 center-align">
@@ -40,6 +41,7 @@ const Landing = props => {
         </div>
       </div>
     </div>
+    </main>
   );
 };
 
