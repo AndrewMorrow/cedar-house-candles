@@ -16,6 +16,9 @@ router.get("/", async (req, res) => {
     }
 });
 
+// @desc        fetch single product
+// @route       GET /api/products/:id
+// @access      Public
 router.get("/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
