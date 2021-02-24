@@ -1,10 +1,10 @@
-const Validator = require("validator");
-const isEmpty = require("is-empty");
+import Validator from "validator";
+import isEmpty from "is-empty";
 
-module.exports = function validateRegisterInput(data) {
+export default function validateRegisterInput(data) {
     let errors = {};
 
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
         data[key] = !isEmpty(data[key]) ? data[key] : "";
     });
 
@@ -34,4 +34,4 @@ module.exports = function validateRegisterInput(data) {
         errors,
         isValid: isEmpty(errors),
     };
-};
+}

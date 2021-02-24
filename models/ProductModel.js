@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // schema for array of reviews
 const reviewSchema = mongoose.Schema({

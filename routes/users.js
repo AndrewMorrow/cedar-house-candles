@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 router.get("/me", (req, res) => {
@@ -7,4 +7,4 @@ router.get("/me", (req, res) => {
     return res.json({ _id, name, email, date });
 });
 
-module.exports = router;
+export default router;

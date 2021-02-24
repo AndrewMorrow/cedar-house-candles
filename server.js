@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 // Routes
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
+import passConfig from "./config/passport.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
@@ -23,7 +24,8 @@ app.use(bodyParser.json());
 
 // Passport JWT setup.
 app.use(passport.initialize());
-require("./config/passport")(passport);
+// require("./config/passport")(passport);
+passConfig(passport);
 
 // Middleware to use when routes require authenticated user.
 const requiresAuth = passport.authenticate("jwt", { session: false });
