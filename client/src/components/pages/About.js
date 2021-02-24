@@ -13,7 +13,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: ""
+        backgroundColor: "transparent"
     },
     paper: {
         padding: theme.spacing(2),
@@ -28,14 +28,17 @@ const useStyles = makeStyles((theme) => ({
     pos: {
         marginBottom: 12,
     },
-    
+    main: {
+        display: 'flex',
+        alignItems: 'center'
+    }
 }));
 
 export default function OutlinedCard() {
     const classes = useStyles();
 
     return (
-        <main>
+        <main className={classes.main}>
             <Paper className={classes.paper} elevation10>
                 <Card className={classes.root} variant="outlined" margin3>
                     <CardContent>
