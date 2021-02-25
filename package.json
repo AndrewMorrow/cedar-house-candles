@@ -12,14 +12,14 @@
         "client": "npm start --prefix client",
         "build": "npm run build --prefix client",
         "heroku-postbuild": "npm run build",
-        "lint": "eslint --fix --ext .js,.jsx ."
+        "lint": "eslint --fix --ext .js,.jsx .",
+        "data:import": "node seeder",
+        "data:destroy": "node seeder -d"
     },
     "dependencies": {
-        "@material-ui/core": "^4.11.3",
         "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
-        "concurrently": "~4.1.2",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "if-env": "~1.0.4",
@@ -32,6 +32,7 @@
         "validator": "^11.1.0"
     },
     "devDependencies": {
+        "concurrently": "^4.1.2",
         "nodemon": "~1.19.4"
     }
 }
