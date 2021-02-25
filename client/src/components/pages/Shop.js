@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import Products from '../../../products.json';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,11 +53,21 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function Album() {
+export default function Shop() {
   const classes = useStyles();
   
-  const [products, setproducts ] = useState(products);
-console.log(products)
+  const [products, setProducts ] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+        const res = await fetch("/api/products");
+        const productData = await res.json()
+        setProducts(productData);
+        
+    };
+    fetchProducts();
+    
+}, []);
 
 
   return (
@@ -65,23 +75,12 @@ console.log(products)
       <CssBaseline />
  
       <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Portfolio
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Below is a small sample of my work. See my GitHub for a more complete list of project and details.
-            </Typography>
-
-          </Container>
-        </div>
+  
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {products.map((card) => (
-              <Grid item key={card.id} xs={12} sm={6} md={4}>
+            {products && products.length >0 && products.map((card) => (
+              <Grid item key={card._id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -96,7 +95,7 @@ console.log(products)
                     {card.description}
                     <br/>
                     <br/>
-                    {card.catrgory}
+                    Price: ${card.price}
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.cardAction} >

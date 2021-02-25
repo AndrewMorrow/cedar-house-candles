@@ -14,6 +14,7 @@ import Login from "./components/pages/Login";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/pages/Dashboard";
 import About from "./components/pages/About";
+import Shop from "./components/pages/Shop"
 
 const App = () => {
     const { dispatch } = useContext(Store);
@@ -44,6 +45,7 @@ const App = () => {
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/about" component={About} />
+                    <Route exact path="/shop" component={Shop} />
                     <Switch>
                         <PrivateRoute
                             exact
