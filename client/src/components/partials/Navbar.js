@@ -57,7 +57,11 @@ const Navbar = (props) => {
         <div className={classes.root}>
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                        onClick={() => handleMenuClick('/')}
+                    >
                         Cedar House Candles
                     </Typography>
 
@@ -89,9 +93,9 @@ const Navbar = (props) => {
                                     onClose={() => setAnchorEl(null)}
                                 >
                                     <MenuItem
-                                        onClick={() => handleMenuClick('/')}
+                                        onClick={() => handleMenuClick('/shop')}
                                     >
-                                        Home
+                                        Shop
                                     </MenuItem>
                                     <MenuItem
                                         onClick={() =>
@@ -118,9 +122,9 @@ const Navbar = (props) => {
                             <div className={classes.headerOptions}>
                                 <Button
                                     className={classes.button}
-                                    onClick={() => handleButtonClick('/')}
+                                    onClick={() => handleButtonClick('/shop')}
                                 >
-                                    Home
+                                    Shop
                                 </Button>
                                 <Button
                                     className={classes.button}
