@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Store } from '../../store';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import React, { useContext, useEffect } from "react";
+import { Store } from "../../store";
+// import { Link } from 'react-router-dom';
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import { getProducts } from "../../store/actions/productActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
         backgroundColor: theme.palette.background.paper,
     },
     gridList: {
@@ -21,19 +22,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Landing = (props) => {
     const classes = useStyles();
-    const { state } = useContext(Store);
-    const [products, setProducts] = useState([]);
+    const { state, dispatch } = useContext(Store);
+    const {
+        product: { products },
+    } = state;
 
     console.log({ state, props });
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const res = await fetch('/api/products');
-            const productData = await res.json();
-            setProducts(productData);
-        };
-        fetchProducts();
-        console.log(products);
+        getProducts()(dispatch);
+        // eslint-disable-next-line
     }, []);
 
     return (
