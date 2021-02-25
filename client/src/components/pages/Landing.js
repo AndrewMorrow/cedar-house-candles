@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Store } from "../../store";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { getProducts } from "../../store/actions/productActions";
 
 const Landing = (props) => {
@@ -12,7 +12,6 @@ const Landing = (props) => {
     useEffect(() => {
         getProducts()(dispatch);
         // eslint-disable-next-line
-        console.log(products);
     }, []);
 
     console.log({ state, props });
