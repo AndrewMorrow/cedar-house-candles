@@ -1,4 +1,4 @@
-import { GET_PRODUCTS } from "../actions/types";
+import { GET_PRODUCTS, GET_PRODUCT } from "../actions/types";
 
 export const initialState = {
     products: [],
@@ -12,7 +12,11 @@ export const reducer = function (state = initialState, action) {
                 ...state,
                 products: action.payload,
             };
-
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: action.payload,
+            };
         default:
             return state;
     }
