@@ -50,6 +50,11 @@ const productSchema = mongoose.Schema(
             required: true,
             default: 0,
         },
+        cols: {
+            type: Number,
+            required: true,
+            default: 1,
+        },
         reviews: [reviewSchema],
     },
     {
