@@ -6,6 +6,10 @@ import {
     initialState as initialStateError,
     reducer as reducerError,
 } from "./errorReducers";
+import {
+    initialState as initialStateProduct,
+    reducer as reducerProduct,
+} from "./productReducers";
 
 /*
     Combine Reducer function based on https://github.com/ankita1010/react-combine-reducers.
@@ -54,4 +58,5 @@ const rootReducer = (reducers) => {
 export default rootReducer({
     auth: [reducerAuth, initialStateAuth],
     error: [reducerError, initialStateError],
+    product: [reducerProduct, initialStateProduct],
 });

@@ -1,23 +1,29 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Store } from "../../store";
 import { Link } from "react-router-dom";
+import { getProducts } from "../../store/actions/productActions";
 
 const Landing = (props) => {
-    const { state } = useContext(Store);
-    const [products, setProducts] = useState([]);
-
-    console.log({ state, props });
+    const { state, dispatch } = useContext(Store);
+    const {
+        product: { products },
+    } = state;
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const productsData = await fetch("/api/products");
-            setProducts(productsData);
-        };
-        fetchProducts();
+        getProducts()(dispatch);
+        // eslint-disable-next-line
         console.log(products);
     }, []);
 
-    return <main>Home</main>;
+    console.log({ state, props });
+
+    return (
+        <main>
+            {products &&
+                products.length > 0 &&
+                products.map((product) => <h1>{product.name}</h1>)}
+        </main>
+    );
 };
 
 export default Landing;
