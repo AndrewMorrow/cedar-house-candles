@@ -1,6 +1,6 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./types";
 
-export const addToCart = () => {
+export const addToCart = () => async (dispatch) => {
     console.log("Add to cart function");
 };
 

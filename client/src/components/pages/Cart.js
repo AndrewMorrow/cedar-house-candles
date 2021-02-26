@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Grid, Paper, Container } from "@material-ui/core";
+import { Store } from "../../store";
+import { addToCart } from "../../store/actions/cartActions";
 
 const Cart = () => {
+    const { state, dispatch } = useContext(Store);
+    const { cart } = state;
+
+    useEffect(() => {
+        addToCart()(dispatch);
+    }, []);
+
     return (
         <main>
             <Grid container>
