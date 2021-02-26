@@ -1,14 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import { Grid, Paper, Container } from "@material-ui/core";
 import { Store } from "../../store";
-import { addToCart } from "../../store/actions/cartActions";
 
-const Cart = () => {
+const Cart = ({ match, location, history }) => {
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
 
     useEffect(() => {
-        addToCart()(dispatch);
+        console.log(cart);
     }, []);
 
     return (
