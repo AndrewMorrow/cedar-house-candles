@@ -37,4 +37,23 @@ router.get(
     })
 );
 
+// @desc        fetch all matching ids
+// @route       GET /api/products/:id
+// @access      Public
+// router.get(
+//     "/:id",
+//     catchError(async (req, res) => {
+//         const product = await Product.find({
+//             _id: { $in: someArray },
+//         });
+
+//         if (product) {
+//             res.status(200).json(product);
+//         } else {
+//             res.status(404);
+//             throw new Error("Product not found");
+//         }
+//     })
+// );
+
 export default router;

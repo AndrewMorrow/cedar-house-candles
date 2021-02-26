@@ -4,10 +4,15 @@ import { Store } from "../../store";
 
 const Cart = ({ match, location, history }) => {
     const { state, dispatch } = useContext(Store);
-    const { cart } = state;
+    const {
+        cart: { cartItems },
+    } = state;
 
     useEffect(() => {
-        console.log(cart);
+        const fetchCartItems = () => {
+            console.log("fetch Items");
+        };
+        fetchCartItems();
     }, []);
 
     return (
@@ -15,7 +20,11 @@ const Cart = ({ match, location, history }) => {
             <Grid container>
                 <Grid container item md={12}>
                     <Container maxWidth="md">
-                        <Paper>Shopping cart item</Paper>
+                        {cartItems && cartItems.length > 0 ? (
+                            <Paper>Shopping cart item</Paper>
+                        ) : (
+                            <h1>No items in your cart</h1>
+                        )}
                     </Container>
                 </Grid>
                 <Grid container item md={6}>
