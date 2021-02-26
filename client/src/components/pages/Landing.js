@@ -85,12 +85,22 @@ const Landing = (props) => {
                                     key={product.image}
                                     cols={product.cols || 1}
                                 >
-                                   
+                                                                   
                                     <img
                                         src={product.image}
                                         alt={product.name}
                                     />
-                                   
+                                   <GridListTileBar
+                                    title={product.name}
+                                    actionIcon={
+                                        <IconButton
+                                            aria-label={`info about ${product.name}`}
+                                            className={classes.icon}
+                                        >
+                                            <InfoIcon />
+                                        </IconButton>
+                                    }
+                                />
                                 </GridListTile>
                             ))}
                     </GridList>
