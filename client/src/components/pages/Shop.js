@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { getProducts } from "../../store/actions/productActions";
 import { Store } from "../../store";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        backgroundColor: '#FFFFF0',
     },
     cardMedia: {
         paddingTop: "56.25%", // 16:9
@@ -48,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
     main: {
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(2),
+    },
+    paper: {
+        padding: theme.spacing(4),
+        margin: 'auto',
+        maxWidth: 950,
+        
+        borderRadius: '1.25rem',
+        marginBottom: 20,
     },
 }));
 
@@ -68,6 +78,7 @@ export default function Shop() {
             <CssBaseline />
 
             <main>
+                <Paper className={classes.paper} elevation10>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>
@@ -106,6 +117,7 @@ export default function Shop() {
                             ))}
                     </Grid>
                 </Container>
+                </Paper>
             </main>
         </React.Fragment>
     );

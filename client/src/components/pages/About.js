@@ -13,15 +13,16 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: "transparent",
+        backgroundColor: '#FFFFF0',
         borderRadius: '3rem'
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         margin: 'auto',
         maxWidth: 950,
-        backgroundColor: '#FFFFF0',
-        borderRadius: '3.25rem'
+        
+        borderRadius: '3.25rem',
+        marginBottom: 20,
     },
 
     title: {
@@ -29,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
     },
     pos: {
         marginBottom: 12,
+        fontFamily: "Old Standard TT"
     },
     main: {
         display: 'flex',
         alignItems: 'center'
+    },
+    typography:{
+        fontFamily: "Old Standard TT"
     }
 }));
 
@@ -44,11 +49,11 @@ export default function OutlinedCard() {
             <Paper className={classes.paper} elevation10>
                 <Card className={classes.root} variant="outlined" margin3>
                     <CardContent>
-                        <Typography variant="h5" component="h2" align="center">
+                        <Typography variant="h5" component="h5" align="center" className={classes.typography}>
                             <b>Store Policies</b>
                         </Typography>
                         <Typography className={classes.pos}>
-                            Orders and Shipping
+                            <b>Orders and Shipping </b>
                         </Typography>
                         <Typography variant="body2" component="p">
                             Cedar House Candles strives to offer candles fit for
@@ -65,7 +70,7 @@ export default function OutlinedCard() {
                         </Typography>
                         <br />
                         <Typography className={classes.pos}>
-                            Refunds & Returns
+                           <b> Refunds and Returns </b>
                         </Typography>
                         <Typography variant="body2" component="p">
                             Due to the type of products offered, we do not
@@ -79,11 +84,11 @@ export default function OutlinedCard() {
                 <br />
                 <Card className={classes.root} variant="outlined">
                     <CardContent>
-                        <Typography variant="h5" component="h2" align="center">
+                        <Typography variant="h5" component="h5" align="center" className={classes.typography}>
                             <b>Product Information and Care</b>
                         </Typography>
                         <Typography className={classes.pos}>
-                            Product Information
+                            <b>Product Information </b>
                         </Typography>
                         <Typography variant="body2" component="p">
                             All Cedar House Candles products are hand-made in
@@ -96,7 +101,7 @@ export default function OutlinedCard() {
                         </Typography>
                         <br />
                         <Typography className={classes.pos}>
-                            Product Care
+                           <b> Product Care</b>
                         </Typography>
                         <Typography variant="body2" component="p">
                             Want a longer, cleaner burn? <br />
