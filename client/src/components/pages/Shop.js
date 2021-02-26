@@ -33,11 +33,14 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
+
         height: "100%",
         display: "flex",
         flexDirection: "column",
         backgroundColor: '#FFFFF0',
+      
     },
+
     cardMedia: {
         paddingTop: "56.25%", // 16:9
     },
@@ -61,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Shop() {
+export default function Shop(props) {
+    const { history } = props;
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const {
@@ -72,6 +76,10 @@ export default function Shop() {
         getProducts()(dispatch);
         // eslint-disable-next-line
     }, []);
+
+    const handleButtonClick = (newRoute) => {
+        history.push(newRoute);
+    };
 
     return (
         <React.Fragment>
@@ -86,7 +94,7 @@ export default function Shop() {
                             products.length > 0 &&
                             products.map((card) => (
                                 <Grid item key={card._id} xs={12} sm={6} md={4}>
-                                    <Card className={classes.card}>
+                                    <Card onClick={() => handleButtonClick(`/product/${card._id}`)} className={classes.card}>
                                         <CardMedia
                                             className={classes.cardMedia}
                                             image={card.image}
