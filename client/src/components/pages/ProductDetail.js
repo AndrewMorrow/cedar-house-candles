@@ -77,8 +77,8 @@ const ProductDetail = ({ match }) => {
         // eslint-disable-next-line
     }, []);
 
-    const addToCartHandler = (productId) => {
-        addToCart(productId)(dispatch);
+    const addToCartHandler = () => {
+        addToCart(product)(dispatch);
     };
 
     return (

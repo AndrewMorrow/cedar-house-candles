@@ -9,10 +9,15 @@ export const reducer = function (state = initialState, action) {
     switch (action.type) {
         case ADD_TO_CART:
             const item = action.payload;
-            const existItem = state.cartItems.find((x) => x === item);
+            const existItem = state.cartItems.find((x) => x._id === item._id);
 
             if (existItem) {
-                return state;
+                return {
+                    ...state,
+                    cartItems: state.cartItems.map(
+                        (x) => x._id === existItem._id && existItem.cartQty++
+                    ),
+                };
             } else {
                 return {
                     ...state,

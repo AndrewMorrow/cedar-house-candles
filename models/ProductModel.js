@@ -62,6 +62,14 @@ const productSchema = mongoose.Schema(
         },
         reviews: [reviewSchema],
         productTypes: [typesSchema],
+        isBestSeller: {
+            type: Boolean,
+            default: false,
+        },
+        cartQty: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         timestamps: true,
