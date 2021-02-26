@@ -9,6 +9,7 @@ import validateLoginInput from "../validation/login.js";
 import User from "../models/UserModel.js";
 
 router.post("/register", (req, res) => {
+    console.log("Register Route");
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
@@ -39,7 +40,33 @@ router.post("/register", (req, res) => {
                 newUser.password = hash;
                 newUser
                     .save()
-                    .then((user) => res.json(user))
+                    .then((user) => {
+                        const payload = {
+                            id: user.id,
+                            name: user.name,
+                        };
+                        // sign token once registered
+                        jwt.sign(
+                            payload,
+                            process.env.JWT_SECRET,
+                            { expiresIn: 31556926 },
+                            (err, token) => {
+                                if (err) {
+                                    return res.status(400).json({
+                                        tokenerror:
+                                            "There was a problem updating your security token",
+                                    });
+                                }
+
+                                res.json({
+                                    success: true,
+                                    token: `Bearer ${token}`,
+                                    user,
+                                });
+                            }
+                        );
+                        // res.json(user)
+                    })
                     .catch((err) => console.log(err));
             });
         });

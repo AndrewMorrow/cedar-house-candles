@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
     Paper,
@@ -9,19 +9,19 @@ import {
     CardContent,
     CardActions,
     Card,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: '#FFFFF0',
-        borderRadius: '3rem',
+        backgroundColor: "#FFFFF0",
+        borderRadius: "3rem",
     },
     paper: {
         padding: theme.spacing(4),
-        margin: 'auto',
+        margin: "auto",
         maxWidth: 950,
 
-        borderRadius: '3.25rem',
+        borderRadius: "3.25rem",
         marginBottom: 20,
     },
 
@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
     },
     pos: {
         marginBottom: 12,
-        fontFamily: 'Old Standard TT',
+        fontFamily: "Old Standard TT",
     },
     main: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
     },
     typography: {
-        fontFamily: 'Old Standard TT',
+        fontFamily: "Old Standard TT",
     },
 }));
 
@@ -144,8 +144,12 @@ export default function OutlinedCard() {
                             <b>Contact Information</b>
                         </Typography>
 
-                        <Typography variant="body2" component="p">
-                            Our E-Mail: cedarhousecandles@gmail.com
+                        <Typography
+                            align="center"
+                            variant="body2"
+                            component="p"
+                        >
+                            E-Mail: cedarhousecandles@gmail.com
                         </Typography>
                     </CardContent>
                 </Card>
