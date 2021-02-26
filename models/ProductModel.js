@@ -7,6 +7,11 @@ const reviewSchema = mongoose.Schema({
     comment: { type: String, required: true },
 });
 
+// schema for array of product types
+const typesSchema = mongoose.Schema({
+    name: { type: String, required: true },
+});
+
 const productSchema = mongoose.Schema(
     {
         user: {
@@ -56,6 +61,7 @@ const productSchema = mongoose.Schema(
             default: 1,
         },
         reviews: [reviewSchema],
+        productTypes: [typesSchema],
     },
     {
         timestamps: true,

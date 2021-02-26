@@ -1,38 +1,40 @@
 import express from "express";
 const router = express.Router();
 import Product from "../models/ProductModel.js";
+import { catchError } from "../middleware/errorMiddleware.js";
 
 // @desc        fetch all products
 // @route       GET /api/products
 // @access      Public
-router.get("/", async (req, res) => {
-    try {
-        console.log("All Products");
-        const products = await Product.find({});
-        res.status(200).json(products);
-    } catch (err) {
-        res.status(404);
-        throw new Error("Product Not Found");
-    }
-});
+router.get(
+    "/",
+    catchError(async (req, res) => {
+        try {
+            console.log("All Products");
+            const products = await Product.find({});
+            res.status(200).json(products);
+        } catch (err) {
+            res.status(404);
+            throw new Error("Product Not Found");
+        }
+    })
+);
 
 // @desc        fetch single product
 // @route       GET /api/products/:id
 // @access      Public
-router.get("/:id", async (req, res) => {
-    try {
+router.get(
+    "/:id",
+    catchError(async (req, res) => {
         const product = await Product.findById(req.params.id);
 
         if (product) {
             res.status(200).json(product);
         } else {
-            res.status(404).json({ message: "Product not found" });
+            res.status(404);
+            throw new Error("Product not found");
         }
-    } catch (err) {
-        // console.log(err);
-        res.status(500);
-        throw new Error("Server Error");
-    }
-});
+    })
+);
 
 export default router;

@@ -13,4 +13,12 @@ const errorHandler = (err, req, res, next) => {
     });
 };
 
-export { notFound, errorHandler };
+const catchError = (fn) => {
+    return function (req, res, next) {
+        return fn(req, res, next).catch((e) => {
+            next(e);
+        });
+    };
+};
+
+export { notFound, errorHandler, catchError };
