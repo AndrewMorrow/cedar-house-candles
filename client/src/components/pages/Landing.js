@@ -1,42 +1,42 @@
-import React, { useContext, useEffect } from 'react';
-import { Store } from '../../store';
+import React, { useContext, useEffect } from "react";
+import { Store } from "../../store";
 // import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import { getProducts } from '../../store/actions/productActions';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import { Container, Tooltip } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import { getProducts } from "../../store/actions/productActions";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import { Container, Tooltip } from "@material-ui/core";
 
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const useStyles = makeStyles((theme) => ({
     main: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
         backgroundColor: theme.palette.background.paper,
-        alignItems: 'center',
+        alignItems: "center",
     },
     gridList: {
         width: 500,
-        height: 450,
+        // height: 450,
     },
     container: {
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
         backgroundColor: theme.palette.background.paper,
     },
     icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: "rgba(255, 255, 255, 0.54)",
     },
     title: {
         margin: theme.spacing(4, 0, 2),
@@ -80,17 +80,14 @@ const Landing = (props) => {
                         {products &&
                             products.length > 0 &&
                             products.map((product) => (
-                                
                                 <GridListTile
                                     key={product.image}
                                     cols={product.cols || 1}
                                 >
-                                   
                                     <img
                                         src={product.image}
                                         alt={product.name}
                                     />
-                                   
                                 </GridListTile>
                             ))}
                     </GridList>
@@ -110,7 +107,7 @@ const Landing = (props) => {
                         <GridListTile
                             key="Subheader"
                             cols={2}
-                            style={{ height: 'auto' }}
+                            style={{ height: "auto" }}
                         ></GridListTile>
                         {products.map((tile) => (
                             <GridListTile key={tile.image}>
