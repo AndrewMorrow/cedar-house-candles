@@ -10,7 +10,7 @@ const products = [
         rating: 4.5,
         numReviews: 13,
         cols: 1,
-        productTypes: ["9OZ SOY CANDLE", "6-CUBE WAX MELT"],
+        productTypes: [{ name: "9OZ SOY CANDLE" }, { name: "6-CUBE WAX MELT" }],
     },
     {
         name: "Autumn Orchard",
@@ -23,6 +23,7 @@ const products = [
         rating: 5,
         numReviews: 23,
         cols: 2,
+        isBestSeller: true,
     },
     {
         name: "Peppermint Vanilla",
@@ -35,18 +36,20 @@ const products = [
         rating: 2.5,
         numReviews: 17,
         cols: 2,
+        isBestSeller: true,
     },
     {
-        name: 'Sugar Cookie',
-        image: '/images/sugarCookie.jpg',
+        name: "Sugar Cookie",
+        image: "/images/sugarCookie.jpg",
         description:
-            'This is a candle, you light it and smell things and stuff.',
-        category: 'Candles',
+            "This is a candle, you light it and smell things and stuff.",
+        category: "Candles",
         price: 16.0,
         countInStock: 0,
         rating: 2.5,
         numReviews: 17,
         cols: 1,
+        isBestSeller: true,
     },
 ];
 

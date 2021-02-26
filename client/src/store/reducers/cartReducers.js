@@ -12,13 +12,17 @@ export const reducer = function (state = initialState, action) {
             const existItem = state.cartItems.find((x) => x._id === item._id);
 
             if (existItem) {
-                return {
-                    ...state,
-                    cartItems: state.cartItems.map(
-                        (x) => x._id === existItem._id && existItem.cartQty++
-                    ),
-                };
+                console.log(existItem);
+                existItem.cartQty++;
+                return state;
+                // return {
+                //     ...state,
+                //     cartItems: state.cartItems.map((x) =>
+                //         x._id === existItem._id ? item : x
+                //     ),
+                // };
             } else {
+                item.cartQty++;
                 return {
                     ...state,
                     cartItems: [...state.cartItems, item],

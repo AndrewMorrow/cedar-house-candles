@@ -75,6 +75,7 @@ const ProductDetail = ({ match }) => {
         getProduct(productId)(dispatch);
         // console.log(product);
         // eslint-disable-next-line
+        console.log(state.cart.cartItems);
     }, []);
 
     const addToCartHandler = () => {
