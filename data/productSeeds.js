@@ -33,7 +33,19 @@ const products = [
         countInStock: 0,
         rating: 2.5,
         numReviews: 17,
-        cols: 3,
+        cols: 2,
+    },
+    {
+        name: 'Sugar Cookie',
+        image: '/images/sugarCookie.jpg',
+        description:
+            'This is a candle, you light it and smell things and stuff.',
+        category: 'Candles',
+        price: 16.0,
+        countInStock: 0,
+        rating: 2.5,
+        numReviews: 17,
+        cols: 1,
     },
 ];
 

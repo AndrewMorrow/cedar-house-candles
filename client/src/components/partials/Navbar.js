@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Button } from '@material-ui/core';
 
@@ -57,14 +57,11 @@ const Navbar = (props) => {
         <div className={classes.root}>
             <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
-                    <Typography
-                        variant="h6"
-                        className={classes.title}
-                        onClick={() => handleMenuClick('/')}
-                    >
-                        Cedar House Candles
-                    </Typography>
-
+                    
+                        <Typography variant="h6" className={classes.title}>
+                        <Link to='/'>  Cedar House Candles   </Link>
+                        </Typography>
+                  
                     <div>
                         {isMobile ? (
                             <>

@@ -14,7 +14,7 @@ body,
 
 main {
     flex-grow: 1;
-    background-color: #FEFBEA;
+    background-color: #fefbea;
 }
 
 header,
@@ -22,3 +22,5 @@ main,
 footer {
     flex-shrink: 0;
 }
+
+
