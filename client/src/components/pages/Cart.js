@@ -1,14 +1,18 @@
 import React, { useEffect, useContext } from "react";
 import { Grid, Paper, Container } from "@material-ui/core";
 import { Store } from "../../store";
-import { addToCart } from "../../store/actions/cartActions";
 
-const Cart = () => {
+const Cart = ({ match, location, history }) => {
     const { state, dispatch } = useContext(Store);
-    const { cart } = state;
+    const {
+        cart: { cartItems },
+    } = state;
 
     useEffect(() => {
-        addToCart()(dispatch);
+        const fetchCartItems = () => {
+            console.log("fetch Items");
+        };
+        fetchCartItems();
     }, []);
 
     return (
@@ -16,7 +20,11 @@ const Cart = () => {
             <Grid container>
                 <Grid container item md={12}>
                     <Container maxWidth="md">
-                        <Paper>Shopping cart item</Paper>
+                        {cartItems && cartItems.length > 0 ? (
+                            <Paper>Shopping cart item</Paper>
+                        ) : (
+                            <h1>No items in your cart</h1>
+                        )}
                     </Container>
                 </Grid>
                 <Grid container item md={6}>

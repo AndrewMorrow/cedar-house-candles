@@ -3,6 +3,7 @@ import { getProduct } from "../../store/actions/productActions";
 import { Store } from "../../store";
 import { Grid, Button, List, ListItem, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { addToCart } from "../../store/actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -72,9 +73,14 @@ const ProductDetail = ({ match }) => {
 
     useEffect(() => {
         getProduct(productId)(dispatch);
-        console.log(product);
+        // console.log(product);
         // eslint-disable-next-line
     }, []);
+
+    const addToCartHandler = () => {
+        addToCart(product)(dispatch);
+    };
+
     return (
         <main>
             <Grid container>
@@ -110,6 +116,9 @@ const ProductDetail = ({ match }) => {
                             <Button
                                 className={classes.cartButton}
                                 variant="contained"
+                                onClick={() => {
+                                    addToCartHandler(productId);
+                                }}
                             >
                                 Add to Cart
                             </Button>
