@@ -10,6 +10,10 @@ import {
     initialState as initialStateProduct,
     reducer as reducerProduct,
 } from "./productReducers";
+import {
+    initialState as initialStateCart,
+    reducer as reducerCart,
+} from "./cartReducers";
 
 /*
     Combine Reducer function based on https://github.com/ankita1010/react-combine-reducers.
@@ -59,4 +63,5 @@ export default rootReducer({
     auth: [reducerAuth, initialStateAuth],
     error: [reducerError, initialStateError],
     product: [reducerProduct, initialStateProduct],
+    cart: [reducerCart, initialStateCart],
 });
