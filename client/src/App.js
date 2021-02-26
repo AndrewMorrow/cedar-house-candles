@@ -15,6 +15,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/pages/Dashboard";
 import About from "./components/pages/About";
 import Shop from "./components/pages/Shop";
+import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
 
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/shop" component={Shop} />
                     <Route path="/product/:id" component={ProductDetail} />
+                    <Route path="/cart" component={Cart} />
                     <Switch>
                         <PrivateRoute
                             exact
