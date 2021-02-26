@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { Store } from '../../store';
+import React, { useContext, useEffect } from "react";
+import { Store } from "../../store";
 // import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -9,10 +9,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { Container, Paper, Tooltip } from '@material-ui/core';
 
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from "@material-ui/core/ListSubheader";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
     },
     icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
+        color: "rgba(255, 255, 255, 0.54)",
     },
     title: {
         margin: theme.spacing(4, 0, 2),
