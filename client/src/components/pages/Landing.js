@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Landing = (props) => {
+    const { history } = props;
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const {
@@ -63,6 +64,10 @@ const Landing = (props) => {
         getProducts()(dispatch);
         // eslint-disable-next-line
     }, []);
+
+    const handleButtonClick = (newRoute) => {
+        history.push(newRoute);
+    };
 
     return (
         <React.Fragment>
@@ -99,7 +104,7 @@ const Landing = (props) => {
                                         <GridListTileBar
                                             title={product.name}
                                             actionIcon={
-                                                <IconButton
+                                                <IconButton onClick={() => handleButtonClick(`/product/${product._id}`)}
                                                     aria-label={`info about ${product.name}`}
                                                     className={classes.icon}
                                                 >
@@ -134,7 +139,7 @@ const Landing = (props) => {
                                     <GridListTileBar
                                         title={tile.name}
                                         actionIcon={
-                                            <IconButton
+                                            <IconButton onClick={() => handleButtonClick(`/product/${tile._id}`)}
                                                 aria-label={`info about ${tile.name}`}
                                                 className={classes.icon}
                                             >
