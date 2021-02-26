@@ -104,6 +104,11 @@ const Cart = ({ match, location, history }) => {
                                                 Price
                                             </Typography>
                                         </TableCell>
+                                        <TableCell align="right">
+                                            <Typography variant="h6">
+                                                Remove
+                                            </Typography>
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
