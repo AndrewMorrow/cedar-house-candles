@@ -14,6 +14,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Store } from "../../store";
 import { TiShoppingCart } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -35,15 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ccyFormat(num) {
     return `${num.toFixed(2)}`;
-}
-
-function priceRow(qty, unit) {
-    return qty * unit;
-}
-
-function createRow(desc, qty, unit) {
-    const price = priceRow(qty, unit);
-    return { desc, qty, unit, price };
 }
 
 function subtotal(items) {
@@ -120,15 +112,19 @@ const Cart = ({ match, location, history }) => {
                                             <>
                                                 <TableRow key={item._id}>
                                                     <TableCell align="center">
-                                                        <img
-                                                            className={
-                                                                classes.itemImage
-                                                            }
-                                                            src={item.image}
-                                                            alt={
-                                                                item.description
-                                                            }
-                                                        />
+                                                        <Link
+                                                            to={`/product/${item._id}`}
+                                                        >
+                                                            <img
+                                                                className={
+                                                                    classes.itemImage
+                                                                }
+                                                                src={item.image}
+                                                                alt={
+                                                                    item.description
+                                                                }
+                                                            />
+                                                        </Link>
                                                     </TableCell>
                                                     <TableCell align="center">
                                                         <Typography>
