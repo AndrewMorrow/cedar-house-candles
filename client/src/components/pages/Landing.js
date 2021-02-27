@@ -92,7 +92,7 @@ const Landing = (props) => {
                         >
                             {products &&
                                 products.length > 0 &&
-                                products.map((product) => (
+                                products.filter(item => item.productCollection === "stander").map((product) => (
                                     <GridListTile
                                         key={product.image}
                                         cols={product.cols || 1}
