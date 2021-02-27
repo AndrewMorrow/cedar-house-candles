@@ -31,6 +31,9 @@ export const reducer = function (state = initialState, action) {
         case REMOVE_FROM_CART:
             return {
                 ...state,
+                cartItems: state.cartItems.filter(
+                    (item) => item._id !== action.payload
+                ),
             };
 
         default:

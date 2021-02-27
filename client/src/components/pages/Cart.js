@@ -10,11 +10,14 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    IconButton,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Store } from "../../store";
 import { TiShoppingCart } from "react-icons/ti";
+import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../../store/actions/cartActions.js";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -57,6 +60,10 @@ const Cart = ({ match, location, history }) => {
 
     const invoiceSubtotal = subtotal(cartItems);
 
+    const handleCartItemDelete = (id) => {
+        removeFromCart(id)(dispatch);
+    };
+
     return (
         <main>
             <Grid container>
@@ -69,7 +76,7 @@ const Cart = ({ match, location, history }) => {
                             >
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center" colSpan={4}>
+                                        <TableCell align="center" colSpan={5}>
                                             <Typography
                                                 variant="h4"
                                                 style={{
@@ -104,7 +111,7 @@ const Cart = ({ match, location, history }) => {
                                                 Price
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="center">
                                             <Typography variant="h6">
                                                 Remove
                                             </Typography>
@@ -141,6 +148,19 @@ const Cart = ({ match, location, history }) => {
                                                     </TableCell>
                                                     <TableCell align="center">
                                                         ${ccyFormat(item.price)}
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                        <IconButton
+                                                            onClick={() =>
+                                                                handleCartItemDelete(
+                                                                    item._id
+                                                                )
+                                                            }
+                                                        >
+                                                            <FaTrashAlt
+                                                                size={20}
+                                                            />
+                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             </>
