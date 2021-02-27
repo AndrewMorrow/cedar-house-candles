@@ -67,6 +67,10 @@ const Cart = ({ match, location, history }) => {
         removeFromCart(id)(dispatch);
     };
 
+    const handleButtonClick = (newRoute) => {
+        history.push(newRoute);
+    };
+
     return (
         <main>
             <Grid container>
@@ -189,7 +193,14 @@ const Cart = ({ match, location, history }) => {
                                             ${ccyFormat(invoiceSubtotal)}
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Button variant="contained">
+                                            <Button
+                                                onClick={() =>
+                                                    handleButtonClick(
+                                                        `/checkout`
+                                                    )
+                                                }
+                                                variant="contained"
+                                            >
                                                 Proceed to Checkout
                                             </Button>
                                         </TableCell>
