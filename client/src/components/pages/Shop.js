@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         backgroundColor: '#FFFFF0',
+        cursor: "pointer"
       
     },
 

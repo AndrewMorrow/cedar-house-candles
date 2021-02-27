@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: '#212121',
     },
+
 }));
 
 const Navbar = (props) => {
@@ -66,7 +67,7 @@ const Navbar = (props) => {
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         <Button
-                            className={classes.button2}
+                            className={classes.button2.active}
                             onClick={() => handleMenuClick('/')}
                         >
                             {' '}
