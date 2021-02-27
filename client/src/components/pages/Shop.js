@@ -63,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '1.25rem',
         marginBottom: 20,
     },
+
+
 }));
 
 export default function Shop(props) {

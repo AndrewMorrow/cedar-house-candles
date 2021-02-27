@@ -1,9 +1,17 @@
-import React, { useContext, useEffect } from "react";
-import { getProduct } from "../../store/actions/productActions";
-import { Store } from "../../store";
-import { Grid, Button, List, ListItem, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { addToCart } from "../../store/actions/cartActions";
+import React, { useContext, useEffect, useState } from 'react';
+import { getProduct } from '../../store/actions/productActions';
+import { Store } from '../../store';
+import {
+    Grid,
+    Button,
+    List,
+    ListItem,
+    Typography,
+    Snackbar,
+} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+import { addToCart } from '../../store/actions/cartActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -12,59 +20,62 @@ const useStyles = makeStyles((theme) => ({
         height: 450,
     },
     img: {
-        margin: "auto",
-        display: "flex",
-        maxWidth: "100%",
-        maxHeight: "100%",
+        margin: 'auto',
+        display: 'flex',
+        maxWidth: '100%',
+        maxHeight: '100%',
     },
     info: {
         // display: "flex",
-        alignItems: "flex-start",
+        alignItems: 'flex-start',
     },
     productName: {
-        margin: "0px 0px 1rem 0px",
-        marginBottom: "2rem",
+        margin: '0px 0px 1rem 0px',
+        marginBottom: '2rem',
     },
     aboutTitle: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
     price: {
-        fontSize: "1.3rem",
-        marginRight: "2rem",
-        fontWeight: "bold",
+        fontSize: '1.3rem',
+        marginRight: '2rem',
+        fontWeight: 'bold',
     },
     priceInfo: {
-        display: "flex",
-        marginBottom: "1rem",
-        alignItems: "center",
+        display: 'flex',
+        marginBottom: '1rem',
+        alignItems: 'center',
     },
     cartButton: {
-        height: "40px",
+        height: '40px',
     },
     listItem: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
         paddingLeft: 0,
     },
     listHeader: {
-        textDecoration: "underline",
+        textDecoration: 'underline',
         paddingLeft: 0,
     },
     description: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
     infoWrapper: {
-        border: "3px double",
-        borderRadius: "15px",
-        padding: "10px",
-        marginBottom: "2rem",
+        border: '3px double',
+        borderRadius: '15px',
+        padding: '10px',
+        marginBottom: '2rem',
     },
     marginBottom: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
 }));
 
+
+
 const ProductDetail = ({ match }) => {
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
     const { state, dispatch } = useContext(Store);
     const {
         product: { product },
@@ -75,11 +86,21 @@ const ProductDetail = ({ match }) => {
         getProduct(productId)(dispatch);
         // console.log(product);
         // eslint-disable-next-line
-        console.log(state.cart.cartItems);
+        // console.log(state.cart.cartItems);
     }, []);
 
-    const addToCartHandler = () => {
+    const addToCartHandler = (e) => {
+        e.preventDefault();
         addToCart(product)(dispatch);
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
     };
 
     return (
@@ -117,12 +138,18 @@ const ProductDetail = ({ match }) => {
                             <Button
                                 className={classes.cartButton}
                                 variant="contained"
-                                onClick={() => {
-                                    addToCartHandler(productId);
-                                }}
+                                onClick={addToCartHandler}
                             >
                                 Add to Cart
                             </Button>
+                            <Snackbar
+                                open={open}
+                                autoHideDuration={6000}
+                                onClose={handleClose}
+                                message='Product Added'
+                            >
+                            
+                            </Snackbar>
                         </div>
                     </div>
                     <div>
