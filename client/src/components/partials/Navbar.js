@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: "#212121",
     },
+
 }));
 
 const Navbar = (props) => {
@@ -74,7 +75,7 @@ const Navbar = (props) => {
                         <Button
                             variant="text"
                             className={classes.button2}
-                            onClick={() => handleMenuClick("/")}
+                            onClick={() => handleMenuClick('/')}
                         >
                             {" "}
                             <b>Cedar House Candles</b>{" "}

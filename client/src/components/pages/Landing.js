@@ -138,7 +138,7 @@ const Landing = (props) => {
                                 cols={2}
                                 style={{ height: "auto" }}
                             ></GridListTile>
-                            {products.map((tile) => (
+                            {products.filter(item => item.isBestSeller).map((tile) => (
                                 <GridListTile key={tile.image}>
                                     <img src={tile.image} alt={tile.name} />
                                     <GridListTileBar

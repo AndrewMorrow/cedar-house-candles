@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         backgroundColor: '#FFFFF0',
+        cursor: "pointer"
       
     },
 
@@ -98,7 +99,7 @@ export default function Shop(props) {
                                         <CardMedia
                                             className={classes.cardMedia}
                                             image={card.image}
-                                            title="Image title"
+                                            title={card.name}
                                         />
                                         <CardContent
                                             className={classes.cardContent}
