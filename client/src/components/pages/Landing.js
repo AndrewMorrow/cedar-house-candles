@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Store } from "../../store";
 // import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import { getProducts } from '../../store/actions/productActions';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import { Container, Paper, Tooltip } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import { getProducts } from "../../store/actions/productActions";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import { Container, Paper, Tooltip } from "@material-ui/core";
 
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
@@ -16,36 +16,36 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const useStyles = makeStyles((theme) => ({
     main: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
 
-        alignItems: 'center',
+        alignItems: "center",
     },
     gridList: {
-        width: 500,
+        width: 700,
     },
     container: {
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "hidden",
     },
     icon: {
         color: "rgba(255, 255, 255, 0.54)",
     },
     title: {
         margin: theme.spacing(4, 0, 2),
-        fontFamily: 'Old Standard TT',
+        fontFamily: "Old Standard TT",
     },
     paper: {
         padding: theme.spacing(4),
-        margin: 'auto',
+        margin: "auto",
         maxWidth: 950,
-        
-        borderRadius: '1.25rem',
+
+        borderRadius: "1.25rem",
         marginBottom: 20,
     },
 }));
@@ -104,7 +104,12 @@ const Landing = (props) => {
                                         <GridListTileBar
                                             title={product.name}
                                             actionIcon={
-                                                <IconButton onClick={() => handleButtonClick(`/product/${product._id}`)}
+                                                <IconButton
+                                                    onClick={() =>
+                                                        handleButtonClick(
+                                                            `/product/${product._id}`
+                                                        )
+                                                    }
                                                     aria-label={`info about ${product.name}`}
                                                     className={classes.icon}
                                                 >
@@ -131,7 +136,7 @@ const Landing = (props) => {
                             <GridListTile
                                 key="Subheader"
                                 cols={2}
-                                style={{ height: 'auto' }}
+                                style={{ height: "auto" }}
                             ></GridListTile>
                             {products.map((tile) => (
                                 <GridListTile key={tile.image}>
@@ -139,7 +144,12 @@ const Landing = (props) => {
                                     <GridListTileBar
                                         title={tile.name}
                                         actionIcon={
-                                            <IconButton onClick={() => handleButtonClick(`/product/${tile._id}`)}
+                                            <IconButton
+                                                onClick={() =>
+                                                    handleButtonClick(
+                                                        `/product/${tile._id}`
+                                                    )
+                                                }
                                                 aria-label={`info about ${tile.name}`}
                                                 className={classes.icon}
                                             >
