@@ -99,7 +99,7 @@ export default function Shop(props) {
                                         <CardMedia
                                             className={classes.cardMedia}
                                             image={card.image}
-                                            title="Image title"
+                                            title={card.name}
                                         />
                                         <CardContent
                                             className={classes.cardContent}

@@ -73,7 +73,7 @@ const Navbar = (props) => {
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         <Button
-                            className={classes.button2.active}
+                            className={classes.button2}
                             onClick={() => handleMenuClick('/')}
                         >
                             {" "}
