@@ -10,11 +10,15 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    IconButton,
+    Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Store } from "../../store";
 import { TiShoppingCart } from "react-icons/ti";
+import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../../store/actions/cartActions.js";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -30,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     table: {
-        minWidth: 700,
+        minWidth: 600,
     },
 }));
 
@@ -52,15 +56,21 @@ const Cart = ({ match, location, history }) => {
     } = state;
 
     useEffect(() => {
-        console.log(cartItems);
-    }, []);
+        // console.log(cartItems);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        // eslint-disable-next-line
+    }, [cartItems]);
 
     const invoiceSubtotal = subtotal(cartItems);
+
+    const handleCartItemDelete = (id) => {
+        removeFromCart(id)(dispatch);
+    };
 
     return (
         <main>
             <Grid container>
-                <Grid container item md={12}>
+                <Grid container item sm={12}>
                     <Container maxWidth="md">
                         <TableContainer component={Paper}>
                             <Table
@@ -69,7 +79,7 @@ const Cart = ({ match, location, history }) => {
                             >
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="center" colSpan={4}>
+                                        <TableCell align="center" colSpan={5}>
                                             <Typography
                                                 variant="h4"
                                                 style={{
@@ -99,9 +109,14 @@ const Cart = ({ match, location, history }) => {
                                                 Qty.
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="right">
                                             <Typography variant="h6">
                                                 Price
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Typography variant="h6">
+                                                Remove
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
@@ -127,15 +142,35 @@ const Cart = ({ match, location, history }) => {
                                                         </Link>
                                                     </TableCell>
                                                     <TableCell align="center">
-                                                        <Typography>
-                                                            {item.name}
-                                                        </Typography>
+                                                        <div>
+                                                            <Typography variant="h6">
+                                                                {item.name}
+                                                            </Typography>
+                                                            <Typography variant="body1">
+                                                                {
+                                                                    item.itemProductType
+                                                                }
+                                                            </Typography>
+                                                        </div>
                                                     </TableCell>
                                                     <TableCell align="center">
                                                         {item.cartQty}
                                                     </TableCell>
-                                                    <TableCell align="center">
+                                                    <TableCell align="right">
                                                         ${ccyFormat(item.price)}
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                        <IconButton
+                                                            onClick={() =>
+                                                                handleCartItemDelete(
+                                                                    item._id
+                                                                )
+                                                            }
+                                                        >
+                                                            <FaTrashAlt
+                                                                size={20}
+                                                            />
+                                                        </IconButton>
                                                     </TableCell>
                                                 </TableRow>
                                             </>
@@ -150,8 +185,13 @@ const Cart = ({ match, location, history }) => {
                                         <TableCell align="right" colSpan={2}>
                                             Subtotal
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="right">
                                             ${ccyFormat(invoiceSubtotal)}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button variant="contained">
+                                                Proceed to Checkout
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>

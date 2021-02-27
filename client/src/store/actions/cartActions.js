@@ -7,6 +7,9 @@ export const addToCart = (product) => async (dispatch) => {
     });
 };
 
-export const removeFromCart = () => {
-    console.log("remove from cart function");
+export const removeFromCart = (id) => async (dispatch) => {
+    dispatch({
+        type: REMOVE_FROM_CART,
+        payload: id,
+    });
 };

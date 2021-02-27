@@ -70,6 +70,10 @@ const productSchema = mongoose.Schema(
             type: Number,
             default: 0,
         },
+        itemProductType: {
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: true,
