@@ -56,6 +56,7 @@ const Cart = ({ match, location, history }) => {
 
     useEffect(() => {
         console.log(cartItems);
+        // eslint-disable-next-line
     }, []);
 
     const invoiceSubtotal = subtotal(cartItems);
