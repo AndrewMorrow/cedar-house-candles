@@ -11,6 +11,7 @@ const products = [
         numReviews: 13,
         cols: 1,
         productTypes: [{ name: "9OZ SOY CANDLE" }, { name: "6-CUBE WAX MELT" }],
+        itemProductType: "9oz Soy Candle",
     },
     {
         name: "Autumn Orchard",
@@ -24,6 +25,7 @@ const products = [
         numReviews: 23,
         cols: 2,
         isBestSeller: true,
+        itemProductType: "9oz Soy Candle",
     },
     {
         name: "Peppermint Vanilla",
@@ -37,6 +39,7 @@ const products = [
         numReviews: 17,
         cols: 2,
         isBestSeller: true,
+        itemProductType: "9oz Soy Candle",
     },
     {
         name: "Sugar Cookie",
@@ -50,6 +53,7 @@ const products = [
         numReviews: 17,
         cols: 1,
         isBestSeller: true,
+        itemProductType: "9oz Soy Candle",
     },
 ];
 

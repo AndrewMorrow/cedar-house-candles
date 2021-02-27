@@ -141,9 +141,16 @@ const Cart = ({ match, location, history }) => {
                                                         </Link>
                                                     </TableCell>
                                                     <TableCell align="center">
-                                                        <Typography>
-                                                            {item.name}
-                                                        </Typography>
+                                                        <div>
+                                                            <Typography variant="h6">
+                                                                {item.name}
+                                                            </Typography>
+                                                            <Typography variant="body1">
+                                                                {
+                                                                    item.itemProductType
+                                                                }
+                                                            </Typography>
+                                                        </div>
                                                     </TableCell>
                                                     <TableCell align="center">
                                                         {item.cartQty}
