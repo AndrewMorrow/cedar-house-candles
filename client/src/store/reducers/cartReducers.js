@@ -2,7 +2,9 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/types";
 
 export const initialState = {
     isAuthenticated: false,
-    cartItems: [],
+    cartItems: localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : [],
 };
 
 export const reducer = function (state = initialState, action) {

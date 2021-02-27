@@ -55,9 +55,10 @@ const Cart = ({ match, location, history }) => {
     } = state;
 
     useEffect(() => {
-        console.log(cartItems);
+        // console.log(cartItems);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
         // eslint-disable-next-line
-    }, []);
+    }, [cartItems]);
 
     const invoiceSubtotal = subtotal(cartItems);
 
