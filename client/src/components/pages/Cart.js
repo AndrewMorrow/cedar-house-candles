@@ -11,6 +11,7 @@ import {
     TableHead,
     TableRow,
     IconButton,
+    Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Store } from "../../store";
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     table: {
-        minWidth: 700,
+        minWidth: 600,
     },
 }));
 
@@ -69,7 +70,7 @@ const Cart = ({ match, location, history }) => {
     return (
         <main>
             <Grid container>
-                <Grid container item md={12}>
+                <Grid container item sm={12}>
                     <Container maxWidth="md">
                         <TableContainer component={Paper}>
                             <Table
@@ -108,7 +109,7 @@ const Cart = ({ match, location, history }) => {
                                                 Qty.
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="right">
                                             <Typography variant="h6">
                                                 Price
                                             </Typography>
@@ -155,7 +156,7 @@ const Cart = ({ match, location, history }) => {
                                                     <TableCell align="center">
                                                         {item.cartQty}
                                                     </TableCell>
-                                                    <TableCell align="center">
+                                                    <TableCell align="right">
                                                         ${ccyFormat(item.price)}
                                                     </TableCell>
                                                     <TableCell align="center">
@@ -184,8 +185,13 @@ const Cart = ({ match, location, history }) => {
                                         <TableCell align="right" colSpan={2}>
                                             Subtotal
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="right">
                                             ${ccyFormat(invoiceSubtotal)}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button variant="contained">
+                                                Proceed to Checkout
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </TableBody>
