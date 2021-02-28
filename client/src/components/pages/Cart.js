@@ -199,6 +199,10 @@ const Cart = ({ match, location, history }) => {
                                                         `/checkout`
                                                     )
                                                 }
+                                                disabled={
+                                                    cartItems.length === 0 &&
+                                                    true
+                                                }
                                                 variant="contained"
                                             >
                                                 Proceed to Checkout
