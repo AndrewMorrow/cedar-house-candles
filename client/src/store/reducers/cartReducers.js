@@ -1,10 +1,15 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/types";
+import {
+    ADD_TO_CART,
+    CART_SAVE_PAYMENT_METHOD,
+    REMOVE_FROM_CART,
+} from "../actions/types";
 
 export const initialState = {
     isAuthenticated: false,
     cartItems: localStorage.getItem("cartItems")
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
+    paymentMethod: "",
 };
 
 export const reducer = function (state = initialState, action) {
@@ -36,6 +41,11 @@ export const reducer = function (state = initialState, action) {
                 cartItems: state.cartItems.filter(
                     (item) => item._id !== action.payload
                 ),
+            };
+        case CART_SAVE_PAYMENT_METHOD:
+            return {
+                ...state,
+                paymentMethod: action.payload,
             };
 
         default:

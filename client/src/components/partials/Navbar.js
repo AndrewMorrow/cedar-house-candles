@@ -85,6 +85,7 @@ const Navbar = (props) => {
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         <Button
+                            variant="text"
                             className={classes.button2}
                             onClick={() => handleMenuClick('/')}
                         >

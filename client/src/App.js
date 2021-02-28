@@ -17,6 +17,8 @@ import About from "./components/pages/About";
 import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
+import PaymentMethod from "./components/pages/PaymentMethod";
+import PlaceOrder from "./components/pages/PlaceOrder";
 
 const App = () => {
     const { dispatch } = useContext(Store);
@@ -49,7 +51,9 @@ const App = () => {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/shop" component={Shop} />
                     <Route path="/product/:id" component={ProductDetail} />
+                    <Route path="/checkout" component={PaymentMethod} />
                     <Route path="/cart" component={Cart} />
+                    <Route path="/placeorder" component={PlaceOrder} />
                     <Switch>
                         <PrivateRoute
                             exact
