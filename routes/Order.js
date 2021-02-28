@@ -3,19 +3,25 @@ const router = express.Router();
 import Order from "../models/OrderModel.js";
 import { catchError } from "../middleware/errorMiddleware.js";
 
-// @desc        fetch all products
-// @route       GET /api/products
-// @access      Public
+// @desc        Create new Order
+// @route       POST /api/orders
+// @access      Private
 router.get(
     "/",
     catchError(async (req, res) => {
-        try {
-            console.log("All Products");
-            const products = await Product.find({});
-            res.status(200).json(products);
-        } catch (err) {
-            res.status(404);
-            throw new Error("Product Not Found");
+        const { orderItems, paymentMethod } = req.body;
+        if (orderItems && orderItems.length === 0) {
+            res.status(400);
+            throw new Error("no order items");
+        } else {
+            const order = new Order({
+                user: req.user._id,
+                orderItems,
+                paymentMethod,
+            });
+
+            const createdOrder = await order.save();
+            res.status(201).json(createdOrder);
         }
     })
 );

@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 import productRoutes from "./routes/products.js";
+import OrderRoutes from "./routes/order.js";
 import passConfig from "./config/passport.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
