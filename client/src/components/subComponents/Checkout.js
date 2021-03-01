@@ -60,7 +60,7 @@ export default function Checkout() {
     function getStepContent(step) {
         switch (step) {
             case 0:
-                return <AddressForm />;
+                return <AddressForm handleNext={handleNext} />;
             case 1:
                 return <PaymentForm />;
             case 2:

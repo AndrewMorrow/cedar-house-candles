@@ -14,13 +14,7 @@ const products = [
     { name: "Product 4", desc: "Best thing of all", price: "$14.11" },
     { name: "Shipping", desc: "", price: "Free" },
 ];
-const addresses = [
-    "1 Material-UI Drive",
-    "Reactville",
-    "Anytown",
-    "99999",
-    "USA",
-];
+
 const payments = [
     { name: "Card type", detail: "Visa" },
     { name: "Card holder", detail: "Mr John Smith" },
@@ -44,6 +38,15 @@ export default function Review() {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
+
+    const addresses = [
+        cart.shippingAddress.address1,
+        cart.shippingAddress.address2,
+
+        "Anytown",
+        "99999",
+        "USA",
+    ];
 
     function ccyFormat(num) {
         return `${num.toFixed(2)}`;
@@ -91,8 +94,28 @@ export default function Review() {
                     >
                         Shipping Info
                     </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
-                    <Typography gutterBottom>{addresses.join(", ")}</Typography>
+                    <Typography gutterBottom>
+                        {cart.shippingAddress.firstName &&
+                            cart.shippingAddress.firstName}{" "}
+                        {cart.shippingAddress.lastName &&
+                            cart.shippingAddress.lastName}
+                    </Typography>
+                    <Typography gutterBottom>
+                        {!cart.shippingAddress.address1 && (
+                            <h6>No Shipping Address Available</h6>
+                        )}
+                        {cart.shippingAddress.address1}
+                        <br />
+                        {cart.shippingAddress.address2 &&
+                            cart.shippingAddress.address2}
+                        <br />
+                        {cart.shippingAddress.city &&
+                            `${cart.shippingAddress.city},`}{" "}
+                        {cart.shippingAddress.addressState}{" "}
+                        {cart.shippingAddress.postalCode}
+                        <br />
+                        {cart.shippingAddress.country}
+                    </Typography>
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={5}>
                     <Typography
