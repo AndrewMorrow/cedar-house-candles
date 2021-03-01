@@ -19,6 +19,7 @@ import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
 import PaymentMethod from "./components/pages/PaymentMethod";
 import PlaceOrder from "./components/pages/PlaceOrder";
+import ShippingPage from "./components/pages/ShippingPage";
 
 const App = () => {
     const { dispatch } = useContext(Store);
@@ -51,7 +52,7 @@ const App = () => {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/shop" component={Shop} />
                     <Route path="/product/:id" component={ProductDetail} />
-                    <Route path="/checkout" component={PaymentMethod} />
+                    <Route path="/checkout" component={ShippingPage} />
                     <Route path="/cart" component={Cart} />
                     <Route path="/placeorder" component={PlaceOrder} />
                     <Switch>

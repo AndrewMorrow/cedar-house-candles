@@ -17,6 +17,7 @@ const PaymentMethod = ({ history }) => {
 
     const handleChange = (event) => {
         setPaymentMethod(event.target.value);
+        savePaymentMethod(paymentMethod)(dispatch);
     };
 
     const handleSubmit = () => {
