@@ -65,7 +65,7 @@ export default function Checkout({ history }) {
 
     useEffect(() => {
         if (order.success) {
-            console.log(order);
+            // console.log(order);
             // history.push(`/order/${order._id}`);
         }
         // eslint-disable-next-line
@@ -128,8 +128,9 @@ export default function Checkout({ history }) {
                                     Thank you for your order.
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    Your order number is {order.order.data._id}.
-                                    We have emailed your order confirmation, and
+                                    Your order number is{" "}
+                                    {order.order && order.order.data._id}. We
+                                    have emailed your order confirmation, and
                                     will send you an update when your order has
                                     shipped.
                                 </Typography>
