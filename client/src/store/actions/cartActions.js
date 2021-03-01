@@ -2,6 +2,7 @@ import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
     CART_SAVE_PAYMENT_METHOD,
+    CART_SAVE_SHIPPING_ADDRESS,
 } from "./types";
 
 export const addToCart = (product) => async (dispatch) => {
@@ -24,5 +25,15 @@ export const savePaymentMethod = (method) => async (dispatch) => {
         payload: method,
     });
 
-    // localStorage.setItem("paymentMethod", JSON.stringify(method));
+    localStorage.setItem("paymentMethod", JSON.stringify(method));
+};
+
+export const saveShippingAddress = (data) => async (dispatch) => {
+    console.log("saving shipping address");
+    dispatch({
+        type: CART_SAVE_SHIPPING_ADDRESS,
+        payload: data,
+    });
+
+    localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
