@@ -14,6 +14,10 @@ import {
     initialState as initialStateCart,
     reducer as reducerCart,
 } from "./cartReducers";
+import {
+    initialState as initialStateOrder,
+    reducer as reducerOrder,
+} from "./orderReducers";
 
 /*
     Combine Reducer function based on https://github.com/ankita1010/react-combine-reducers.
@@ -64,4 +68,5 @@ export default rootReducer({
     error: [reducerError, initialStateError],
     product: [reducerProduct, initialStateProduct],
     cart: [reducerCart, initialStateCart],
+    order: [reducerOrder, initialStateOrder],
 });

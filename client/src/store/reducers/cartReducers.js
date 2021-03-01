@@ -14,6 +14,7 @@ export const initialState = {
     shippingAddress: localStorage.getItem("shippingAddress")
         ? JSON.parse(localStorage.getItem("shippingAddress"))
         : {},
+    shippingPrice: 8,
 };
 
 export const reducer = function (state = initialState, action) {

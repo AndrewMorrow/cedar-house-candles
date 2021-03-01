@@ -38,16 +38,6 @@ export default function Review() {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
-
-    const addresses = [
-        cart.shippingAddress.address1,
-        cart.shippingAddress.address2,
-
-        "Anytown",
-        "99999",
-        "USA",
-    ];
-
     function ccyFormat(num) {
         return `${num.toFixed(2)}`;
     }

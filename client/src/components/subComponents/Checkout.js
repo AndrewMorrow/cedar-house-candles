@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,6 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+import { Store } from "../../store";
+import { createOrder } from "../../store/actions/orderActions";
+import { CART_SAVE_SHIPPING_ADDRESS } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -53,9 +56,20 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-export default function Checkout() {
+export default function Checkout({ history }) {
     const classes = useStyles();
+    const { state, dispatch } = useContext(Store);
     const [activeStep, setActiveStep] = useState(0);
+
+    const { cart, order } = state;
+
+    useEffect(() => {
+        if (order.success) {
+            console.log(order);
+            // history.push(`/order/${order._id}`);
+        }
+        // eslint-disable-next-line
+    }, [order.success]);
 
     function getStepContent(step) {
         switch (step) {
@@ -70,8 +84,18 @@ export default function Checkout() {
         }
     }
 
-    const handleNext = () => {
+    const handleNext = (e) => {
+        console.log(e);
         setActiveStep(activeStep + 1);
+        if (e.target.innerText.toLowerCase() === "place order") {
+            createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                shippingPrice: cart.shippingPrice,
+                // totalPrice: cart.totalPrice,
+            })(dispatch);
+        }
     };
 
     const handleBack = () => {
@@ -104,9 +128,9 @@ export default function Checkout() {
                                     Thank you for your order.
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    Your order number is #2001539. We have
-                                    emailed your order confirmation, and will
-                                    send you an update when your order has
+                                    Your order number is {order.order.data._id}.
+                                    We have emailed your order confirmation, and
+                                    will send you an update when your order has
                                     shipped.
                                 </Typography>
                             </React.Fragment>
