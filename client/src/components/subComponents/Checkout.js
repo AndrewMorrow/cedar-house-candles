@@ -14,11 +14,12 @@ import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import { Store } from "../../store";
-import { createOrder } from "../../store/actions/orderActions";
+import { createOrder, getOrderDetails } from "../../store/actions/orderActions";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -63,16 +64,33 @@ export default function Checkout({ history }) {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const [activeStep, setActiveStep] = useState(0);
+    const [sdkReady, setSdkReady] = useState(false);
 
     const { cart, order } = state;
 
     useEffect(() => {
-        if (order.success) {
-            // console.log(order);
-            // history.push(`/order/${order._id}`);
+        const addPayPalScript = async () => {
+            const { data: clientId } = await axios.get("/api/config/paypal");
+            const script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+            script.async = true;
+            script.onload = () => {
+                setSdkReady(true);
+            };
+            document.body.appendChild(script);
+        };
+        if (!order || order.success) {
+            getOrderDetails(order.order.data._id)(dispatch);
+        } else if (!order.order.data.isPaid) {
+            if (!window.paypal) {
+                addPayPalScript();
+            }
+        } else {
+            setSdkReady(true);
         }
         // eslint-disable-next-line
-    }, [order.success]);
+    }, [dispatch]);
 
     function ccyFormat(num) {
         return `${num.toFixed(2)}`;
