@@ -17,6 +17,7 @@ import About from "./components/pages/About";
 import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import ProductDetail from "./components/pages/ProductDetail";
+import OrderDetail from "./components/pages/OrderDetail";
 import PaymentMethod from "./components/pages/PaymentMethod";
 import PlaceOrder from "./components/pages/PlaceOrder";
 import ShippingPage from "./components/pages/ShippingPage";
@@ -52,6 +53,7 @@ const App = () => {
                     <Route exact path="/about" component={About} />
                     <Route exact path="/shop" component={Shop} />
                     <Route path="/product/:id" component={ProductDetail} />
+                    <Route path="/order/:id" component={OrderDetail} />
                     <Route path="/checkout" component={ShippingPage} />
                     <Route path="/cart" component={Cart} />
                     <Route path="/placeorder" component={PlaceOrder} />
