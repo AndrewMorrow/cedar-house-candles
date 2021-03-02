@@ -3,6 +3,11 @@ const router = express.Router();
 import Order from "../models/OrderModel.js";
 import { catchError } from "../middleware/errorMiddleware.js";
 
+import passport from "passport";
+
+// Middleware to use when routes require authenticated user.
+const requiresAuth = passport.authenticate("jwt", { session: false });
+
 // @desc        Create new Order
 // @route       POST /api/orders
 // @access      Public
@@ -41,44 +46,6 @@ router.post(
     })
 );
 
-// @desc        Get order by id
-// @route       GET /api/orders/:id
-// @access      Private
-router.get(
-    "/:id",
-    catchError(async (req, res) => {
-        const order = await Order.findById(req.params.id).populate(
-            "user",
-            "name email"
-        );
-
-        if (order) {
-            res.json(order);
-        } else {
-            res.status(404);
-            throw new Error("Order Not Found");
-        }
-    })
-);
-
-// @desc        Get orders by user
-// @route       GET /api/orders/myorders
-// @access      Private
-router.get(
-    "/myorders",
-    catchError(async (req, res) => {
-        console.log(req);
-        const orders = await Order.find({ user: req.user._id });
-
-        if (orders) {
-            res.json(orders);
-        } else {
-            res.status(404);
-            throw new Error("No Orders Found");
-        }
-    })
-);
-
 // @desc        Update order to paid
 // @route       GET /api/orders/:id/pay
 // @access      Private
@@ -99,6 +66,47 @@ router.put(
             const updatedOrder = await order.save();
 
             res.json(updatedOrder);
+        } else {
+            res.status(404);
+            throw new Error("Order Not Found");
+        }
+    })
+);
+
+// @desc        Get orders by user
+// @route       GET /api/orders/myorders
+// @access      Private
+router.get(
+    "/myorders",
+    requiresAuth,
+    catchError(async (req, res) => {
+        // console.log(req);
+        const orders = await Order.find({
+            user: req.user._id,
+        });
+
+        if (orders) {
+            res.json(orders);
+        } else {
+            res.status(404);
+            throw new Error("No Orders Found");
+        }
+    })
+);
+
+// @desc        Get order by id
+// @route       GET /api/orders/:id
+// @access      Private
+router.get(
+    "/:id",
+    catchError(async (req, res) => {
+        const order = await Order.findById(req.params.id).populate(
+            "user",
+            "name email"
+        );
+
+        if (order) {
+            res.json(order);
         } else {
             res.status(404);
             throw new Error("Order Not Found");

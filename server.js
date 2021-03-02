@@ -53,8 +53,8 @@ app.get("/api/config/paypal", (req, res) =>
 );
 
 // Custom Error handlers
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {

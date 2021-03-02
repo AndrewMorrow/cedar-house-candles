@@ -9,12 +9,16 @@ import {
     ORDER_PAY_FAIL,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_REQUEST,
+    ORDER_LIST_MY_REQUEST,
+    ORDER_LIST_MY_SUCCESS,
+    ORDER_LIST_MY_FAIL,
 } from "../actions/types";
 
 export const initialState = {
     orderItems: [],
     shippingAddress: {},
     loading: true,
+    orders: [],
 };
 
 export const reducer = function (state = initialState, action) {
@@ -68,6 +72,22 @@ export const reducer = function (state = initialState, action) {
             };
         case ORDER_PAY_RESET:
             return {};
+
+        case ORDER_LIST_MY_REQUEST:
+            return {
+                ...state,
+                loading: false,
+            };
+        case ORDER_LIST_MY_SUCCESS:
+            return {
+                loading: false,
+                orders: action.payload,
+            };
+        case ORDER_LIST_MY_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
 
         default:
             return state;
