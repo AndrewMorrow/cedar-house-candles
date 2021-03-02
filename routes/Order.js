@@ -11,7 +11,7 @@ router.post(
     catchError(async (req, res) => {
         const {
             orderItems,
-            // shippingAddress,
+            shippingAddress,
             paymentMethod,
             // itemsPrice,
             shippingPrice,
@@ -24,10 +24,11 @@ router.post(
             res.status(400);
             throw new Error("no order items");
         } else {
+            // dry way to check for userId?
             const order = new Order({
                 user: userId,
                 orderItems,
-                // shippingAddress,
+                shippingAddress,
                 paymentMethod,
                 // itemsPrice,
                 shippingPrice,
@@ -56,6 +57,24 @@ router.get(
         } else {
             res.status(404);
             throw new Error("Order Not Found");
+        }
+    })
+);
+
+// @desc        Get orders by user
+// @route       GET /api/orders/myorders
+// @access      Private
+router.get(
+    "/myorders",
+    catchError(async (req, res) => {
+        console.log(req);
+        const orders = await Order.find({ user: req.user._id });
+
+        if (orders) {
+            res.json(orders);
+        } else {
+            res.status(404);
+            throw new Error("No Orders Found");
         }
     })
 );

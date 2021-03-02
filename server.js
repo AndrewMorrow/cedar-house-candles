@@ -44,6 +44,7 @@ app.use("/api/users", requiresAuth, usersRoutes);
 // Product data routes
 app.use("/api/products", productRoutes);
 
+// How to make only one route protected?
 // order data routes
 app.use("/api/orders", orderRoutes);
 
