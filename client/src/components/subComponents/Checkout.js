@@ -20,6 +20,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
+import { payOrder } from "../../store/actions/orderActions";
+import { ORDER_PAY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -69,6 +72,7 @@ export default function Checkout({ history }) {
     const { cart, order } = state;
 
     useEffect(() => {
+        // console.log(sdkReady);
         const addPayPalScript = async () => {
             const { data: clientId } = await axios.get("/api/config/paypal");
             const script = document.createElement("script");
@@ -81,8 +85,9 @@ export default function Checkout({ history }) {
             document.body.appendChild(script);
         };
         if (!order || order.success) {
-            getOrderDetails(order.order.data._id)(dispatch);
-        } else if (!order.order.data.isPaid) {
+            dispatch({ type: ORDER_PAY_RESET });
+            getOrderDetails(order._id)(dispatch);
+        } else if (!order.isPaid) {
             if (!window.paypal) {
                 addPayPalScript();
             }
@@ -134,6 +139,12 @@ export default function Checkout({ history }) {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1);
+    };
+
+    const successPaymentHandler = (paymentResult) => {
+        console.log(paymentResult);
+        payOrder(order.order.data._id, paymentResult)(dispatch);
+        history.push(`/`);
     };
 
     return (
@@ -251,10 +262,19 @@ export default function Checkout({ history }) {
                                             gutterBottom
                                             className={classes.title}
                                         >
-                                            Payment Method
+                                            Proceed to Payment
+                                            {order.paymentMethod}
                                         </Typography>
                                         <Grid container>
-                                            {state.cart.paymentMethod}
+                                            {order.loading && (
+                                                <h1>Loading...</h1>
+                                            )}
+                                            <PayPalButton
+                                                amount={147}
+                                                onSuccess={
+                                                    successPaymentHandler
+                                                }
+                                            />
                                         </Grid>
                                     </Grid>
                                 </Grid>

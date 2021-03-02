@@ -33,6 +33,7 @@ export const getOrderDetails = (id) => (dispatch) => {
     axios
         .get(`/api/orders/${id}`)
         .then((res) => {
+            console.log(res);
             dispatch({ type: ORDER_DETAILS_SUCCESS, payload: res });
         })
         .catch((err) =>
