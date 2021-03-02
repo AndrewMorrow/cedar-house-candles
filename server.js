@@ -47,6 +47,10 @@ app.use("/api/products", productRoutes);
 // order data routes
 app.use("/api/orders", orderRoutes);
 
+app.get("/api/config/paypal", (req, res) =>
+    res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 // Custom Error handlers
 app.use(notFound);
 app.use(errorHandler);
