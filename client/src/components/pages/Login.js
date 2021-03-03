@@ -1,42 +1,41 @@
-import React, { useEffect, useRef, useContext } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { loginUser, setErrors } from '../../store/actions/authActions';
-import { Store } from '../../store';
-import classnames from 'classnames';
+import React, { useEffect, useRef, useContext } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { loginUser, setErrors } from "../../store/actions/authActions";
+import { Store } from "../../store";
+import classnames from "classnames";
+import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
     },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: "100%", // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
 }));
-
-
 
 const Login = (props) => {
     const classes = useStyles();
@@ -46,13 +45,16 @@ const Login = (props) => {
     const passwordRef = useRef();
 
     useEffect(() => {
-        if (state.auth.isAuthenticated) props.history.push('/dashboard');
-    }, [state, props]);
+        dispatch({
+            type: ORDER_LIST_MY_RESET,
+        });
+        if (state.auth.isAuthenticated) props.history.push("/dashboard");
+    }, [state, props, dispatch]);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(emailRef.current.value)
+        console.log(emailRef.current.value);
 
         dispatch(setErrors({ response: { data: {} } }));
 
@@ -75,7 +77,11 @@ const Login = (props) => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate onSubmit={onSubmit}>
+                    <form
+                        className={classes.form}
+                        noValidate
+                        onSubmit={onSubmit}
+                    >
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -89,7 +95,7 @@ const Login = (props) => {
                             autoFocus
                             inputRef={emailRef}
                             error={errors.incorrect}
-                            className={classnames('', {
+                            className={classnames("", {
                                 invalid: errors.incorrect,
                             })}
                         />
@@ -105,11 +111,11 @@ const Login = (props) => {
                             autoComplete="current-password"
                             inputRef={passwordRef}
                             error={errors.incorrect}
-                            className={classnames('', {
+                            className={classnames("", {
                                 invalid: errors.incorrect,
                             })}
                         />
-              
+
                         <Button
                             type="submit"
                             fullWidth
@@ -128,7 +134,6 @@ const Login = (props) => {
                         </Grid>
                     </form>
                 </div>
-          
             </Container>
         </main>
     );
