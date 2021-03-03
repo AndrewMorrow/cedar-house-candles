@@ -55,25 +55,23 @@ const useStyles = makeStyles((theme) => ({
     buttons: {
         display: "flex",
         justifyContent: "flex-end",
-        
     },
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-        color: 'white',
-        backgroundColor: 'black',
-        '&:focus': {
-            backgroundColor: 'black',
-            color: 'white',
+        color: "white",
+        backgroundColor: "black",
+        "&:focus": {
+            backgroundColor: "black",
+            color: "white",
         },
-        '&hover': {
-            backgroundColor: 'black',
-            opacity: 0
+        "&hover": {
+            backgroundColor: "black",
+            opacity: 0,
         },
-        '&active': {
-            backgroundColor: 'black'
-        }
-   
+        "&active": {
+            backgroundColor: "black",
+        },
     },
 }));
 
@@ -89,27 +87,9 @@ export default function Checkout() {
     const { cart, order } = state;
 
     useEffect(() => {
-        // console.log(sdkReady);
-        // const addPayPalScript = async () => {
-        //     const { data: clientId } = await axios.get("/api/config/paypal");
-        //     const script = document.createElement("script");
-        //     script.type = "text/javascript";
-        //     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-        //     script.async = true;
-        //     script.onload = () => {
-        //         setSdkReady(true);
-        //     };
-        //     document.body.appendChild(script);
-        // };
         if (!order || order.success) {
             dispatch({ type: ORDER_PAY_RESET });
             getOrderDetails(order._id)(dispatch);
-            // } else if (!order.isPaid) {
-            //     if (!window.paypal) {
-            //         addPayPalScript();
-            //     }
-            // } else {
-            //     setSdkReady(true);
         }
         // eslint-disable-next-line
     }, [dispatch]);
@@ -144,7 +124,7 @@ export default function Checkout() {
         setActiveStep(activeStep + 1);
         if (e.target.innerText.toLowerCase() === "place order") {
             createOrder({
-                userId: state.auth.user.id ? state.auth.user.id : {},
+                userId: state.auth.user.id ? state.auth.user.id : [],
                 orderItems: cart.cartItems,
                 shippingAddress: cart.shippingAddress,
                 paymentMethod: cart.paymentMethod,
@@ -161,7 +141,7 @@ export default function Checkout() {
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
         payOrder(order.order._id, paymentResult)(dispatch);
-        // history.push(`/order/${order.order._id}`);
+        history.push(`/`);
     };
 
     return (
@@ -257,8 +237,10 @@ export default function Checkout() {
                                             {cart.shippingAddress.address1}
                                             <br />
                                             {cart.shippingAddress.address2 &&
-                                                `${cart.shippingAddress.address2} 
-                        <br />`}
+                                                cart.shippingAddress.address2}
+                                            {cart.shippingAddress.address2 && (
+                                                <br />
+                                            )}
                                             {cart.shippingAddress.city &&
                                                 `${cart.shippingAddress.city},`}{" "}
                                             {cart.shippingAddress.addressState}{" "}

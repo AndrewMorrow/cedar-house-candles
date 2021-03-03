@@ -2,7 +2,6 @@ import express from "express";
 const router = express.Router();
 import Order from "../models/OrderModel.js";
 import { catchError } from "../middleware/errorMiddleware.js";
-
 import passport from "passport";
 
 // Middleware to use when routes require authenticated user.
@@ -24,24 +23,37 @@ router.post(
             userId,
         } = req.body;
 
-        console.log(userId);
+        // console.log(userId);
         if (orderItems && orderItems.length === 0) {
             res.status(400);
             throw new Error("no order items");
         } else {
-            // dry way to check for userId?
-            const order = new Order({
-                user: userId,
-                orderItems,
-                shippingAddress,
-                paymentMethod,
-                // itemsPrice,
-                shippingPrice,
-                totalPrice,
-            });
-            // console.log(orderItems);
-            const createdOrder = await order.save();
-            res.status(201).json(createdOrder);
+            if (userId && userId.length !== 0) {
+                const order = new Order({
+                    user: userId,
+                    orderItems,
+                    shippingAddress,
+                    paymentMethod,
+                    shippingPrice,
+                    totalPrice,
+                });
+
+                // console.log(orderItems);
+                const createdOrder = await order.save();
+                res.status(201).json(createdOrder);
+            } else {
+                const order = new Order({
+                    orderItems,
+                    shippingAddress,
+                    paymentMethod,
+                    shippingPrice,
+                    totalPrice,
+                });
+
+                // console.log(orderItems);
+                const createdOrder = await order.save();
+                res.status(201).json(createdOrder);
+            }
         }
     })
 );

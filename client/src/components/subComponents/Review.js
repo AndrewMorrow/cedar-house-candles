@@ -94,8 +94,8 @@ export default function Review() {
                         {cart.shippingAddress.address1}
                         <br />
                         {cart.shippingAddress.address2 &&
-                            `${cart.shippingAddress.address2} 
-                        <br />`}
+                            cart.shippingAddress.address2}
+                        {cart.shippingAddress.address2 && <br />}
                         {cart.shippingAddress.city &&
                             `${cart.shippingAddress.city},`}{" "}
                         {cart.shippingAddress.addressState}{" "}

@@ -19,6 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
+import { ORDER_PAY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -65,11 +66,12 @@ const OrderDetail = ({ match }) => {
     const { order } = state;
 
     useEffect(() => {
-        if (!order || order._id !== orderId) {
+        if (!order || order._id !== orderId || order.success) {
+            dispatch({ type: ORDER_PAY_RESET });
             getOrderDetails(orderId)(dispatch);
         }
         // eslint-disable-next-line
-    }, []);
+    }, [dispatch]);
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
@@ -196,8 +198,10 @@ const OrderDetail = ({ match }) => {
                                                 <br />
                                                 {order.order.shippingAddress
                                                     .address2 &&
-                                                    `${order.order.shippingAddress.address2}
-                        <br />`}
+                                                    order.order.shippingAddress
+                                                        .address2}
+                                                {order.order.shippingAddress
+                                                    .address2 && <br />}
                                                 {order.order.shippingAddress
                                                     .city &&
                                                     `${order.order.shippingAddress.city},`}{" "}
