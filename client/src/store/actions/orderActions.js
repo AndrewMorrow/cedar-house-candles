@@ -18,10 +18,10 @@ export const createOrder = (order) => (dispatch) => {
     dispatch({
         type: ORDER_CREATE_REQUEST,
     });
-    const { data } = axios
+    axios
         .post("/api/orders", order)
         .then((res) => {
-            dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
+            dispatch({ type: ORDER_CREATE_SUCCESS, payload: res.data });
         })
         .catch((err) =>
             dispatch({ type: ORDER_CREATE_FAIL, payload: err.response })
@@ -32,11 +32,11 @@ export const getOrderDetails = (id) => (dispatch) => {
     dispatch({
         type: ORDER_DETAILS_REQUEST,
     });
-    const { data } = axios
-        .get(`/api/orders/${id}`)
+    axios
+        .get(`/api/orders/order/${id}`)
         .then((res) => {
             console.log(res);
-            dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
+            dispatch({ type: ORDER_DETAILS_SUCCESS, payload: res.data });
         })
         .catch((err) =>
             dispatch({ type: ORDER_DETAILS_FAIL, payload: err.response })
@@ -47,10 +47,10 @@ export const payOrder = (orderId, paymentResult) => (dispatch) => {
     dispatch({
         type: ORDER_PAY_REQUEST,
     });
-    const { data } = axios
-        .put(`/api/orders/${orderId}/pay`, paymentResult)
+    axios
+        .put(`/api/orders/order/${orderId}/pay`, paymentResult)
         .then((res) => {
-            dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+            dispatch({ type: ORDER_PAY_SUCCESS, payload: res.data });
         })
         .catch((err) =>
             dispatch({ type: ORDER_PAY_FAIL, payload: err.response })
@@ -62,10 +62,10 @@ export const listMyOrders = () => (dispatch) => {
         type: ORDER_LIST_MY_REQUEST,
     });
 
-    const { data } = axios
+    axios
         .get(`/api/orders/myorders`)
         .then((res) => {
-            dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
+            dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: res.data });
         })
         .catch((err) =>
             dispatch({ type: ORDER_LIST_MY_FAIL, payload: err.response })

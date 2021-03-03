@@ -23,6 +23,7 @@ import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
 import { ORDER_PAY_RESET } from "../../store/actions/types";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -63,36 +64,37 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-export default function Checkout({ history }) {
+export default function Checkout() {
     const classes = useStyles();
+    const history = useHistory();
     const { state, dispatch } = useContext(Store);
     const [activeStep, setActiveStep] = useState(0);
-    const [sdkReady, setSdkReady] = useState(false);
+    // const [sdkReady, setSdkReady] = useState(false);
 
     const { cart, order } = state;
 
     useEffect(() => {
         // console.log(sdkReady);
-        const addPayPalScript = async () => {
-            const { data: clientId } = await axios.get("/api/config/paypal");
-            const script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-            script.async = true;
-            script.onload = () => {
-                setSdkReady(true);
-            };
-            document.body.appendChild(script);
-        };
+        // const addPayPalScript = async () => {
+        //     const { data: clientId } = await axios.get("/api/config/paypal");
+        //     const script = document.createElement("script");
+        //     script.type = "text/javascript";
+        //     script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+        //     script.async = true;
+        //     script.onload = () => {
+        //         setSdkReady(true);
+        //     };
+        //     document.body.appendChild(script);
+        // };
         if (!order || order.success) {
             dispatch({ type: ORDER_PAY_RESET });
             getOrderDetails(order._id)(dispatch);
-        } else if (!order.isPaid) {
-            if (!window.paypal) {
-                addPayPalScript();
-            }
-        } else {
-            setSdkReady(true);
+            // } else if (!order.isPaid) {
+            //     if (!window.paypal) {
+            //         addPayPalScript();
+            //     }
+            // } else {
+            //     setSdkReady(true);
         }
         // eslint-disable-next-line
     }, [dispatch]);
@@ -143,8 +145,8 @@ export default function Checkout({ history }) {
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
-        payOrder(order.order.data._id, paymentResult)(dispatch);
-        history.push(`/`);
+        payOrder(order.order._id, paymentResult)(dispatch);
+        // history.push(`/order/${order.order._id}`);
     };
 
     return (
@@ -174,7 +176,7 @@ export default function Checkout({ history }) {
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     Your order number is{" "}
-                                    {order.order && order.order.data._id}.
+                                    {order.order && order.order._id}.
                                 </Typography>
                                 <Typography variant="h6" gutterBottom>
                                     Order summary
@@ -263,18 +265,25 @@ export default function Checkout({ history }) {
                                             className={classes.title}
                                         >
                                             Proceed to Payment
-                                            {order.paymentMethod}
                                         </Typography>
                                         <Grid container>
                                             {order.loading && (
                                                 <h1>Loading...</h1>
                                             )}
-                                            <PayPalButton
-                                                amount={147}
-                                                onSuccess={
-                                                    successPaymentHandler
-                                                }
-                                            />
+                                            {order.order &&
+                                            !order.order.isPaid ? (
+                                                <PayPalButton
+                                                    amount={
+                                                        order.order &&
+                                                        order.order.totalPrice
+                                                    }
+                                                    onSuccess={
+                                                        successPaymentHandler
+                                                    }
+                                                />
+                                            ) : (
+                                                <h6>Order has been paid!</h6>
+                                            )}
                                         </Grid>
                                     </Grid>
                                 </Grid>

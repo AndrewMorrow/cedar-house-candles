@@ -50,7 +50,7 @@ router.post(
 // @route       GET /api/orders/:id/pay
 // @access      Private
 router.put(
-    "/:id/pay",
+    "/order/:id/pay",
     catchError(async (req, res) => {
         const order = await Order.findById(req.params.id);
 
@@ -84,7 +84,7 @@ router.get(
         const orders = await Order.find({
             user: req.user._id,
         });
-
+        // console.log(orders);
         if (orders) {
             res.json(orders);
         } else {
@@ -98,12 +98,11 @@ router.get(
 // @route       GET /api/orders/:id
 // @access      Private
 router.get(
-    "/:id",
+    "/order/:id",
     catchError(async (req, res) => {
-        const order = await Order.findById(req.params.id).populate(
-            "user",
-            "name email"
-        );
+        // console.log(req.params.id);
+        console.log("Id Route");
+        const order = await Order.findById(req.params.id);
 
         if (order) {
             res.json(order);

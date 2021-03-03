@@ -19,7 +19,7 @@ export const getProduct = (id) => async (dispatch) => {
     try {
         const res = await fetch(`/api/products/${id}`);
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         dispatch({
             type: GET_PRODUCT,
             payload: data,

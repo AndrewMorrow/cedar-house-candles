@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 import productRoutes from "./routes/products.js";
-import orderRoutes from "./routes/order.js";
+import orderRoutes from "./routes/orders.js";
 import passConfig from "./config/passport.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
@@ -44,7 +44,6 @@ app.use("/api/users", requiresAuth, usersRoutes);
 // Product data routes
 app.use("/api/products", productRoutes);
 
-// How to make only one route protected?
 // order data routes
 app.use("/api/orders", orderRoutes);
 
@@ -53,8 +52,8 @@ app.get("/api/config/paypal", (req, res) =>
 );
 
 // Custom Error handlers
-// app.use(notFound);
-// app.use(errorHandler);
+app.use(notFound);
+app.use(errorHandler);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
