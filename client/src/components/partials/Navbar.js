@@ -34,20 +34,21 @@ const useStyles = makeStyles((theme) => ({
         margin: '0px 8px',
         color: 'white',
         '&:focus': {
-            backgroundColor: 'gray',
+            backgroundColor: '#d8ac9c',
         },
     },
     button2: {
         margin: '0px 8px',
         color: 'white',
-        fontSize: 20,
+        fontSize: 25,
 
         '&:focus': {
             backgroundColor: 'transparent',
         },
     },
     appBar: {
-        backgroundColor: '#212121',
+        backgroundColor: '#999b84',
+        padding: '1rem'
     },
 }));
 

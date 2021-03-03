@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: '#FFFFF0',
+        backgroundColor: '#f4eeed',
         cursor: "pointer"
       
     },
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(4),
         margin: 'auto',
         maxWidth: 950,
-        
+        backgroundColor: '#efd9d1',
         borderRadius: '1.25rem',
         marginBottom: 20,
     },
