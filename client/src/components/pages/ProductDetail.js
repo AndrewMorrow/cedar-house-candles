@@ -8,6 +8,7 @@ import {
     ListItem,
     Typography,
     Snackbar,
+    Paper,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,9 +47,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '1rem',
         alignItems: 'center',
     },
-    cartButton: {
-        height: '40px',
-    },
+   
     listItem: {
         marginBottom: '1rem',
         paddingLeft: 0,
@@ -65,10 +64,29 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '15px',
         padding: '10px',
         marginBottom: '2rem',
+        backgroundColor: '#f4eeed'
     },
     marginBottom: {
         marginBottom: '1rem',
     },
+    paper: {
+        padding: theme.spacing(4),
+        margin: "auto",
+        maxWidth: 950,
+        backgroundColor: '#efd9d1',
+        borderRadius: "1.25rem",
+        marginBottom: 20,
+    },
+    button: {
+        height: '40px',
+        color: 'white',
+        backgroundColor: '#999b84',
+        
+        '&:focus': {
+            backgroundColor: 'transparent',
+        },
+
+    }
 }));
 
 
@@ -105,6 +123,7 @@ const ProductDetail = ({ match }) => {
 
     return (
         <main>
+            <Paper className={classes.paper}>
             <Grid container>
                 <Grid item className={classes.image} md={6}>
                     <img
@@ -136,11 +155,11 @@ const ProductDetail = ({ match }) => {
                                 Price: ${product.price}
                             </p>
                             <Button
-                                className={classes.cartButton}
+                                className={classes.button}
                                 variant="contained"
                                 onClick={addToCartHandler}
                             >
-                                Add to Cart
+                              <b>  Add to Cart </b>
                             </Button>
                             <Snackbar
                                 open={open}
@@ -151,7 +170,7 @@ const ProductDetail = ({ match }) => {
                             
                             </Snackbar>
                         </div>
-                    </div>
+                   
                     <div>
                         <List>
                             <ListItem className={classes.listHeader}>
@@ -178,8 +197,11 @@ const ProductDetail = ({ match }) => {
                         of phthalate, lead, and zinc to bring you a cozy,
                         clean-burning product.
                     </Typography>
+                    </div>
                 </Grid>
             </Grid>
+
+            </Paper>
         </main>
     );
 };

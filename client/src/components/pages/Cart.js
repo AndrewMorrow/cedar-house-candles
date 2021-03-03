@@ -24,10 +24,13 @@ const useStyles = makeStyles((theme) => ({
     itemImage: {
         height: "100px",
     },
-    paperCon: {
-        padding: "20px",
-        display: "flex",
-        justifyContent: "space-between",
+    paper: {
+        padding: theme.spacing(4),
+        margin: "auto",
+        maxWidth: 950,
+        backgroundColor: '#efd9d1',
+        borderRadius: "1.25rem",
+        marginBottom: 20,
     },
     quantNum: {
         display: "flex",
@@ -36,6 +39,15 @@ const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 600,
     },
+    button: {
+        color: 'white',
+        backgroundColor: '#999b84',
+        
+        '&:focus': {
+            backgroundColor: 'transparent',
+        },
+
+    }
 }));
 
 function ccyFormat(num) {
@@ -73,6 +85,7 @@ const Cart = ({ match, location, history }) => {
 
     return (
         <main>
+            <Paper className={classes.paper}>
             <Grid container>
                 <Grid container item sm={12}>
                     <Container maxWidth="md">
@@ -193,7 +206,7 @@ const Cart = ({ match, location, history }) => {
                                             ${ccyFormat(invoiceSubtotal)}
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Button
+                                            <Button className={classes.button}
                                                 onClick={() =>
                                                     handleButtonClick(
                                                         `/checkout`
@@ -205,7 +218,7 @@ const Cart = ({ match, location, history }) => {
                                                 }
                                                 variant="contained"
                                             >
-                                                Proceed to Checkout
+                                                <b>Proceed to Checkout</b>
                                             </Button>
                                         </TableCell>
                                     </TableRow>
@@ -215,6 +228,7 @@ const Cart = ({ match, location, history }) => {
                     </Container>
                 </Grid>
             </Grid>
+            </Paper>
         </main>
     );
 };

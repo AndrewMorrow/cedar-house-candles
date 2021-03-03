@@ -59,18 +59,16 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-        color: "white",
-        backgroundColor: "black",
-        "&:focus": {
-            backgroundColor: "black",
-            color: "white",
+        color: 'white',
+        fontWeight: 'bold',
+        backgroundColor: '#999b84',
+        
+        '&:focus': {
+            backgroundColor: 'transparent',
         },
-        "&hover": {
-            backgroundColor: "black",
-            opacity: 0,
-        },
-        "&active": {
-            backgroundColor: "black",
+        '&:hover': {
+            backgroundColor: '#d8ac9c',
+            
         },
     },
 }));
@@ -294,12 +292,12 @@ export default function Checkout() {
                                             onClick={handleBack}
                                             className={classes.button}
                                         >
-                                            Back
+                                           <b> Back</b>
                                         </Button>
                                     )}
                                     <Button
                                         variant="contained"
-                                        color="primary"
+                                        
                                         onClick={handleNext}
                                         className={classes.button}
                                     >
