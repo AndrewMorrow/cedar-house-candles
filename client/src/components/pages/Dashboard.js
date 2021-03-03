@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Store } from "../../store";
 import { logoutUser } from "../../store/actions/authActions";
+import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 import API from "../../utils/apiHelper.js";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -54,10 +55,13 @@ const Dashboard = (props) => {
     }, [state, props]);
 
     useEffect(() => {
+        dispatch({
+            type: ORDER_LIST_MY_RESET,
+        });
         if (state.auth.isAuthenticated) {
             listMyOrders()(dispatch);
         }
-    }, []);
+    }, [dispatch, state.auth.isAuthenticated]);
 
     const onLogoutClick = (e) => {
         e.preventDefault();
