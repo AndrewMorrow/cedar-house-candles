@@ -47,10 +47,25 @@ const useStyles = makeStyles((theme) => ({
     buttons: {
         display: "flex",
         justifyContent: "flex-end",
+        
     },
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
+        color: 'white',
+        backgroundColor: 'black',
+        '&:focus': {
+            backgroundColor: 'black',
+            color: 'white',
+        },
+        '&hover': {
+            backgroundColor: 'black',
+            opacity: 0
+        },
+        '&active': {
+            backgroundColor: 'black'
+        }
+   
     },
 }));
 
