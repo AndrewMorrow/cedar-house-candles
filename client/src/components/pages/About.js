@@ -13,14 +13,14 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: "#FFFFF0",
+        backgroundColor: "#f4eeed",
         borderRadius: "3rem",
     },
     paper: {
         padding: theme.spacing(4),
         margin: "auto",
         maxWidth: 950,
-
+        backgroundColor: '#efd9d1',
         borderRadius: "3.25rem",
         marginBottom: 20,
     },

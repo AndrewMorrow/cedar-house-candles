@@ -39,12 +39,13 @@ const useStyles = makeStyles((theme) => ({
     title: {
         margin: theme.spacing(4, 0, 2),
         fontFamily: "Old Standard TT",
+        color: '#214c1f'
     },
     paper: {
         padding: theme.spacing(4),
         margin: "auto",
         maxWidth: 950,
-
+        backgroundColor: '#efd9d1',
         borderRadius: "1.25rem",
         marginBottom: 20,
     },
