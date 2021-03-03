@@ -19,20 +19,7 @@ import {
     IconButton,
     Button,
 } from "@material-ui/core";
-const orders = [
-    {
-        _id: "1234",
-        name: "blah1",
-        price: 12,
-        paidAt: "02/15/2021",
-    },
-    {
-        _id: "5688",
-        name: "blah5",
-        price: 5,
-        paidAt: "01/25/2021",
-    },
-];
+import { listMyOrders } from "../../store/actions/orderActions";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -56,6 +43,7 @@ const Dashboard = (props) => {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const user = state.auth.user;
+    const { order } = state;
 
     useEffect(() => {
         if (!state.auth.isAuthenticated) props.history.push("/login");
@@ -64,6 +52,12 @@ const Dashboard = (props) => {
             .then((res) => console.log({ res }))
             .catch((err) => console.log({ err }));
     }, [state, props]);
+
+    useEffect(() => {
+        if (state.auth.isAuthenticated) {
+            listMyOrders()(dispatch);
+        }
+    }, []);
 
     const onLogoutClick = (e) => {
         e.preventDefault();
@@ -107,11 +101,16 @@ const Dashboard = (props) => {
                                                 Order Date
                                             </Typography>
                                         </TableCell>
+                                        <TableCell align="center">
+                                            <Typography variant="h6">
+                                                Status
+                                            </Typography>
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {orders && orders.length > 0 ? (
-                                        orders.map((item) => (
+                                    {order.orders && order.orders.length > 0 ? (
+                                        order.orders.map((item) => (
                                             <>
                                                 <TableRow key={item._id}>
                                                     <TableCell align="center">
@@ -124,7 +123,18 @@ const Dashboard = (props) => {
 
                                                     <TableCell align="center">
                                                         <Typography variant="h6">
-                                                            {item.paidAt}
+                                                            {new Date(
+                                                                item.createdAt
+                                                            ).toLocaleDateString()}
+                                                        </Typography>
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                        <Typography variant="h6">
+                                                            {item.paymentResult
+                                                                ? item
+                                                                      .paymentResult
+                                                                      .status
+                                                                : `NOT COMPLETED`}
                                                         </Typography>
                                                     </TableCell>
                                                 </TableRow>
