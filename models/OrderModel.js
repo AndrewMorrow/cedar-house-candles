@@ -21,11 +21,25 @@ const orderSchema = mongoose.Schema(
             },
         ],
         shippingAddress: {
-            address: {
+            firstName: {
+                type: String,
+            },
+            lastName: {
+                type: String,
+            },
+            address1: {
+                type: String,
+                // required: true,
+            },
+            address2: {
                 type: String,
                 // required: true,
             },
             city: {
+                type: String,
+                // required: true,
+            },
+            addressState: {
                 type: String,
                 // required: true,
             },

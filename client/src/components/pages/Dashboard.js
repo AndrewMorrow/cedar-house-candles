@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
-import { Store } from '../../store';
-import { logoutUser } from '../../store/actions/authActions';
-import API from '../../utils/apiHelper.js';
-import { FaTrashAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useContext } from "react";
+import { Store } from "../../store";
+import { logoutUser } from "../../store/actions/authActions";
+import API from "../../utils/apiHelper.js";
+import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 import {
     Grid,
     Paper,
@@ -18,34 +18,34 @@ import {
     TableRow,
     IconButton,
     Button,
-} from '@material-ui/core';
+} from "@material-ui/core";
 const orders = [
     {
-        _id: '1234',
-        name: 'blah1',
+        _id: "1234",
+        name: "blah1",
         price: 12,
-        paidAt: '02/15/2021'
+        paidAt: "02/15/2021",
     },
     {
-        _id: '5688',
-        name: 'blah5',
+        _id: "5688",
+        name: "blah5",
         price: 5,
-        paidAt: '01/25/2021'
+        paidAt: "01/25/2021",
     },
 ];
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
-        height: '100px',
+        height: "100px",
     },
     paperCon: {
-        padding: '20px',
-        display: 'flex',
-        justifyContent: 'space-between',
+        padding: "20px",
+        display: "flex",
+        justifyContent: "space-between",
     },
     quantNum: {
-        display: 'flex',
-        justifyContent: 'center',
+        display: "flex",
+        justifyContent: "center",
     },
     table: {
         minWidth: 600,
@@ -58,7 +58,7 @@ const Dashboard = (props) => {
     const user = state.auth.user;
 
     useEffect(() => {
-        if (!state.auth.isAuthenticated) props.history.push('/login');
+        if (!state.auth.isAuthenticated) props.history.push("/login");
 
         API.getUser()
             .then((res) => console.log({ res }))
@@ -87,9 +87,9 @@ const Dashboard = (props) => {
                                             <Typography
                                                 variant="h4"
                                                 style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
                                                 }}
                                             >
                                                 Order History
@@ -97,7 +97,6 @@ const Dashboard = (props) => {
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                    
                                         <TableCell align="center">
                                             <Typography variant="h6">
                                                 Order ID
@@ -108,7 +107,6 @@ const Dashboard = (props) => {
                                                 Order Date
                                             </Typography>
                                         </TableCell>
-                         
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -116,28 +114,24 @@ const Dashboard = (props) => {
                                         orders.map((item) => (
                                             <>
                                                 <TableRow key={item._id}>
-                                          
                                                     <TableCell align="center">
                                                         <div>
                                                             <Typography variant="h6">
                                                                 {item._id}
                                                             </Typography>
-                               
                                                         </div>
                                                     </TableCell>
-                                                    
+
                                                     <TableCell align="center">
-                                                    <Typography variant="h6">
-                                                                {
-                                                                    item.paidAt
-                                                                }
-                                                            </Typography>
+                                                        <Typography variant="h6">
+                                                            {item.paidAt}
+                                                        </Typography>
                                                     </TableCell>
                                                 </TableRow>
                                             </>
                                         ))
                                     ) : (
-                                        <h5 style={{ marginLeft: '1rem' }}>
+                                        <h5 style={{ marginLeft: "1rem" }}>
                                             No order history for this user
                                         </h5>
                                     )}

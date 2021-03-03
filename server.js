@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 import productRoutes from "./routes/products.js";
-import orderRoutes from "./routes/order.js";
+import orderRoutes from "./routes/orders.js";
 import passConfig from "./config/passport.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 dotenv.config();
@@ -46,6 +46,10 @@ app.use("/api/products", productRoutes);
 
 // order data routes
 app.use("/api/orders", orderRoutes);
+
+app.get("/api/config/paypal", (req, res) =>
+    res.send(process.env.PAYPAL_CLIENT_ID)
+);
 
 // Custom Error handlers
 app.use(notFound);
