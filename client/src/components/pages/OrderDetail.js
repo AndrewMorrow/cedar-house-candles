@@ -66,12 +66,12 @@ const OrderDetail = ({ match }) => {
     const { order } = state;
 
     useEffect(() => {
-        if (!order || order._id !== orderId || order.success) {
+        if (!order || order._id !== orderId || !order.success) {
             dispatch({ type: ORDER_PAY_RESET });
             getOrderDetails(orderId)(dispatch);
         }
         // eslint-disable-next-line
-    }, [dispatch]);
+    }, []);
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);

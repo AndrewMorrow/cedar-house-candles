@@ -55,9 +55,9 @@ const Dashboard = (props) => {
     }, [state, props]);
 
     useEffect(() => {
-        dispatch({
-            type: ORDER_LIST_MY_RESET,
-        });
+        // dispatch({
+        //     type: ORDER_LIST_MY_RESET,
+        // });
         if (state.auth.isAuthenticated) {
             listMyOrders()(dispatch);
         }
