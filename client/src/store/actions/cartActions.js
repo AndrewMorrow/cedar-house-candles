@@ -3,6 +3,7 @@ import {
     REMOVE_FROM_CART,
     CART_SAVE_PAYMENT_METHOD,
     CART_SAVE_SHIPPING_ADDRESS,
+    UPDATE_TOTAL_PRICE,
 } from "./types";
 
 export const addToCart = (product) => async (dispatch) => {
@@ -36,4 +37,11 @@ export const saveShippingAddress = (data) => async (dispatch) => {
     });
 
     localStorage.setItem("shippingAddress", JSON.stringify(data));
+};
+
+export const updateTotalPrice = (total) => async (dispatch) => {
+    dispatch({
+        type: UPDATE_TOTAL_PRICE,
+        payload: total,
+    });
 };

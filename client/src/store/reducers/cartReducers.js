@@ -3,6 +3,7 @@ import {
     CART_SAVE_PAYMENT_METHOD,
     REMOVE_FROM_CART,
     CART_SAVE_SHIPPING_ADDRESS,
+    UPDATE_TOTAL_PRICE,
 } from "../actions/types";
 
 export const initialState = {
@@ -15,6 +16,7 @@ export const initialState = {
         ? JSON.parse(localStorage.getItem("shippingAddress"))
         : {},
     shippingPrice: 8,
+    totalPrice: 0,
 };
 
 export const reducer = function (state = initialState, action) {
@@ -57,6 +59,11 @@ export const reducer = function (state = initialState, action) {
             return {
                 ...state,
                 shippingAddress: action.payload,
+            };
+        case UPDATE_TOTAL_PRICE:
+            return {
+                ...state,
+                totalPrice: action.payload,
             };
 
         default:
