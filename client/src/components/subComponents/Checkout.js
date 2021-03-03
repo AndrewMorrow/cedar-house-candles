@@ -141,7 +141,7 @@ export default function Checkout() {
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
         payOrder(order.order._id, paymentResult)(dispatch);
-        history.push(`/`);
+        history.push(`/orderthanks/${order.order._id}`);
     };
 
     return (
