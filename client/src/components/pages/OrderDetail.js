@@ -251,9 +251,9 @@ const OrderDetail = ({ match }) => {
                                                         }
                                                     />
                                                 ) : (
-                                                    <h6>
+                                                    <h5>
                                                         Order has been paid!
-                                                    </h6>
+                                                    </h5>
                                                 )}
                                             </Grid>
                                         </Grid>
