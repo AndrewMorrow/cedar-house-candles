@@ -1,0 +1,59 @@
+import express from "express";
+const router = express.Router();
+import Product from "../models/ProductModel.js";
+import { catchError } from "../middleware/errorMiddleware.js";
+
+// @desc        fetch all products
+// @route       GET /api/products
+// @access      Public
+router.get(
+    "/",
+    catchError(async (req, res) => {
+        try {
+            console.log("All Products");
+            const products = await Product.find({});
+            res.status(200).json(products);
+        } catch (err) {
+            res.status(404);
+            throw new Error("Product Not Found");
+        }
+    })
+);
+
+// @desc        fetch single product
+// @route       GET /api/products/:id
+// @access      Public
+router.get(
+    "/:id",
+    catchError(async (req, res) => {
+        const product = await Product.findById(req.params.id);
+
+        if (product) {
+            res.status(200).json(product);
+        } else {
+            res.status(404);
+            throw new Error("Product not found");
+        }
+    })
+);
+
+// @desc        fetch all matching ids
+// @route       GET /api/products/:id
+// @access      Public
+// router.get(
+//     "/:id",
+//     catchError(async (req, res) => {
+//         const product = await Product.find({
+//             _id: { $in: someArray },
+//         });
+
+//         if (product) {
+//             res.status(200).json(product);
+//         } else {
+//             res.status(404);
+//             throw new Error("Product not found");
+//         }
+//     })
+// );
+
+export default router;

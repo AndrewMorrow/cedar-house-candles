@@ -7,6 +7,16 @@ const reviewSchema = mongoose.Schema({
     comment: { type: String, required: true },
 });
 
+// schema for array of product types
+const typesSchema = mongoose.Schema({
+    name: { type: String, required: true },
+});
+const noteProfileSchema = mongoose.Schema({
+    top: { type: String },
+    middle: { type: String },
+    bottom: { type: String },
+});
+
 const productSchema = mongoose.Schema(
     {
         user: {
@@ -50,7 +60,37 @@ const productSchema = mongoose.Schema(
             required: true,
             default: 0,
         },
+        cols: {
+            type: Number,
+            required: true,
+            default: 1,
+        },
         reviews: [reviewSchema],
+        productTypes: [typesSchema],
+        isBestSeller: {
+            type: Boolean,
+            default: false,
+        },
+        cartQty: {
+            type: Number,
+            default: 0,
+        },
+        itemProductType: {
+            type: String,
+            required: true,
+        },
+        productCollection: {
+            type: String,
+        },
+        noteProfileTop: {
+            type: String,
+        },
+        noteProfileMiddle: {
+            type: String,
+        },
+        noteProfileBottom: {
+            type: String,
+        },
     },
     {
         timestamps: true,

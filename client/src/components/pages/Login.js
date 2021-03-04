@@ -1,21 +1,60 @@
-import React, { useEffect, useRef, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Store } from '../../store';
-import { loginUser, setErrors } from '../../store/actions/authActions';
-import classnames from 'classnames';
+import React, { useEffect, useRef, useContext } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { loginUser, setErrors } from "../../store/actions/authActions";
+import { Store } from "../../store";
+import classnames from "classnames";
+import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
 
 const Login = (props) => {
+    const classes = useStyles();
     const { state, dispatch } = useContext(Store);
     const errors = state.error;
     const emailRef = useRef();
     const passwordRef = useRef();
 
     useEffect(() => {
-        if (state.auth.isAuthenticated) props.history.push('/dashboard');
-    }, [state, props]);
+        dispatch({
+            type: ORDER_LIST_MY_RESET,
+        });
+        if (state.auth.isAuthenticated) props.history.push("/dashboard");
+    }, [state, props, dispatch]);
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        console.log(emailRef.current.value);
 
         dispatch(setErrors({ response: { data: {} } }));
 
@@ -29,86 +68,73 @@ const Login = (props) => {
 
     return (
         <main>
-            <div className="container">
-                <div className="row" style={{ marginTop: '4rem' }}>
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">
-                                keyboard_backspace
-                            </i>{' '}
-                            Back to home
-                        </Link>
-                        <div
-                            className="col s12"
-                            style={{ paddingLeft: '11.250px' }}
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <form
+                        className={classes.form}
+                        noValidate
+                        onSubmit={onSubmit}
+                    >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            type="email"
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            inputRef={emailRef}
+                            error={errors.incorrect}
+                            className={classnames("", {
+                                invalid: errors.incorrect,
+                            })}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            inputRef={passwordRef}
+                            error={errors.incorrect}
+                            className={classnames("", {
+                                invalid: errors.incorrect,
+                            })}
+                        />
+
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
                         >
-                            <h4>
-                                <b>Login</b> below
-                            </h4>
-                            <p className="grey-text text-darken-1">
-                                Don't have an account?{' '}
-                                <Link to="/register">Register</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={onSubmit}>
-                            <div className="input-field col s12">
-                                <input
-                                    ref={emailRef}
-                                    error={errors.incorrect}
-                                    name="email"
-                                    type="email"
-                                    className={classnames('', {
-                                        invalid: errors.incorrect,
-                                    })}
-                                />
-
-                                <label htmlFor="email">Email</label>
-
-                                <span className="red-text">
-                                    {errors.incorrect}
-                                </span>
-                            </div>
-
-                            <div className="input-field col s12">
-                                <input
-                                    ref={passwordRef}
-                                    error={errors.incorrect}
-                                    name="password"
-                                    type="password"
-                                    className={classnames('', {
-                                        invalid: errors.incorrect,
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
-                            </div>
-
-                            <div className="col s12">
-                                <span className="red-text">
-                                    {errors.message}
-                                </span>
-                            </div>
-
-                            <div
-                                className="col s12"
-                                style={{ paddingLeft: '11.250px' }}
-                            >
-                                <button
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                                    style={{
-                                        width: '150px',
-                                        borderRadius: '3px',
-                                        letterSpacing: '1.5px',
-                                        marginTop: '1rem',
-                                    }}
-                                    type="submit"
-                                >
-                                    Login
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            Sign In
+                        </Button>
+                        <Grid container>
+                            <Grid item>
+                                <Link to="/register" variant="body2">
+                                    {"Don't have an account? Sign Up"}
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </form>
                 </div>
-            </div>
+            </Container>
         </main>
     );
 };
