@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // schema for array of reviews
 const reviewSchema = mongoose.Schema({
@@ -11,13 +11,18 @@ const reviewSchema = mongoose.Schema({
 const typesSchema = mongoose.Schema({
     name: { type: String, required: true },
 });
+const noteProfileSchema = mongoose.Schema({
+    top: { type: String },
+    middle: { type: String },
+    bottom: { type: String },
+});
 
 const productSchema = mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'User',
+            ref: "User",
         },
         name: {
             type: String,
@@ -77,12 +82,21 @@ const productSchema = mongoose.Schema(
         productCollection: {
             type: String,
         },
+        noteProfileTop: {
+            type: String,
+        },
+        noteProfileMiddle: {
+            type: String,
+        },
+        noteProfileBottom: {
+            type: String,
+        },
     },
     {
         timestamps: true,
     }
 );
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 export default Product;

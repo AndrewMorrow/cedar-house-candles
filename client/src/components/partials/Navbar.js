@@ -32,15 +32,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     button: {
-        margin: '0px 8px',
-        color: 'white',
-        '&:focus': {
-            backgroundColor: '#d8ac9c',
+        margin: "0px 8px",
+        color: "white",
+        "&:focus": {
+            backgroundColor: "#d8ac9c",
         },
     },
     button2: {
-        margin: '0px 8px',
-        color: 'white',
+        margin: "0px 8px",
+        color: "white",
         fontSize: 25,
 
         '&:focus': {

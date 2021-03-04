@@ -4,6 +4,7 @@ import {
     REMOVE_FROM_CART,
     CART_SAVE_SHIPPING_ADDRESS,
     UPDATE_TOTAL_PRICE,
+    CLEAR_CART,
 } from "../actions/types";
 
 export const initialState = {
@@ -64,6 +65,11 @@ export const reducer = function (state = initialState, action) {
             return {
                 ...state,
                 totalPrice: action.payload,
+            };
+        case CLEAR_CART:
+            return {
+                ...state,
+                cartItems: [],
             };
 
         default:
