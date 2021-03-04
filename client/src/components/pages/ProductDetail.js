@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { getProduct } from "../../store/actions/productActions";
 import { Store } from "../../store";
 import {
@@ -9,10 +9,12 @@ import {
     Typography,
     Snackbar,
     Paper,
+    MenuItem,
+    Select,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import { addToCart } from "../../store/actions/cartActions";
+import { changeCartQty, addToCart } from "../../store/actions/cartActions.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -91,6 +93,8 @@ const useStyles = makeStyles((theme) => ({
 const ProductDetail = ({ match }) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const [snackOpen, setSnackOpen] = useState(false);
+    const [selectValue, setSelectValue] = useState(1);
     const { state, dispatch } = useContext(Store);
     const {
         product: { product },
@@ -106,16 +110,29 @@ const ProductDetail = ({ match }) => {
 
     const addToCartHandler = (e) => {
         e.preventDefault();
-        addToCart(product)(dispatch);
-        setOpen(true);
+        addToCart(product, selectValue)(dispatch);
+        setSnackOpen(true);
     };
 
-    const handleClose = (event, reason) => {
+    const handleSnackClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
         }
 
         setOpen(false);
+    };
+
+    const handleChange = (event, eItem) => {
+        setSelectValue(event.target.value);
+        changeCartQty(event.target.value, eItem)(dispatch);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = () => {
+        setOpen(true);
     };
 
     return (
@@ -156,6 +173,24 @@ const ProductDetail = ({ match }) => {
                                 <p className={classes.price}>
                                     Price: ${product.price}
                                 </p>
+                                <Select
+                                    labelId="demo-controlled-open-select-label"
+                                    id="demo-controlled-open-select"
+                                    open={open}
+                                    onClose={handleClose}
+                                    onOpen={handleOpen}
+                                    value={selectValue}
+                                    onChange={(e) => handleChange(e, product)}
+                                    style={{ marginRight: "1rem" }}
+                                >
+                                    {[
+                                        ...Array(product.countInStock).keys(),
+                                    ].map((x) => (
+                                        <MenuItem key={x + 1} value={x + 1}>
+                                            {x + 1}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
                                 <Button
                                     className={classes.button}
                                     variant="contained"
@@ -164,9 +199,9 @@ const ProductDetail = ({ match }) => {
                                     <b> Add to Cart </b>
                                 </Button>
                                 <Snackbar
-                                    open={open}
+                                    open={snackOpen}
                                     autoHideDuration={6000}
-                                    onClose={handleClose}
+                                    onClose={handleSnackClose}
                                     message="Product Added"
                                 ></Snackbar>
                             </div>

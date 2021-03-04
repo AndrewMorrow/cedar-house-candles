@@ -24,21 +24,16 @@ export const initialState = {
 export const reducer = function (state = initialState, action) {
     switch (action.type) {
         case ADD_TO_CART:
-            const item = action.payload;
+            const item = action.payload.product;
+            const itemCartQty = action.payload.qty;
             const existItem = state.cartItems.find((x) => x._id === item._id);
 
             if (existItem) {
-                console.log(existItem);
+                // console.log(existItem);
                 existItem.cartQty++;
                 return state;
-                // return {
-                //     ...state,
-                //     cartItems: state.cartItems.map((x) =>
-                //         x._id === existItem._id ? item : x
-                //     ),
-                // };
             } else {
-                item.cartQty++;
+                item.cartQty = itemCartQty;
                 return {
                     ...state,
                     cartItems: [...state.cartItems, item],
