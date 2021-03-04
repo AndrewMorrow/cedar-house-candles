@@ -4,12 +4,23 @@ import {
     CART_SAVE_PAYMENT_METHOD,
     CART_SAVE_SHIPPING_ADDRESS,
     UPDATE_TOTAL_PRICE,
+    CHANGE_CART_QTY,
 } from "./types";
 
 export const addToCart = (product) => async (dispatch) => {
     dispatch({
         type: ADD_TO_CART,
         payload: product,
+    });
+};
+
+export const changeCartQty = (qty, item) => async (dispatch) => {
+    dispatch({
+        type: CHANGE_CART_QTY,
+        payload: {
+            qty,
+            item,
+        },
     });
 };
 

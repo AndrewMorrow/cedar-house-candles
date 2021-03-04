@@ -15,13 +15,24 @@ import Container from '@material-ui/core/Container';
 import { Store } from '../../store';
 import { registerUser, setErrors } from '../../store/actions/authActions';
 import classnames from 'classnames';
+import { Paper, Card } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        padding: theme.spacing(6),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: '#efd9d1',
+        borderRadius: '1.25rem',
+    },
+    card: {
+        padding: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+
+        borderRadius: '1.25rem',
     },
     avatar: {
         margin: theme.spacing(1),
@@ -31,8 +42,14 @@ const useStyles = makeStyles((theme) => ({
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
     },
-    submit: {
+    button: {
         margin: theme.spacing(3, 0, 2),
+        color: 'white',
+        backgroundColor: '#999b84',
+
+        '&:focus': {
+            backgroundColor: 'transparent',
+        },
     },
 }));
 
@@ -44,7 +61,6 @@ const Register = (props) => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const password2Ref = useRef();
-   
 
     useEffect(() => {
         if (state.auth.isAuthenticated) props.history.push('/dashboard');
@@ -68,106 +84,110 @@ const Register = (props) => {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12}>
-                            <TextField
-                                autoComplete="name"
-                                name="name"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Name"
-                                autoFocus
-                                inputRef={nameRef}
-                                error={errors.name}
-                                className={classnames('', {
-                                    invalid: errors.name,
-                                })}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                inputRef={emailRef}
-                                error={errors.email}
-                                type="email"
-                                className={classnames('', {
-                                    invalid: errors.email,
-                                })}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                inputRef={passwordRef}
-                                error={errors.password}
-                                type="password"
-                                className={classnames('', {
-                                    invalid: errors.password,
-                                })}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password2"
-                                label="Password2"
-                                type="password2"
-                                id="password2"
-                                autoComplete="current-password2"
-                                inputRef={password2Ref}
-                                error={errors.password2}
-                                type="password"
-                                className={classnames('', {
-                                    invalid: errors.password2,
-                                })}
-                            />
-                        </Grid>
-                      
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
+            <Paper className={classes.paper}>
+                <Card className={classes.card}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
+                    </Typography>
+                    <form
+                        className={classes.form}
+                        noValidate
+                        onSubmit={onSubmit}
                     >
-                        Sign Up
-                    </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link to="/login" variant="body2">
-                                Already have an account? Sign in
-                            </Link>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    autoComplete="name"
+                                    name="name"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Name"
+                                    autoFocus
+                                    inputRef={nameRef}
+                                    error={errors.name}
+                                    className={classnames('', {
+                                        invalid: errors.name,
+                                    })}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    inputRef={emailRef}
+                                    error={errors.email}
+                                    type="email"
+                                    className={classnames('', {
+                                        invalid: errors.email,
+                                    })}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    inputRef={passwordRef}
+                                    error={errors.password}
+                                    type="password"
+                                    className={classnames('', {
+                                        invalid: errors.password,
+                                    })}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password2"
+                                    label="Password2"
+                                    type="password2"
+                                    id="password2"
+                                    autoComplete="current-password2"
+                                    inputRef={password2Ref}
+                                    error={errors.password2}
+                                    type="password"
+                                    className={classnames('', {
+                                        invalid: errors.password2,
+                                    })}
+                                />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </form>
-            </div>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            className={classes.button}
+                        >
+                            Sign Up
+                        </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link to="/login" variant="body2">
+                                    Already have an account? Sign in
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </Card>
+            </Paper>
         </Container>
     );
 };
