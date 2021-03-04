@@ -7,10 +7,13 @@ import {
     CHANGE_CART_QTY,
 } from "./types";
 
-export const addToCart = (product) => async (dispatch) => {
+export const addToCart = (product, qty) => async (dispatch) => {
     dispatch({
         type: ADD_TO_CART,
-        payload: product,
+        payload: {
+            product,
+            qty,
+        },
     });
 };
 

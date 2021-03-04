@@ -1,21 +1,21 @@
-import React, { useEffect, useContext } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import { getProducts } from '../../store/actions/productActions';
-import { Store } from '../../store';
-import { Paper } from '@material-ui/core';
+import React, { useEffect, useContext } from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Button from "@material-ui/core/Button";
+import CameraIcon from "@material-ui/icons/PhotoCamera";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
+import { getProducts } from "../../store/actions/productActions";
+import { Store } from "../../store";
+import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -33,24 +33,24 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: '#f4eeed',
-        cursor: 'pointer',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#f4eeed",
+        cursor: "pointer",
     },
 
     cardMedia: {
-        paddingTop: '56.25%', // 16:9
+        paddingTop: "56.25%", // 16:9
     },
     cardContent: {
         flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
     },
     cardAction: {
-        justifyContent: 'center',
+        justifyContent: "center",
     },
     main: {
         marginTop: theme.spacing(8),
@@ -58,10 +58,10 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(4),
-        margin: 'auto',
+        margin: "auto",
         maxWidth: 950,
-        backgroundColor: '#efd9d1',
-        borderRadius: '1.25rem',
+        backgroundColor: "#efd9d1",
+        borderRadius: "1.25rem",
         marginBottom: 20,
     },
     prices:{
@@ -134,7 +134,9 @@ export default function Shop(props) {
                                                     </Typography>
                                                 </div>
 
-                                                <Typography className={classes.prices}>
+                                                <Typography
+                                                    className={classes.prices}
+                                                >
                                                     <b>Price: $</b>
                                                     {card.price}
                                                 </Typography>

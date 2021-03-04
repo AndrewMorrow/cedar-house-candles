@@ -98,9 +98,9 @@ const Cart = ({ match, location, history }) => {
         setOpen(false);
     };
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    // const handleOpen = () => {
+    //     setOpen(true);
+    // };
 
     return (
         <main>
@@ -203,8 +203,10 @@ const Cart = ({ match, location, history }) => {
                                                                 onClose={
                                                                     handleClose
                                                                 }
-                                                                onOpen={
-                                                                    handleOpen
+                                                                onOpen={() =>
+                                                                    setOpen(
+                                                                        true
+                                                                    )
                                                                 }
                                                                 value={
                                                                     item.cartQty

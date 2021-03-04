@@ -51,10 +51,6 @@ app.get("/api/config/paypal", (req, res) =>
     res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
-// Custom Error handlers
-app.use(notFound);
-app.use(errorHandler);
-
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -64,6 +60,9 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
+// Custom Error handlers
+app.use(notFound);
+app.use(errorHandler);
 app.listen(PORT, () => {
     console.log(`Server is listening at http://localhost:${PORT}`);
 });
