@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 20,
     },
     prices:{
-        marginTop: 10
+        marginTop: 12
     }
 }));
 

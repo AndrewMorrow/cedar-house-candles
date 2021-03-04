@@ -68,9 +68,7 @@ const useStyles = makeStyles((theme) => ({
             
         },
     },
-    step: {
-        color: '#d8ac9c'
-    }
+
 }));
 
 const steps = ["Shipping address", "Payment method", "Complete Payment"];

@@ -22,6 +22,7 @@ import PlaceOrder from "./components/pages/PlaceOrder";
 import ShippingPage from "./components/pages/ShippingPage";
 import OrderThanks from "./components/pages/OrderThanks";
 
+
 const App = () => {
     const { dispatch } = useContext(Store);
 
