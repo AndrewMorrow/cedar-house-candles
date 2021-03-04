@@ -71,6 +71,7 @@ const Login = (props) => {
             type: ORDER_LIST_MY_RESET,
         });
         if (state.auth.isAuthenticated) props.history.push("/dashboard");
+        // eslint-disable-next-line
     }, []);
 
     const onSubmit = (e) => {
