@@ -66,12 +66,12 @@ const OrderDetail = ({ match }) => {
     const { order } = state;
 
     useEffect(() => {
-        if (!order || order._id !== orderId || !order.success) {
-            dispatch({ type: ORDER_PAY_RESET });
-            getOrderDetails(orderId)(dispatch);
-        }
+        // dispatch({ type: ORDER_PAY_RESET });
+
+        getOrderDetails(orderId)(dispatch);
+
         // eslint-disable-next-line
-    }, []);
+    }, [order.success]);
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
@@ -82,188 +82,162 @@ const OrderDetail = ({ match }) => {
         return `${num.toFixed(2)}`;
     }
 
-    return order.loading ? (
+    return order.loading || !order.order ? (
         <h1>Loading... </h1>
     ) : (
         order.order && (
-            <>
-                <React.Fragment>
-                    <CssBaseline />
-                    <main className={classes.layout}>
-                        <Paper className={classes.paper}>
-                            <Typography
-                                component="h1"
-                                variant="h4"
-                                align="center"
-                            >
-                                Order Detail
+            <main className={classes.layout}>
+                <Paper className={classes.paper}>
+                    <Typography component="h1" variant="h4" align="center">
+                        Order Detail
+                    </Typography>
+                    <React.Fragment>
+                        <React.Fragment>
+                            <Typography variant="h5" gutterBottom>
+                                Thank you for your order.
                             </Typography>
-                            <React.Fragment>
-                                <React.Fragment>
-                                    <Typography variant="h5" gutterBottom>
-                                        Thank you for your order.
-                                    </Typography>
-                                    <Typography variant="subtitle1">
-                                        Your order number is{" "}
-                                        {order.order && order.order._id}.
-                                    </Typography>
-                                    <Typography variant="h6" gutterBottom>
-                                        Order summary
-                                    </Typography>
-                                    <List disablePadding>
-                                        {order.order &&
-                                            order.order.orderItems.map(
-                                                (product) => (
-                                                    <ListItem
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                        key={product.name}
-                                                    >
-                                                        <ListItemText
-                                                            primary={
-                                                                product.name
-                                                            }
-                                                            // secondary={
-                                                            //     product.itemProductType
-                                                            // }
-                                                        />
-
-                                                        <Typography variant="body2">
-                                                            {product.cartQty} x
-                                                            $
-                                                            {ccyFormat(
-                                                                product.price
-                                                            )}
-                                                        </Typography>
-                                                    </ListItem>
-                                                )
-                                            )}
-                                        <ListItem className={classes.listItem}>
-                                            <ListItemText primary="Shipping" />
-                                            <Typography variant="subtitle1">
-                                                $
-                                                {order.order &&
-                                                    ccyFormat(
-                                                        order.order
-                                                            .shippingPrice
-                                                    )}
-                                            </Typography>
-                                        </ListItem>
-                                        <ListItem className={classes.listItem}>
-                                            <ListItemText primary="Total" />
-                                            <Typography
-                                                variant="subtitle1"
-                                                className={classes.total}
-                                            >
-                                                $
-                                                {order.order &&
-                                                    ccyFormat(
-                                                        order.order.totalPrice
-                                                    )}
-                                            </Typography>
-                                        </ListItem>
-                                    </List>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12} sm={7}>
-                                            <Typography
-                                                variant="h6"
-                                                gutterBottom
-                                                className={classes.title}
-                                            >
-                                                Shipping Info
-                                            </Typography>
-                                            <Typography gutterBottom>
-                                                {order.order.shippingAddress
-                                                    .firstName &&
-                                                    order.order.shippingAddress
-                                                        .firstName}{" "}
-                                                {order.order.shippingAddress
-                                                    .lastName &&
-                                                    order.order.shippingAddress
-                                                        .lastName}
-                                            </Typography>
-                                            <Typography gutterBottom>
-                                                {!order.order.shippingAddress
-                                                    .address1 && (
-                                                    <h6>
-                                                        No Shipping Address
-                                                        Available
-                                                    </h6>
-                                                )}
-                                                {
-                                                    order.order.shippingAddress
-                                                        .address1
-                                                }
-                                                <br />
-                                                {order.order.shippingAddress
-                                                    .address2 &&
-                                                    order.order.shippingAddress
-                                                        .address2}
-                                                {order.order.shippingAddress
-                                                    .address2 && <br />}
-                                                {order.order.shippingAddress
-                                                    .city &&
-                                                    `${order.order.shippingAddress.city},`}{" "}
-                                                {
-                                                    order.order.shippingAddress
-                                                        .addressState
-                                                }{" "}
-                                                {order.order.shippingAddress
-                                                    .postalCode &&
-                                                    order.order.shippingAddress
-                                                        .postalCode}
-                                                <br />
-                                                {order.order.shippingAddress
-                                                    .country &&
-                                                    order.order.shippingAddress
-                                                        .country}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            container
-                                            direction="column"
-                                            xs={12}
-                                            sm={5}
+                            <Typography variant="subtitle1">
+                                Your order number is{" "}
+                                {order.order && order.order._id}.
+                            </Typography>
+                            <Typography variant="h6" gutterBottom>
+                                Order summary
+                            </Typography>
+                            <List disablePadding>
+                                {order.order &&
+                                    order.order.orderItems.map((product) => (
+                                        <ListItem
+                                            className={classes.listItem}
+                                            key={product.name}
                                         >
-                                            <Typography
-                                                variant="h6"
-                                                gutterBottom
-                                                className={classes.title}
-                                            >
-                                                Proceed to Payment
+                                            <ListItemText
+                                                primary={product.name}
+                                                // secondary={
+                                                //     product.itemProductType
+                                                // }
+                                            />
+
+                                            <Typography variant="body2">
+                                                {product.cartQty} x $
+                                                {ccyFormat(product.price)}
                                             </Typography>
-                                            <Grid container>
-                                                {order.loading && (
-                                                    <h1>Loading...</h1>
-                                                )}
-                                                {order.order &&
-                                                !order.order.isPaid ? (
-                                                    <PayPalButton
-                                                        amount={
-                                                            order.order &&
-                                                            order.order
-                                                                .totalPrice
-                                                        }
-                                                        onSuccess={
-                                                            successPaymentHandler
-                                                        }
-                                                    />
-                                                ) : (
-                                                    <h5>
-                                                        Order has been paid!
-                                                    </h5>
-                                                )}
-                                            </Grid>
-                                        </Grid>
+                                        </ListItem>
+                                    ))}
+                                <ListItem className={classes.listItem}>
+                                    <ListItemText primary="Shipping" />
+                                    <Typography variant="subtitle1">
+                                        $
+                                        {order.order &&
+                                            ccyFormat(
+                                                order.order.shippingPrice
+                                            )}
+                                    </Typography>
+                                </ListItem>
+                                <ListItem className={classes.listItem}>
+                                    <ListItemText primary="Total" />
+                                    <Typography
+                                        variant="subtitle1"
+                                        className={classes.total}
+                                    >
+                                        $
+                                        {order.order &&
+                                            ccyFormat(order.order.totalPrice)}
+                                    </Typography>
+                                </ListItem>
+                            </List>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={7}>
+                                    <Typography
+                                        variant="h6"
+                                        gutterBottom
+                                        className={classes.title}
+                                    >
+                                        Shipping Info
+                                    </Typography>
+                                    <Typography gutterBottom>
+                                        {order.order.shippingAddress
+                                            .firstName &&
+                                            order.order.shippingAddress
+                                                .firstName}{" "}
+                                        {order.order.shippingAddress.lastName &&
+                                            order.order.shippingAddress
+                                                .lastName}
+                                    </Typography>
+                                    <Typography gutterBottom>
+                                        {!order.order.shippingAddress
+                                            .address1 && (
+                                            <h6>
+                                                No Shipping Address Available
+                                            </h6>
+                                        )}
+                                        {order.order.shippingAddress.address1}
+                                        <br />
+                                        {order.order.shippingAddress.address2 &&
+                                            order.order.shippingAddress
+                                                .address2}
+                                        {order.order.shippingAddress
+                                            .address2 && <br />}
+                                        {order.order.shippingAddress.city &&
+                                            `${order.order.shippingAddress.city},`}{" "}
+                                        {
+                                            order.order.shippingAddress
+                                                .addressState
+                                        }{" "}
+                                        {order.order.shippingAddress
+                                            .postalCode &&
+                                            order.order.shippingAddress
+                                                .postalCode}
+                                        <br />
+                                        {order.order.shippingAddress.country &&
+                                            order.order.shippingAddress.country}
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    direction="column"
+                                    xs={12}
+                                    sm={5}
+                                >
+                                    {!order.order.isPaid ? (
+                                        <Typography
+                                            variant="h6"
+                                            gutterBottom
+                                            className={classes.title}
+                                        >
+                                            Proceed to payment
+                                        </Typography>
+                                    ) : (
+                                        <Typography
+                                            variant="h6"
+                                            gutterBottom
+                                            className={classes.title}
+                                        >
+                                            Payment Complete
+                                        </Typography>
+                                    )}
+                                    <Grid container>
+                                        {order.loading && <h1>Loading...</h1>}
+                                        {order.order && !order.order.isPaid ? (
+                                            <PayPalButton
+                                                amount={
+                                                    order.order &&
+                                                    order.order.totalPrice
+                                                }
+                                                onSuccess={
+                                                    successPaymentHandler
+                                                }
+                                            />
+                                        ) : (
+                                            <h4>Thank you for your payment!</h4>
+                                        )}
                                     </Grid>
-                                </React.Fragment>
-                            </React.Fragment>
-                        </Paper>
-                    </main>
-                </React.Fragment>
-            </>
+                                </Grid>
+                            </Grid>
+                        </React.Fragment>
+                    </React.Fragment>
+                </Paper>
+            </main>
         )
     );
 };

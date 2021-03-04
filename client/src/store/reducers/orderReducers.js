@@ -18,8 +18,9 @@ import {
 export const initialState = {
     orderItems: [],
     shippingAddress: {},
-    loading: true,
+    loading: false,
     orders: [],
+    success: false,
 };
 
 export const reducer = function (state = initialState, action) {
@@ -48,7 +49,6 @@ export const reducer = function (state = initialState, action) {
         case ORDER_DETAILS_SUCCESS:
             return {
                 loading: false,
-
                 order: action.payload,
             };
         case ORDER_DETAILS_FAIL:
@@ -76,8 +76,7 @@ export const reducer = function (state = initialState, action) {
 
         case ORDER_LIST_MY_REQUEST:
             return {
-                ...state,
-                loading: false,
+                loading: true,
             };
         case ORDER_LIST_MY_SUCCESS:
             return {
@@ -92,6 +91,7 @@ export const reducer = function (state = initialState, action) {
         case ORDER_LIST_MY_RESET:
             return {
                 ...state,
+                loading: true,
                 orders: [],
             };
 

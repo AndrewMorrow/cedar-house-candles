@@ -50,7 +50,7 @@ const Dashboard = (props) => {
         if (!state.auth.isAuthenticated) props.history.push("/login");
 
         API.getUser()
-            .then((res) => console.log({ res }))
+            .then((res) => console.log(res))
             .catch((err) => console.log({ err }));
     }, [state, props]);
 
@@ -61,7 +61,8 @@ const Dashboard = (props) => {
         if (state.auth.isAuthenticated) {
             listMyOrders()(dispatch);
         }
-    }, [dispatch, state.auth.isAuthenticated]);
+        // eslint-disable-next-line
+    }, []);
 
     const onLogoutClick = (e) => {
         e.preventDefault();
@@ -119,9 +120,13 @@ const Dashboard = (props) => {
                                                 <TableRow key={item._id}>
                                                     <TableCell align="center">
                                                         <div>
-                                                            <Typography variant="h6">
-                                                                {item._id}
-                                                            </Typography>
+                                                            <Link
+                                                                to={`/order/${item._id}`}
+                                                            >
+                                                                <Typography variant="h6">
+                                                                    {item._id}
+                                                                </Typography>
+                                                            </Link>
                                                         </div>
                                                     </TableCell>
 
