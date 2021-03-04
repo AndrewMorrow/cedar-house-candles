@@ -33,13 +33,11 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
     card: {
-
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: '#f4eeed',
-        cursor: "pointer"
-      
+        backgroundColor: "#f4eeed",
+        cursor: "pointer",
     },
 
     cardMedia: {
@@ -57,14 +55,12 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(4),
-        margin: 'auto',
+        margin: "auto",
         maxWidth: 950,
-        backgroundColor: '#efd9d1',
-        borderRadius: '1.25rem',
+        backgroundColor: "#efd9d1",
+        borderRadius: "1.25rem",
         marginBottom: 20,
     },
-
-
 }));
 
 export default function Shop(props) {
@@ -90,44 +86,57 @@ export default function Shop(props) {
 
             <main>
                 <Paper className={classes.paper} elevation10>
-                <Container className={classes.cardGrid} maxWidth="md">
-                    {/* End hero unit */}
-                    <Grid container spacing={4}>
-                        {products &&
-                            products.length > 0 &&
-                            products.map((card) => (
-                                <Grid item key={card._id} xs={12} sm={6} md={4}>
-                                    <Card onClick={() => handleButtonClick(`/product/${card._id}`)} className={classes.card}>
-                                        <CardMedia
-                                            className={classes.cardMedia}
-                                            image={card.image}
-                                            title={card.name}
-                                        />
-                                        <CardContent
-                                            className={classes.cardContent}
+                    <Container className={classes.cardGrid} maxWidth="md">
+                        {/* End hero unit */}
+                        <Grid container spacing={4}>
+                            {products &&
+                                products.length > 0 &&
+                                products.map((card) => (
+                                    <Grid
+                                        item
+                                        key={card._id}
+                                        xs={12}
+                                        sm={6}
+                                        md={4}
+                                    >
+                                        <Card
+                                            onClick={() =>
+                                                handleButtonClick(
+                                                    `/product/${card._id}`
+                                                )
+                                            }
+                                            className={classes.card}
                                         >
-                                            <Typography
-                                                gutterBottom
-                                                variant="h5"
-                                                component="h2"
+                                            <CardMedia
+                                                className={classes.cardMedia}
+                                                image={card.image}
+                                                title={card.name}
+                                            />
+                                            <CardContent
+                                                className={classes.cardContent}
                                             >
-                                                {card.name}
-                                            </Typography>
-                                            <Typography align="left">
-                                                {card.description}
-                                                <br />
-                                                <br />
-                                                Price: ${card.price}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions
-                                            className={classes.cardAction}
-                                        ></CardActions>
-                                    </Card>
-                                </Grid>
-                            ))}
-                    </Grid>
-                </Container>
+                                                <Typography
+                                                    gutterBottom
+                                                    variant="h5"
+                                                    component="h2"
+                                                >
+                                                    {card.name}
+                                                </Typography>
+                                                <Typography align="left">
+                                                    {card.description}
+                                                    <br />
+                                                    <br />
+                                                    Price: ${card.price}
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions
+                                                className={classes.cardAction}
+                                            ></CardActions>
+                                        </Card>
+                                    </Grid>
+                                ))}
+                        </Grid>
+                    </Container>
                 </Paper>
             </main>
         </React.Fragment>
