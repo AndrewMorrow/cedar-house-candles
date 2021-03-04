@@ -1,25 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Store } from "../../store";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import { createOrder, getOrderDetails } from "../../store/actions/orderActions";
+import { getOrderDetails } from "../../store/actions/orderActions";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
-import { ORDER_PAY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -93,13 +83,24 @@ const OrderDetail = ({ match }) => {
                     </Typography>
                     <React.Fragment>
                         <React.Fragment>
-                            <Typography variant="h5" gutterBottom>
-                                Thank you for your order.
-                            </Typography>
-                            <Typography variant="subtitle1">
-                                Your order number is{" "}
-                                {order.order && order.order._id}.
-                            </Typography>
+                            {order.order.isPaid ? (
+                                <Typography variant="h5" gutterBottom>
+                                    Thank you for your order.
+                                </Typography>
+                            ) : (
+                                <Typography variant="h5" gutterBottom>
+                                    Please proceed with payment below to
+                                    complete order.
+                                </Typography>
+                            )}
+                            {order.order.isPaid ? (
+                                <Typography variant="subtitle1">
+                                    Your order number is{" "}
+                                    {order.order && order.order._id}.
+                                </Typography>
+                            ) : (
+                                <></>
+                            )}
                             <Typography variant="h6" gutterBottom>
                                 Order summary
                             </Typography>

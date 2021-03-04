@@ -7,9 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@material-ui/core";
 import { Store } from "../../store";
 import { logoutUser } from "../../store/actions/authActions";
@@ -32,15 +31,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     button: {
-        margin: '0px 8px',
-        color: 'white',
-        '&:focus': {
-            backgroundColor: '#d8ac9c',
+        margin: "0px 8px",
+        color: "white",
+        "&:focus": {
+            backgroundColor: "#d8ac9c",
         },
     },
     button2: {
-        margin: '0px 8px',
-        color: 'white',
+        margin: "0px 8px",
+        color: "white",
         fontSize: 25,
 
         "&:focus": {
@@ -48,8 +47,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     appBar: {
-        backgroundColor: '#999b84',
-        padding: '1rem'
+        backgroundColor: "#999b84",
+        padding: "1rem",
     },
 }));
 

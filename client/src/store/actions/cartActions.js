@@ -4,7 +4,6 @@ import {
     CART_SAVE_PAYMENT_METHOD,
     CART_SAVE_SHIPPING_ADDRESS,
     UPDATE_TOTAL_PRICE,
-    CLEAR_CART,
 } from "./types";
 
 export const addToCart = (product) => async (dispatch) => {

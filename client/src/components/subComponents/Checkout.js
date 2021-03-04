@@ -1,14 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
@@ -19,7 +16,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
 import { CLEAR_CART, ORDER_PAY_RESET } from "../../store/actions/types";
@@ -72,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = ["Shipping address", "Payment method", "Complete Payment"];
 
 export default function Checkout() {
     const classes = useStyles();
@@ -167,12 +163,10 @@ export default function Checkout() {
                         {activeStep === steps.length ? (
                             <React.Fragment>
                                 <Typography variant="h5" gutterBottom>
-                                    Thank you for your order.
+                                    Please proceed with payment below to
+                                    complete order.
                                 </Typography>
-                                <Typography variant="subtitle1">
-                                    Your order number is{" "}
-                                    {order.order && order.order._id}.
-                                </Typography>
+
                                 <Typography variant="h6" gutterBottom>
                                     Order summary
                                 </Typography>
