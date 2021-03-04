@@ -22,7 +22,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
-import { ORDER_PAY_RESET } from "../../store/actions/types";
+import { CLEAR_CART, ORDER_PAY_RESET } from "../../store/actions/types";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,16 +59,15 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-        color: 'white',
-        fontWeight: 'bold',
-        backgroundColor: '#999b84',
-        
-        '&:focus': {
-            backgroundColor: 'transparent',
+        color: "white",
+        fontWeight: "bold",
+        backgroundColor: "#999b84",
+
+        "&:focus": {
+            backgroundColor: "transparent",
         },
-        '&:hover': {
-            backgroundColor: '#d8ac9c',
-            
+        "&:hover": {
+            backgroundColor: "#d8ac9c",
         },
     },
 }));
@@ -140,6 +139,9 @@ export default function Checkout() {
         console.log(paymentResult);
         payOrder(order.order._id, paymentResult)(dispatch);
         history.push(`/orderthanks/${order.order._id}`);
+        dispatch({
+            type: CLEAR_CART,
+        });
     };
 
     return (
@@ -292,12 +294,11 @@ export default function Checkout() {
                                             onClick={handleBack}
                                             className={classes.button}
                                         >
-                                           <b> Back</b>
+                                            <b> Back</b>
                                         </Button>
                                     )}
                                     <Button
                                         variant="contained"
-                                        
                                         onClick={handleNext}
                                         className={classes.button}
                                     >
