@@ -13,8 +13,7 @@
         "start:prod": "node server.js",
         "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
         "client": "cd client && npm start",
-        "build": "cd client && npm run build ",
-        "heroku-postbuild": "npm run build",
+        "heroku-postbuild": "cd client && npm install && npm run build",
         "lint": "eslint --fix --ext .js,.jsx .",
         "data:import": "node seeder",
         "data:destroy": "node seeder -d"
