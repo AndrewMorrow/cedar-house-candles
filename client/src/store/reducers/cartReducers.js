@@ -5,6 +5,7 @@ import {
     CART_SAVE_SHIPPING_ADDRESS,
     UPDATE_TOTAL_PRICE,
     CLEAR_CART,
+    CHANGE_CART_QTY,
 } from "../actions/types";
 
 export const initialState = {
@@ -61,6 +62,18 @@ export const reducer = function (state = initialState, action) {
                 ...state,
                 shippingAddress: action.payload,
             };
+
+        case CHANGE_CART_QTY:
+            const eItem = action.payload.item;
+            const itemExists = state.cartItems.find((x) => x._id === eItem._id);
+
+            if (itemExists) {
+                // console.log(itemExists);
+                itemExists.cartQty = action.payload.qty;
+                return state;
+            }
+            return state;
+
         case UPDATE_TOTAL_PRICE:
             return {
                 ...state,
