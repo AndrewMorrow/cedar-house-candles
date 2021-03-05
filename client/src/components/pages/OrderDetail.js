@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Store } from "../../store";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import { getOrderDetails } from "../../store/actions/orderActions";
 import List from "@material-ui/core/List";
@@ -26,15 +27,19 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        padding: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(6),
-            marginBottom: theme.spacing(6),
-            padding: theme.spacing(3),
-        },
+        padding: theme.spacing(4),
+        margin: "auto",
+        backgroundColor: "#efd9d1",
+        borderRadius: "1.25rem",
+        marginBottom: 20,
     },
+    card: {
+        
+        borderRadius: "1.25rem",
+        padding: theme.spacing(4),
+     
+    },
+
     stepper: {
         padding: theme.spacing(3, 0, 5),
     },
@@ -78,6 +83,7 @@ const OrderDetail = ({ match }) => {
         order.order && (
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
+                    <Card className={classes.card}>
                     <Typography component="h1" variant="h4" align="center">
                         Order Detail
                     </Typography>
@@ -237,6 +243,7 @@ const OrderDetail = ({ match }) => {
                             </Grid>
                         </React.Fragment>
                     </React.Fragment>
+                    </Card>
                 </Paper>
             </main>
         )
