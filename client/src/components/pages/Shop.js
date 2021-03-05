@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -15,7 +15,8 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { getProducts } from "../../store/actions/productActions";
 import { Store } from "../../store";
-import { Paper } from "@material-ui/core";
+import { Paper, Snackbar } from "@material-ui/core";
+import { addToCart } from "../../store/actions/cartActions.js";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -64,9 +65,9 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "1.25rem",
         marginBottom: 20,
     },
-    prices:{
-        marginTop: 12
-    }
+    descCont: {
+        marginBottom: "1rem",
+    },
 }));
 
 export default function Shop(props) {
@@ -76,6 +77,7 @@ export default function Shop(props) {
     const {
         product: { products },
     } = state;
+    const [snackOpen, setSnackOpen] = useState(false);
 
     useEffect(() => {
         getProducts()(dispatch);
@@ -84,6 +86,19 @@ export default function Shop(props) {
 
     const handleButtonClick = (newRoute) => {
         history.push(newRoute);
+    };
+
+    const addToCartHandler = (product) => {
+        addToCart(product, 1)(dispatch);
+        setSnackOpen(true);
+    };
+
+    const handleSnackClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setSnackOpen(false);
     };
 
     return (
@@ -105,45 +120,117 @@ export default function Shop(props) {
                                         sm={6}
                                         md={4}
                                     >
-                                        <Card
-                                            onClick={() =>
-                                                handleButtonClick(
-                                                    `/product/${card._id}`
-                                                )
-                                            }
-                                            className={classes.card}
-                                        >
+                                        <Card className={classes.card}>
                                             <CardMedia
                                                 className={classes.cardMedia}
                                                 image={card.image}
                                                 title={card.name}
+                                                onClick={() =>
+                                                    handleButtonClick(
+                                                        `/product/${card._id}`
+                                                    )
+                                                }
                                             />
                                             <CardContent
                                                 className={classes.cardContent}
                                             >
-                                                <div>
+                                                <div
+                                                    className={classes.descCont}
+                                                >
                                                     <Typography
                                                         gutterBottom
                                                         variant="h5"
                                                         component="h2"
+                                                        onClick={() =>
+                                                            handleButtonClick(
+                                                                `/product/${card._id}`
+                                                            )
+                                                        }
                                                     >
                                                         {card.name}
                                                     </Typography>
-                                                    <Typography align="left">
+                                                    <Typography
+                                                        align="left"
+                                                        onClick={() =>
+                                                            handleButtonClick(
+                                                                `/product/${card._id}`
+                                                            )
+                                                        }
+                                                    >
                                                         {card.description}
                                                     </Typography>
                                                 </div>
 
-                                                <Typography
-                                                    className={classes.prices}
+                                                <Grid
+                                                    container
+                                                    alignItems="center"
+                                                    justify="center"
                                                 >
-                                                    <b>Price: $</b>
-                                                    {card.price}
-                                                </Typography>
+                                                    <Grid item xs={6}>
+                                                        <Typography
+                                                            className={
+                                                                classes.prices
+                                                            }
+                                                            style={{
+                                                                display: "flex",
+                                                            }}
+                                                            onClick={() =>
+                                                                handleButtonClick(
+                                                                    `/product/${card._id}`
+                                                                )
+                                                            }
+                                                        >
+                                                            <b>
+                                                                Price: $
+                                                                {card.price}
+                                                            </b>
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        {card.countInStock >
+                                                        0 ? (
+                                                            <Button
+                                                                style={{
+                                                                    display:
+                                                                        "flex",
+                                                                }}
+                                                                variant="contained"
+                                                                color="secondary"
+                                                                size="small"
+                                                                onClick={() =>
+                                                                    addToCartHandler(
+                                                                        card
+                                                                    )
+                                                                }
+                                                            >
+                                                                Add to Cart
+                                                            </Button>
+                                                        ) : (
+                                                            <Button
+                                                                style={{
+                                                                    display:
+                                                                        "flex",
+                                                                }}
+                                                                variant="text"
+                                                                color="secondary"
+                                                                size="small"
+                                                            >
+                                                                Out of Stock
+                                                            </Button>
+                                                        )}
+                                                        <Snackbar
+                                                            open={snackOpen}
+                                                            autoHideDuration={
+                                                                1000
+                                                            }
+                                                            onClose={
+                                                                handleSnackClose
+                                                            }
+                                                            message="Product Added to Cart"
+                                                        ></Snackbar>
+                                                    </Grid>
+                                                </Grid>
                                             </CardContent>
-                                            <CardActions
-                                                className={classes.cardAction}
-                                            ></CardActions>
                                         </Card>
                                     </Grid>
                                 ))}
