@@ -31,15 +31,17 @@ export const reducer = function (state = initialState, action) {
             if (existItem) {
                 // console.log(existItem);
                 if (itemCartQty + existItem.cartQty > existItem.countInStock) {
+                    console.log("if exist");
                     existItem.cartQty = existItem.countInStock;
                     return state;
                 } else {
-                    existItem.cartQty++;
+                    console.log("exists else");
+                    existItem.cartQty = existItem.cartQty + itemCartQty;
                     return state;
                 }
             } else {
                 item.cartQty = itemCartQty;
-
+                console.log("else");
                 return {
                     ...state,
                     cartItems: [...state.cartItems, item],

@@ -119,7 +119,7 @@ const ProductDetail = ({ match }) => {
             return;
         }
 
-        setOpen(false);
+        setSnackOpen(false);
     };
 
     const handleChange = (event, eItem) => {
@@ -200,9 +200,9 @@ const ProductDetail = ({ match }) => {
                                 </Button>
                                 <Snackbar
                                     open={snackOpen}
-                                    autoHideDuration={6000}
+                                    autoHideDuration={1000}
                                     onClose={handleSnackClose}
-                                    message="Product Added"
+                                    message="Product Added to Cart"
                                 ></Snackbar>
                             </div>
 
