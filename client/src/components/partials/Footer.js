@@ -5,7 +5,6 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
-import { FaAddressCard } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 
 function Copyright() {
@@ -24,8 +23,9 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     footer: {
         padding: theme.spacing(3, 2),
+        marginTop: "1.2rem",
 
-        backgroundColor: '#efd9d1',
+        backgroundColor: "#efd9d1",
     },
     iconsContainer: {
         display: "flex",

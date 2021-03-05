@@ -57,7 +57,7 @@ router.post(
 
 // @desc        Update order to paid
 // @route       GET /api/orders/:id/pay
-// @access      Private
+// @access      Public
 router.put(
     "/order/:id/pay",
     catchError(async (req, res) => {
@@ -103,7 +103,7 @@ router.get(
 
 // @desc        Get order by id
 // @route       GET /api/orders/:id
-// @access      Private
+// @access      Public
 router.get(
     "/order/:id",
     catchError(async (req, res) => {

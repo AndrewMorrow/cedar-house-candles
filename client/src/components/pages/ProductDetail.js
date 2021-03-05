@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getProduct } from "../../store/actions/productActions";
 import { Store } from "../../store";
 import {
@@ -13,7 +13,6 @@ import {
     Select,
     Container,
 } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import { changeCartQty, addToCart } from "../../store/actions/cartActions.js";
 

@@ -7,9 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@material-ui/core";
 import { Store } from "../../store";
 import { logoutUser } from "../../store/actions/authActions";
@@ -17,7 +16,7 @@ import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: "2rem",
+        marginBottom: "1.5rem",
         display: "flex",
         alignContent: "center",
     },
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
     appBar: {
         backgroundColor: "#999b84",
-        padding: "1rem",
+        padding: ".5rem",
     },
 }));
 

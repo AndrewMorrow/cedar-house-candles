@@ -38,7 +38,7 @@ router.get(
 
 // @desc        Update order to paid
 // @route       GET /api/orders/:id/pay
-// @access      Private
+// @access      Public
 router.put(
     "/product/:id/updateqty",
     catchError(async (req, res) => {

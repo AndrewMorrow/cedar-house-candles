@@ -1,15 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-    Grid,
-    Paper,
-    Typography,
-    ButtonBase,
-    Button,
-    CardContent,
-    CardActions,
-    Card,
-} from "@material-ui/core";
+import { Paper, Typography, CardContent, Card } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(4),
         margin: "auto",
         maxWidth: 950,
-        backgroundColor: '#efd9d1',
+        backgroundColor: "#efd9d1",
         borderRadius: "3.25rem",
         marginBottom: 20,
     },
