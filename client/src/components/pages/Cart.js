@@ -26,6 +26,7 @@ import {
     addToCart,
     removeFromCart,
 } from "../../store/actions/cartActions.js";
+import SelectComp from "../subComponents/SelectComp";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -94,9 +95,9 @@ const Cart = ({ match, location, history }) => {
         changeCartQty(event.target.value, eItem)(dispatch);
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
 
     // const handleOpen = () => {
     //     setOpen(true);
@@ -196,47 +197,12 @@ const Cart = ({ match, location, history }) => {
                                                             </div>
                                                         </TableCell>
                                                         <TableCell align="center">
-                                                            <Select
-                                                                labelId="demo-controlled-open-select-label"
-                                                                id="demo-controlled-open-select"
-                                                                open={open}
-                                                                onClose={
-                                                                    handleClose
+                                                            <SelectComp
+                                                                item={item}
+                                                                handleChange={
+                                                                    handleChange
                                                                 }
-                                                                onOpen={() =>
-                                                                    setOpen(
-                                                                        true
-                                                                    )
-                                                                }
-                                                                value={
-                                                                    item.cartQty
-                                                                }
-                                                                onChange={(e) =>
-                                                                    handleChange(
-                                                                        e,
-                                                                        item
-                                                                    )
-                                                                }
-                                                            >
-                                                                {[
-                                                                    ...Array(
-                                                                        item.countInStock
-                                                                    ).keys(),
-                                                                ].map((x) => (
-                                                                    <MenuItem
-                                                                        key={
-                                                                            x +
-                                                                            1
-                                                                        }
-                                                                        value={
-                                                                            x +
-                                                                            1
-                                                                        }
-                                                                    >
-                                                                        {x + 1}{" "}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </Select>
+                                                            />
                                                         </TableCell>
                                                         <TableCell align="right">
                                                             $
