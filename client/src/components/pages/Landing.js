@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
     title: {
         margin: theme.spacing(4, 0, 2),
         fontFamily: "Old Standard TT",
-        color: '#214c1f'
+        color: "#214c1f",
     },
     paper: {
         padding: theme.spacing(4),
         margin: "auto",
         maxWidth: 950,
-        backgroundColor: '#efd9d1',
+        backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
         marginBottom: 20,
     },
@@ -82,7 +82,7 @@ const Landing = (props) => {
                             align="center"
                             className={classes.title}
                         >
-                            <b>Collection</b>
+                            <b>Autumn Collection</b>
                         </Typography>
                     </Container>
                     <Container className={classes.container}>
@@ -93,33 +93,38 @@ const Landing = (props) => {
                         >
                             {products &&
                                 products.length > 0 &&
-                                products.filter(item => item.productCollection === "stander").map((product) => (
-                                    <GridListTile
-                                        key={product.image}
-                                        cols={product.cols || 1}
-                                    >
-                                        <img
-                                            src={product.image}
-                                            alt={product.name}
-                                        />
-                                        <GridListTileBar
-                                            title={product.name}
-                                            actionIcon={
-                                                <IconButton
-                                                    onClick={() =>
-                                                        handleButtonClick(
-                                                            `/product/${product._id}`
-                                                        )
-                                                    }
-                                                    aria-label={`info about ${product.name}`}
-                                                    className={classes.icon}
-                                                >
-                                                    <InfoIcon />
-                                                </IconButton>
-                                            }
-                                        />
-                                    </GridListTile>
-                                ))}
+                                products
+                                    .filter(
+                                        (item) =>
+                                            item.productCollection === "Autumn"
+                                    )
+                                    .map((product) => (
+                                        <GridListTile
+                                            key={product.image}
+                                            cols={product.cols || 1}
+                                        >
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                            />
+                                            <GridListTileBar
+                                                title={product.name}
+                                                actionIcon={
+                                                    <IconButton
+                                                        onClick={() =>
+                                                            handleButtonClick(
+                                                                `/product/${product._id}`
+                                                            )
+                                                        }
+                                                        aria-label={`info about ${product.name}`}
+                                                        className={classes.icon}
+                                                    >
+                                                        <InfoIcon />
+                                                    </IconButton>
+                                                }
+                                            />
+                                        </GridListTile>
+                                    ))}
                         </GridList>
                     </Container>
                     <Container>
@@ -129,7 +134,7 @@ const Landing = (props) => {
                             align="center"
                             className={classes.title}
                         >
-                            <b>Best Seller</b>
+                            <b>Best Sellers</b>
                         </Typography>
                     </Container>
                     <Container className={classes.container}>
@@ -139,27 +144,29 @@ const Landing = (props) => {
                                 cols={2}
                                 style={{ height: "auto" }}
                             ></GridListTile>
-                            {products.filter(item => item.isBestSeller).map((tile) => (
-                                <GridListTile key={tile.image}>
-                                    <img src={tile.image} alt={tile.name} />
-                                    <GridListTileBar
-                                        title={tile.name}
-                                        actionIcon={
-                                            <IconButton
-                                                onClick={() =>
-                                                    handleButtonClick(
-                                                        `/product/${tile._id}`
-                                                    )
-                                                }
-                                                aria-label={`info about ${tile.name}`}
-                                                className={classes.icon}
-                                            >
-                                                <InfoIcon />
-                                            </IconButton>
-                                        }
-                                    />
-                                </GridListTile>
-                            ))}
+                            {products
+                                .filter((item) => item.isBestSeller)
+                                .map((tile) => (
+                                    <GridListTile key={tile.image}>
+                                        <img src={tile.image} alt={tile.name} />
+                                        <GridListTileBar
+                                            title={tile.name}
+                                            actionIcon={
+                                                <IconButton
+                                                    onClick={() =>
+                                                        handleButtonClick(
+                                                            `/product/${tile._id}`
+                                                        )
+                                                    }
+                                                    aria-label={`info about ${tile.name}`}
+                                                    className={classes.icon}
+                                                >
+                                                    <InfoIcon />
+                                                </IconButton>
+                                            }
+                                        />
+                                    </GridListTile>
+                                ))}
                         </GridList>
                     </Container>
                 </Paper>

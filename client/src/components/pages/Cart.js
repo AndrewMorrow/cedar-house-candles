@@ -27,6 +27,7 @@ import {
     removeFromCart,
 } from "../../store/actions/cartActions.js";
 import SelectComp from "../subComponents/SelectComp";
+import DialogComp from "../subComponents/DialogComp";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -70,7 +71,7 @@ function subtotal(items) {
 const Cart = ({ match, location, history }) => {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
-    const [open, setOpen] = React.useState(false);
+    const [dialogOpen, setDialogOpen] = React.useState(false);
     const {
         cart: { cartItems },
     } = state;
@@ -95,9 +96,13 @@ const Cart = ({ match, location, history }) => {
         changeCartQty(event.target.value, eItem)(dispatch);
     };
 
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
+    const handleDialogOpen = () => {
+        setDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    };
 
     // const handleOpen = () => {
     //     setOpen(true);
@@ -243,21 +248,54 @@ const Cart = ({ match, location, history }) => {
                                                 ${ccyFormat(invoiceSubtotal)}
                                             </TableCell>
                                             <TableCell align="center">
-                                                <Button
-                                                    className={classes.button}
-                                                    onClick={() =>
-                                                        handleButtonClick(
-                                                            `/checkout`
-                                                        )
+                                                {state.auth.isAuthenticated ? (
+                                                    <Button
+                                                        className={
+                                                            classes.button
+                                                        }
+                                                        onClick={() =>
+                                                            handleButtonClick(
+                                                                `/checkout`
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            cartItems.length ===
+                                                                0 && true
+                                                        }
+                                                        variant="contained"
+                                                    >
+                                                        <b>
+                                                            Proceed to Checkout
+                                                        </b>
+                                                    </Button>
+                                                ) : (
+                                                    <Button
+                                                        className={
+                                                            classes.button
+                                                        }
+                                                        onClick={
+                                                            handleDialogOpen
+                                                        }
+                                                        disabled={
+                                                            cartItems.length ===
+                                                                0 && true
+                                                        }
+                                                        variant="contained"
+                                                    >
+                                                        <b>
+                                                            Proceed to Checkout
+                                                        </b>
+                                                    </Button>
+                                                )}
+                                                <DialogComp
+                                                    handleDialogOpen={
+                                                        handleDialogOpen
                                                     }
-                                                    disabled={
-                                                        cartItems.length ===
-                                                            0 && true
+                                                    dialogOpen={dialogOpen}
+                                                    handleDialogClose={
+                                                        handleDialogClose
                                                     }
-                                                    variant="contained"
-                                                >
-                                                    <b>Proceed to Checkout</b>
-                                                </Button>
+                                                />
                                             </TableCell>
                                         </TableRow>
                                     </TableBody>
