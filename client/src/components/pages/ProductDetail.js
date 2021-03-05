@@ -11,6 +11,7 @@ import {
     Paper,
     MenuItem,
     Select,
+    Container,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
@@ -140,11 +141,13 @@ const ProductDetail = ({ match }) => {
             <Paper className={classes.paper}>
                 <Grid container>
                     <Grid item className={classes.image} md={6}>
+                        <Container>
                         <img
                             className={classes.img}
                             src={product.image}
                             alt={product.description}
                         />
+                        </Container>
                     </Grid>
                     <Grid
                         className={classes.info}
