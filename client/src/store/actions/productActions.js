@@ -1,3 +1,4 @@
+import axios from "axios";
 import { GET_PRODUCTS, GET_PRODUCT } from "./types";
 
 export const getProducts = () => async (dispatch) => {
@@ -23,6 +24,16 @@ export const getProduct = (id) => async (dispatch) => {
         dispatch({
             type: GET_PRODUCT,
             payload: data,
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const updateProductStock = async (productId, qty) => {
+    try {
+        await axios.put(`/api/products/product/${productId}/updateqty`, {
+            qty: qty,
         });
     } catch (error) {
         console.error(error);

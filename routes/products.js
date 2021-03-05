@@ -44,7 +44,9 @@ router.put(
     "/product/:id/updateqty",
     catchError(async (req, res) => {
         const product = await Product.findById(req.params.id);
-        const purchasedQty = req.body.purchasedQty;
+        console.log("product Update");
+        console.log(req.body.qty);
+        const purchasedQty = req.body.qty;
 
         if (product) {
             product.countInStock = product.countInStock - purchasedQty;
