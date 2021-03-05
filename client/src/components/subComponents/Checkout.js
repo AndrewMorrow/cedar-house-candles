@@ -21,6 +21,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
 import { CLEAR_CART, ORDER_PAY_RESET } from "../../store/actions/types";
 import { useHistory } from "react-router-dom";
+import { updateProductStock } from "../../store/actions/productActions";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -146,6 +147,9 @@ export default function Checkout() {
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult);
         payOrder(order.order._id, paymentResult)(dispatch);
+        order.order.orderItems.map((item) =>
+            updateProductStock(item._id, item.cartQty)
+        );
         history.push(`/orderthanks/${order.order._id}`);
         dispatch({
             type: CLEAR_CART,

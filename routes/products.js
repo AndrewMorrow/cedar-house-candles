@@ -37,23 +37,28 @@ router.get(
     })
 );
 
-// @desc        fetch all matching ids
-// @route       GET /api/products/:id
-// @access      Public
-// router.get(
-//     "/:id",
-//     catchError(async (req, res) => {
-//         const product = await Product.find({
-//             _id: { $in: someArray },
-//         });
+// @desc        Update order to paid
+// @route       GET /api/orders/:id/pay
+// @access      Private
+router.put(
+    "/product/:id/updateqty",
+    catchError(async (req, res) => {
+        const product = await Product.findById(req.params.id);
+        console.log("product Update");
+        console.log(req.body.qty);
+        const purchasedQty = req.body.qty;
 
-//         if (product) {
-//             res.status(200).json(product);
-//         } else {
-//             res.status(404);
-//             throw new Error("Product not found");
-//         }
-//     })
-// );
+        if (product) {
+            product.countInStock = product.countInStock - purchasedQty;
+
+            const updatedProduct = await product.save();
+
+            res.json(updatedProduct);
+        } else {
+            res.status(404);
+            throw new Error("Order Not Found");
+        }
+    })
+);
 
 export default router;
