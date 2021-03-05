@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import { PayPalButton } from "react-paypal-button-v2";
 import { payOrder } from "../../store/actions/orderActions";
+import BackdropComp from "../subComponents/BackdropComp";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -34,10 +35,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 20,
     },
     card: {
-        
         borderRadius: "1.25rem",
         padding: theme.spacing(4),
-     
     },
 
     stepper: {
@@ -78,171 +77,188 @@ const OrderDetail = ({ match }) => {
     }
 
     return order.loading || !order.order ? (
-        <h1>Loading... </h1>
+        <BackdropComp />
     ) : (
         order.order && (
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
                     <Card className={classes.card}>
-                    <Typography component="h1" variant="h4" align="center">
-                        Order Detail
-                    </Typography>
-                    <React.Fragment>
+                        <Typography component="h1" variant="h4" align="center">
+                            Order Detail
+                        </Typography>
                         <React.Fragment>
-                            {order.order.isPaid ? (
-                                <Typography variant="h5" gutterBottom>
-                                    Thank you for your order.
-                                </Typography>
-                            ) : (
-                                <Typography variant="h5" gutterBottom>
-                                    Please proceed with payment below to
-                                    complete order.
-                                </Typography>
-                            )}
-                            {order.order.isPaid ? (
-                                <Typography variant="subtitle1">
-                                    Your order number is{" "}
-                                    {order.order && order.order._id}.
-                                </Typography>
-                            ) : (
-                                <></>
-                            )}
-                            <Typography variant="h6" gutterBottom>
-                                Order summary
-                            </Typography>
-                            <List disablePadding>
-                                {order.order &&
-                                    order.order.orderItems.map((product) => (
-                                        <ListItem
-                                            className={classes.listItem}
-                                            key={product.name}
-                                        >
-                                            <ListItemText
-                                                primary={product.name}
-                                                // secondary={
-                                                //     product.itemProductType
-                                                // }
-                                            />
-
-                                            <Typography variant="body2">
-                                                {product.cartQty} x $
-                                                {ccyFormat(product.price)}
-                                            </Typography>
-                                        </ListItem>
-                                    ))}
-                                <ListItem className={classes.listItem}>
-                                    <ListItemText primary="Shipping" />
+                            <React.Fragment>
+                                {order.order.isPaid ? (
+                                    <Typography variant="h5" gutterBottom>
+                                        Thank you for your order.
+                                    </Typography>
+                                ) : (
+                                    <Typography variant="h5" gutterBottom>
+                                        Please proceed with payment below to
+                                        complete order.
+                                    </Typography>
+                                )}
+                                {order.order.isPaid ? (
                                     <Typography variant="subtitle1">
-                                        $
-                                        {order.order &&
-                                            ccyFormat(
-                                                order.order.shippingPrice
-                                            )}
+                                        Your order number is{" "}
+                                        {order.order && order.order._id}.
                                     </Typography>
-                                </ListItem>
-                                <ListItem className={classes.listItem}>
-                                    <ListItemText primary="Total" />
-                                    <Typography
-                                        variant="subtitle1"
-                                        className={classes.total}
-                                    >
-                                        $
-                                        {order.order &&
-                                            ccyFormat(order.order.totalPrice)}
-                                    </Typography>
-                                </ListItem>
-                            </List>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={7}>
-                                    <Typography
-                                        variant="h6"
-                                        gutterBottom
-                                        className={classes.title}
-                                    >
-                                        Shipping Info
-                                    </Typography>
-                                    <Typography gutterBottom>
-                                        {order.order.shippingAddress
-                                            .firstName &&
-                                            order.order.shippingAddress
-                                                .firstName}{" "}
-                                        {order.order.shippingAddress.lastName &&
-                                            order.order.shippingAddress
-                                                .lastName}
-                                    </Typography>
-                                    <Typography gutterBottom>
-                                        {!order.order.shippingAddress
-                                            .address1 && (
-                                            <h6>
-                                                No Shipping Address Available
-                                            </h6>
+                                ) : (
+                                    <></>
+                                )}
+                                <Typography variant="h6" gutterBottom>
+                                    Order summary
+                                </Typography>
+                                <List disablePadding>
+                                    {order.order &&
+                                        order.order.orderItems.map(
+                                            (product) => (
+                                                <ListItem
+                                                    className={classes.listItem}
+                                                    key={product.name}
+                                                >
+                                                    <ListItemText
+                                                        primary={product.name}
+                                                        // secondary={
+                                                        //     product.itemProductType
+                                                        // }
+                                                    />
+
+                                                    <Typography variant="body2">
+                                                        {product.cartQty} x $
+                                                        {ccyFormat(
+                                                            product.price
+                                                        )}
+                                                    </Typography>
+                                                </ListItem>
+                                            )
                                         )}
-                                        {order.order.shippingAddress.address1}
-                                        <br />
-                                        {order.order.shippingAddress.address2 &&
-                                            order.order.shippingAddress
-                                                .address2}
-                                        {order.order.shippingAddress
-                                            .address2 && <br />}
-                                        {order.order.shippingAddress.city &&
-                                            `${order.order.shippingAddress.city},`}{" "}
-                                        {
-                                            order.order.shippingAddress
-                                                .addressState
-                                        }{" "}
-                                        {order.order.shippingAddress
-                                            .postalCode &&
-                                            order.order.shippingAddress
-                                                .postalCode}
-                                        <br />
-                                        {order.order.shippingAddress.country &&
-                                            order.order.shippingAddress.country}
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    container
-                                    direction="column"
-                                    xs={12}
-                                    sm={5}
-                                >
-                                    {!order.order.isPaid ? (
-                                        <Typography
-                                            variant="h6"
-                                            gutterBottom
-                                            className={classes.title}
-                                        >
-                                            Proceed to payment
+                                    <ListItem className={classes.listItem}>
+                                        <ListItemText primary="Shipping" />
+                                        <Typography variant="subtitle1">
+                                            $
+                                            {order.order &&
+                                                ccyFormat(
+                                                    order.order.shippingPrice
+                                                )}
                                         </Typography>
-                                    ) : (
+                                    </ListItem>
+                                    <ListItem className={classes.listItem}>
+                                        <ListItemText primary="Total" />
                                         <Typography
-                                            variant="h6"
-                                            gutterBottom
-                                            className={classes.title}
+                                            variant="subtitle1"
+                                            className={classes.total}
                                         >
-                                            Payment Complete
-                                        </Typography>
-                                    )}
-                                    <Grid container>
-                                        {order.loading && <h1>Loading...</h1>}
-                                        {order.order && !order.order.isPaid ? (
-                                            <PayPalButton
-                                                amount={
-                                                    order.order &&
+                                            $
+                                            {order.order &&
+                                                ccyFormat(
                                                     order.order.totalPrice
-                                                }
-                                                onSuccess={
-                                                    successPaymentHandler
-                                                }
-                                            />
+                                                )}
+                                        </Typography>
+                                    </ListItem>
+                                </List>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={7}>
+                                        <Typography
+                                            variant="h6"
+                                            gutterBottom
+                                            className={classes.title}
+                                        >
+                                            Shipping Info
+                                        </Typography>
+                                        <Typography gutterBottom>
+                                            {order.order.shippingAddress
+                                                .firstName &&
+                                                order.order.shippingAddress
+                                                    .firstName}{" "}
+                                            {order.order.shippingAddress
+                                                .lastName &&
+                                                order.order.shippingAddress
+                                                    .lastName}
+                                        </Typography>
+                                        <Typography gutterBottom>
+                                            {!order.order.shippingAddress
+                                                .address1 && (
+                                                <h6>
+                                                    No Shipping Address
+                                                    Available
+                                                </h6>
+                                            )}
+                                            {
+                                                order.order.shippingAddress
+                                                    .address1
+                                            }
+                                            <br />
+                                            {order.order.shippingAddress
+                                                .address2 &&
+                                                order.order.shippingAddress
+                                                    .address2}
+                                            {order.order.shippingAddress
+                                                .address2 && <br />}
+                                            {order.order.shippingAddress.city &&
+                                                `${order.order.shippingAddress.city},`}{" "}
+                                            {
+                                                order.order.shippingAddress
+                                                    .addressState
+                                            }{" "}
+                                            {order.order.shippingAddress
+                                                .postalCode &&
+                                                order.order.shippingAddress
+                                                    .postalCode}
+                                            <br />
+                                            {order.order.shippingAddress
+                                                .country &&
+                                                order.order.shippingAddress
+                                                    .country}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        container
+                                        direction="column"
+                                        xs={12}
+                                        sm={5}
+                                    >
+                                        {!order.order.isPaid ? (
+                                            <Typography
+                                                variant="h6"
+                                                gutterBottom
+                                                className={classes.title}
+                                            >
+                                                Proceed to payment
+                                            </Typography>
                                         ) : (
-                                            <h4>Thank you for your payment!</h4>
+                                            <Typography
+                                                variant="h6"
+                                                gutterBottom
+                                                className={classes.title}
+                                            >
+                                                Payment Complete
+                                            </Typography>
                                         )}
+                                        <Grid container>
+                                            {order.loading && <BackdropComp />}
+                                            {order.order &&
+                                            !order.order.isPaid ? (
+                                                <PayPalButton
+                                                    amount={
+                                                        order.order &&
+                                                        order.order.totalPrice
+                                                    }
+                                                    onSuccess={
+                                                        successPaymentHandler
+                                                    }
+                                                />
+                                            ) : (
+                                                <h4>
+                                                    Thank you for your payment!
+                                                </h4>
+                                            )}
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
+                            </React.Fragment>
                         </React.Fragment>
-                    </React.Fragment>
                     </Card>
                 </Paper>
             </main>

@@ -21,6 +21,7 @@ import {
     Button,
 } from "@material-ui/core";
 import { listMyOrders } from "../../store/actions/orderActions";
+import BackdropComp from "../subComponents/BackdropComp";
 
 const useStyles = makeStyles((theme) => ({
     itemImage: {
@@ -72,94 +73,105 @@ const Dashboard = (props) => {
 
     return (
         <main>
-            <Grid container>
-                <Grid container item sm={12}>
-                    <Container maxWidth="md">
-                        <TableContainer component={Paper}>
-                            <Table
-                                className={classes.table}
-                                aria-label="spanning table"
-                            >
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align="center" colSpan={5}>
-                                            <Typography
-                                                variant="h4"
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                }}
+            {order.loading ? (
+                <BackdropComp />
+            ) : (
+                <Grid container>
+                    <Grid container item sm={12}>
+                        <Container maxWidth="md">
+                            <TableContainer component={Paper}>
+                                <Table
+                                    className={classes.table}
+                                    aria-label="spanning table"
+                                >
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell
+                                                align="center"
+                                                colSpan={5}
                                             >
-                                                Order History
-                                            </Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell align="center">
-                                            <Typography variant="h6">
-                                                Order ID
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Typography variant="h6">
-                                                Order Date
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Typography variant="h6">
-                                                Status
-                                            </Typography>
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {order.orders && order.orders.length > 0 ? (
-                                        order.orders.map((item) => (
-                                            <>
-                                                <TableRow key={item._id}>
-                                                    <TableCell align="center">
-                                                        <div>
-                                                            <Link
-                                                                to={`/order/${item._id}`}
-                                                            >
-                                                                <Typography variant="h6">
-                                                                    {item._id}
-                                                                </Typography>
-                                                            </Link>
-                                                        </div>
-                                                    </TableCell>
+                                                <Typography
+                                                    variant="h4"
+                                                    style={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent:
+                                                            "center",
+                                                    }}
+                                                >
+                                                    Order History
+                                                </Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell align="center">
+                                                <Typography variant="h6">
+                                                    Order ID
+                                                </Typography>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Typography variant="h6">
+                                                    Order Date
+                                                </Typography>
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <Typography variant="h6">
+                                                    Status
+                                                </Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {order.orders &&
+                                        order.orders.length > 0 ? (
+                                            order.orders.map((item) => (
+                                                <>
+                                                    <TableRow key={item._id}>
+                                                        <TableCell align="center">
+                                                            <div>
+                                                                <Link
+                                                                    to={`/order/${item._id}`}
+                                                                >
+                                                                    <Typography variant="h6">
+                                                                        {
+                                                                            item._id
+                                                                        }
+                                                                    </Typography>
+                                                                </Link>
+                                                            </div>
+                                                        </TableCell>
 
-                                                    <TableCell align="center">
-                                                        <Typography variant="h6">
-                                                            {new Date(
-                                                                item.createdAt
-                                                            ).toLocaleDateString()}
-                                                        </Typography>
-                                                    </TableCell>
-                                                    <TableCell align="center">
-                                                        <Typography variant="h6">
-                                                            {item.paymentResult
-                                                                ? item
-                                                                      .paymentResult
-                                                                      .status
-                                                                : `NOT COMPLETED`}
-                                                        </Typography>
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-                                        ))
-                                    ) : (
-                                        <h5 style={{ marginLeft: "1rem" }}>
-                                            No order history for this user
-                                        </h5>
-                                    )}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Container>
+                                                        <TableCell align="center">
+                                                            <Typography variant="h6">
+                                                                {new Date(
+                                                                    item.createdAt
+                                                                ).toLocaleDateString()}
+                                                            </Typography>
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            <Typography variant="h6">
+                                                                {item.paymentResult
+                                                                    ? item
+                                                                          .paymentResult
+                                                                          .status
+                                                                    : `NOT COMPLETED`}
+                                                            </Typography>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </>
+                                            ))
+                                        ) : (
+                                            <h5 style={{ marginLeft: "1rem" }}>
+                                                No order history for this user
+                                            </h5>
+                                        )}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Container>
+                    </Grid>
                 </Grid>
-            </Grid>
+            )}
         </main>
     );
 };
