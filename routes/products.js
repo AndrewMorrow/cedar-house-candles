@@ -44,16 +44,16 @@ router.put(
     "/product/:id/updateqty",
     catchError(async (req, res) => {
         const product = await Product.findById(req.params.id);
-        console.log("product Update");
-        console.log(req.body.qty);
         const purchasedQty = req.body.qty;
 
         if (product) {
-            product.countInStock = product.countInStock - purchasedQty;
+            if (product.countInStock > 0) {
+                product.countInStock = product.countInStock - purchasedQty;
 
-            const updatedProduct = await product.save();
+                const updatedProduct = await product.save();
 
-            res.json(updatedProduct);
+                res.json(updatedProduct);
+            }
         } else {
             res.status(404);
             throw new Error("Order Not Found");

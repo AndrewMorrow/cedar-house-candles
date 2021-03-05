@@ -42,7 +42,7 @@ const products = [
             "The cool mint and creamy vanilla in this candle will have you ready to bundle up and head for the North Pole.",
         category: "Candles",
         price: 16.0,
-        countInStock: 3,
+        countInStock: 25,
         rating: 2.5,
         numReviews: 17,
         cols: 2,
