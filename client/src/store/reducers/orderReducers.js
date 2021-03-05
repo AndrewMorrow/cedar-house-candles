@@ -63,6 +63,7 @@ export const reducer = function (state = initialState, action) {
             };
         case ORDER_PAY_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 success: true,
             };
