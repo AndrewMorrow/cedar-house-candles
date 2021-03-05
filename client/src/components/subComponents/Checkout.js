@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -36,14 +37,17 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        padding: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(6),
-            marginBottom: theme.spacing(6),
-            padding: theme.spacing(3),
-        },
+        padding: theme.spacing(4),
+        margin: "auto",
+        backgroundColor: "#efd9d1",
+        borderRadius: "1.25rem",
+        marginBottom: 20,
+    },
+    card: {
+        
+        borderRadius: "1.25rem",
+        padding: theme.spacing(4),
+     
     },
     stepper: {
         padding: theme.spacing(3, 0, 5),
@@ -154,6 +158,7 @@ export default function Checkout() {
 
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
+                    <Card className={classes.card}>
                     <Typography component="h1" variant="h4" align="center">
                         Checkout
                     </Typography>
@@ -342,6 +347,7 @@ export default function Checkout() {
                             </React.Fragment>
                         )}
                     </React.Fragment>
+                    </Card>
                 </Paper>
             </main>
         </React.Fragment>
