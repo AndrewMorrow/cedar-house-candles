@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: theme.spacing(4, 0, 2),
-        fontFamily: 'Old Standard TT',
-        color: '#214c1f',
+        fontFamily: "Old Standard TT",
+        color: "#3B3D3D",
     },
     paper: {
         backgroundColor: '#efd9d1',
