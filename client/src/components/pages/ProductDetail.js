@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getProduct } from "../../store/actions/productActions";
-import { Store } from "../../store";
+import React, { useContext, useEffect, useState } from 'react';
+import { getProduct } from '../../store/actions/productActions';
+import { Store } from '../../store';
 import {
     Grid,
     Button,
@@ -12,9 +12,9 @@ import {
     MenuItem,
     Select,
     Container,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { changeCartQty, addToCart } from "../../store/actions/cartActions.js";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { changeCartQty, addToCart } from '../../store/actions/cartActions.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -23,69 +23,73 @@ const useStyles = makeStyles((theme) => ({
         height: 450,
     },
     img: {
-        margin: "auto",
-        display: "flex",
-        maxWidth: "100%",
-        maxHeight: "100%",
+        margin: 'auto',
+        display: 'flex',
+        maxWidth: '100%',
+        maxHeight: '100%',
     },
     info: {
         // display: "flex",
-        alignItems: "flex-start",
+        alignItems: 'flex-start',
     },
     productName: {
-        margin: "0px 0px 1rem 0px",
-        marginBottom: "2rem",
+        margin: '0px 0px 1rem 0px',
+        marginBottom: '2rem',
     },
     aboutTitle: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
     price: {
-        fontSize: "1.3rem",
-        marginRight: "2rem",
-        fontWeight: "bold",
+        fontSize: '1.3rem',
+        marginRight: '2rem',
+        fontWeight: 'bold',
     },
     priceInfo: {
-        display: "flex",
-        marginBottom: "1rem",
-        alignItems: "center",
+        display: 'flex',
+        marginBottom: '1rem',
+        alignItems: 'center',
     },
 
     listItem: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
         paddingLeft: 0,
     },
     listHeader: {
-        textDecoration: "underline",
+        textDecoration: 'underline',
         paddingLeft: 0,
     },
     description: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
     infoWrapper: {
-        border: "3px double",
-        borderRadius: "15px",
-        padding: "10px",
-        marginBottom: "2rem",
-        backgroundColor: "#f4eeed",
+        border: '3px double',
+        borderRadius: '15px',
+        padding: '10px',
+        marginBottom: '2rem',
+        backgroundColor: '#f4eeed',
     },
     marginBottom: {
-        marginBottom: "1rem",
+        marginBottom: '1rem',
     },
     paper: {
-        padding: theme.spacing(4),
-        margin: "auto",
-        maxWidth: 950,
-        backgroundColor: "#efd9d1",
-        borderRadius: "1.25rem",
-        marginBottom: 20,
+        marginTop: theme.spacing(3),
+        backgroundColor: '#efd9d1',
+        borderRadius: '1.25rem',
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(4),
+        },
     },
     button: {
-        height: "40px",
-        color: "white",
-        backgroundColor: "#999b84",
+        height: '40px',
+        color: 'white',
+        backgroundColor: '#999b84',
 
-        "&:focus": {
-            backgroundColor: "transparent",
+        '&:focus': {
+            backgroundColor: 'transparent',
         },
     },
 }));
@@ -113,7 +117,7 @@ const ProductDetail = ({ match }) => {
     };
 
     const handleSnackClose = (event, reason) => {
-        if (reason === "clickaway") {
+        if (reason === 'clickaway') {
             return;
         }
 
@@ -181,7 +185,7 @@ const ProductDetail = ({ match }) => {
                                     onOpen={handleOpen}
                                     value={selectValue}
                                     onChange={(e) => handleChange(e, product)}
-                                    style={{ marginRight: "1rem" }}
+                                    style={{ marginRight: '1rem' }}
                                 >
                                     {[
                                         ...Array(product.countInStock).keys(),

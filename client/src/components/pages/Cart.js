@@ -109,6 +109,7 @@ const Cart = ({ match, location, history }) => {
 
     return (
         <main>
+            <Container>
             <Paper className={classes.paper}>
                 <Grid container>
                     <Grid container item sm={12}>
@@ -304,6 +305,7 @@ const Cart = ({ match, location, history }) => {
                     </Grid>
                 </Grid>
             </Paper>
+            </Container>
         </main>
     );
 };

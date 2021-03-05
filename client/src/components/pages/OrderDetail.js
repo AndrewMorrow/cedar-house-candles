@@ -28,11 +28,16 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        padding: theme.spacing(4),
-        margin: "auto",
+        marginTop: theme.spacing(3),
         backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
-        marginBottom: 20,
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+          marginTop: theme.spacing(6),
+          marginBottom: theme.spacing(6),
+          padding: theme.spacing(4),
+        },
     },
     card: {
         borderRadius: "1.25rem",

@@ -23,9 +23,16 @@ const useStyles = makeStyles((theme) => ({
         height: "100px",
     },
     paperCon: {
-        padding: "20px",
-        display: "flex",
-        justifyContent: "space-between",
+        marginTop: theme.spacing(3),
+        backgroundColor: "#efd9d1",
+        borderRadius: "1.25rem",
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+          marginTop: theme.spacing(6),
+          marginBottom: theme.spacing(6),
+          padding: theme.spacing(4),
+        },
     },
     quantNum: {
         display: "flex",

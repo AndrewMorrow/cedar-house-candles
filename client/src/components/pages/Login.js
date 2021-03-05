@@ -19,14 +19,17 @@ import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 import { Paper, Card } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
-        padding: theme.spacing(6),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        marginTop: theme.spacing(3),
         backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
-    },
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+          marginTop: theme.spacing(6),
+          marginBottom: theme.spacing(6),
+          padding: theme.spacing(4),
+        },
+      },
     card: {
         padding: theme.spacing(2),
         display: "flex",
@@ -89,7 +92,7 @@ const Login = (props) => {
 
     return (
         <main>
-            <Container component="main" maxWidth="xs">
+            <Container compo maxWidth="xs">
                 <CssBaseline />
                 <Paper className={classes.paper}>
                     <Card className={classes.card}>

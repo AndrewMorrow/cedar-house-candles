@@ -71,11 +71,13 @@ const Landing = (props) => {
     };
 
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <main className={classes.main}>
+        
+        <main className={classes.main}>
+            <Container>
+         
                 <Paper className={classes.paper} elevation10>
-                    <Container>
+                    
+                    <Container maxWidth="xs">
                         <Typography
                             variant="h2"
                             component="h2"
@@ -170,8 +172,9 @@ const Landing = (props) => {
                         </GridList>
                     </Container>
                 </Paper>
+                </Container>
             </main>
-        </React.Fragment>
+       
     );
 };
 
