@@ -39,12 +39,12 @@ export default function AlertDialogSlide({
                 </DialogContent>
                 <DialogActions>
                     <Link to="/login">
-                        <Button onClick={handleDialogClose} color="primary">
+                        <Button onClick={handleDialogClose} color="secondary">
                             Login
                         </Button>
                     </Link>
                     <Link to="/checkout">
-                        <Button onClick={handleDialogClose} color="primary">
+                        <Button onClick={handleDialogClose} color="secondary">
                             Continue as Guest
                         </Button>
                     </Link>
