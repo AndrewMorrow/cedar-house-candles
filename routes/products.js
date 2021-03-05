@@ -47,7 +47,10 @@ router.put(
         const purchasedQty = req.body.qty;
 
         if (product) {
-            if (product.countInStock > 0) {
+            if (
+                product.countInStock > 0 &&
+                product.countInStock - purchasedQty >= 0
+            ) {
                 product.countInStock = product.countInStock - purchasedQty;
 
                 const updatedProduct = await product.save();
