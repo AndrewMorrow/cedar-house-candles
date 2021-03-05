@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     gridList: {
-        width: 700,
+        width: 600,
     },
     container: {
         display: "flex",
@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: "wrap",
         justifyContent: "space-around",
         overflow: "hidden",
+        paddingLeft: "0",
+        paddingRight: "0",
     },
     icon: {
         color: "rgba(255, 255, 255, 0.54)",
@@ -42,12 +44,19 @@ const useStyles = makeStyles((theme) => ({
         color: "#214c1f",
     },
     paper: {
-        padding: theme.spacing(4),
         margin: "auto",
         maxWidth: 950,
         backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
-        marginBottom: 20,
+
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(4),
+        },
     },
 }));
 
@@ -71,12 +80,9 @@ const Landing = (props) => {
     };
 
     return (
-        
         <main className={classes.main}>
             <Container>
-         
                 <Paper className={classes.paper} elevation10>
-                    
                     <Container maxWidth="xs">
                         <Typography
                             variant="h2"
@@ -172,9 +178,8 @@ const Landing = (props) => {
                         </GridList>
                     </Container>
                 </Paper>
-                </Container>
-            </main>
-       
+            </Container>
+        </main>
     );
 };
 
