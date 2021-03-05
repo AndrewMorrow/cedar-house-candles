@@ -191,13 +191,23 @@ const ProductDetail = ({ match }) => {
                                         </MenuItem>
                                     ))}
                                 </Select>
-                                <Button
-                                    className={classes.button}
-                                    variant="contained"
-                                    onClick={addToCartHandler}
-                                >
-                                    <b> Add to Cart </b>
-                                </Button>
+                                {product.countInStock !== 0 ? (
+                                    <Button
+                                        className={classes.button}
+                                        variant="contained"
+                                        onClick={addToCartHandler}
+                                    >
+                                        <b> Add to Cart </b>
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        className={classes.button}
+                                        variant="contained"
+                                        disabled
+                                    >
+                                        <b> Out of Stock </b>
+                                    </Button>
+                                )}
                                 <Snackbar
                                     open={snackOpen}
                                     autoHideDuration={1000}
