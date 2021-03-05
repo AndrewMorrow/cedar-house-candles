@@ -120,7 +120,6 @@ export default function Checkout() {
     }
 
     const handleNext = (e) => {
-        // console.log(e);
         setActiveStep(activeStep + 1);
         if (e.target.innerText.toLowerCase() === "place order") {
             createOrder({

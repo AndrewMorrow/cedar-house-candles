@@ -46,8 +46,8 @@ const Dashboard = (props) => {
         if (!state.auth.isAuthenticated) props.history.push("/login");
 
         API.getUser()
-            .then((res) => console.log(res))
-            .catch((err) => console.log({ err }));
+            .then((res) => {})
+            .catch((err) => {});
     }, [state, props]);
 
     useEffect(() => {

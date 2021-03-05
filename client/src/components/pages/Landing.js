@@ -59,7 +59,7 @@ const Landing = (props) => {
         product: { products },
     } = state;
 
-    console.log({ state, props });
+    // console.log({ state, props });
 
     useEffect(() => {
         getProducts()(dispatch);

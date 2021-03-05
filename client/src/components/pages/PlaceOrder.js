@@ -59,10 +59,6 @@ const PlaceOrder = ({ history }) => {
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
 
-    useEffect(() => {
-        console.log(state.cart.paymentMethod);
-    }, []);
-
     function ccyFormat(num) {
         return `${num.toFixed(2)}`;
     }

@@ -77,7 +77,6 @@ const Cart = ({ match, location, history }) => {
     } = state;
 
     useEffect(() => {
-        // console.log(cartItems);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
         // eslint-disable-next-line
     }, [cartItems]);

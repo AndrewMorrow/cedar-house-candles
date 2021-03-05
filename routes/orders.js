@@ -23,7 +23,6 @@ router.post(
             userId,
         } = req.body;
 
-        // console.log(userId);
         if (orderItems && orderItems.length === 0) {
             res.status(400);
             throw new Error("no order items");
@@ -38,7 +37,6 @@ router.post(
                     totalPrice,
                 });
 
-                // console.log(orderItems);
                 const createdOrder = await order.save();
                 res.status(201).json(createdOrder);
             } else {
@@ -50,7 +48,6 @@ router.post(
                     totalPrice,
                 });
 
-                // console.log(orderItems);
                 const createdOrder = await order.save();
                 res.status(201).json(createdOrder);
             }
@@ -92,11 +89,9 @@ router.get(
     "/myorders",
     requiresAuth,
     catchError(async (req, res) => {
-        // console.log(req);
         const orders = await Order.find({
             user: req.user._id,
         });
-        // console.log(orders);
         if (orders) {
             res.json(orders);
         } else {
@@ -112,8 +107,6 @@ router.get(
 router.get(
     "/order/:id",
     catchError(async (req, res) => {
-        // console.log(req.params.id);
-        console.log("Id Route");
         const order = await Order.findById(req.params.id);
 
         if (order) {

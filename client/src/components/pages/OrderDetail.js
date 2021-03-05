@@ -68,7 +68,6 @@ const OrderDetail = ({ match }) => {
     }, [order.success]);
 
     const successPaymentHandler = (paymentResult) => {
-        console.log(paymentResult);
         payOrder(order.order._id, paymentResult)(dispatch);
     };
 

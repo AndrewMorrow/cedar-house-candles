@@ -104,9 +104,7 @@ const ProductDetail = ({ match }) => {
 
     useEffect(() => {
         getProduct(productId)(dispatch);
-        // console.log(product);
         // eslint-disable-next-line
-        // console.log(state.cart.cartItems);
     }, []);
 
     const addToCartHandler = (e) => {
@@ -142,11 +140,11 @@ const ProductDetail = ({ match }) => {
                 <Grid container>
                     <Grid item className={classes.image} md={6}>
                         <Container>
-                        <img
-                            className={classes.img}
-                            src={product.image}
-                            alt={product.description}
-                        />
+                            <img
+                                className={classes.img}
+                                src={product.image}
+                                alt={product.description}
+                            />
                         </Container>
                     </Grid>
                     <Grid

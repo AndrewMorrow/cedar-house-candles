@@ -1,25 +1,25 @@
-import React, { useContext } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import { withRouter, Link } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { FaUserCircle } from 'react-icons/fa';
-import { Button } from '@material-ui/core';
-import { Store } from '../../store';
-import { logoutUser } from '../../store/actions/authActions';
-import { ORDER_LIST_MY_RESET } from '../../store/actions/types';
+import React, { useContext } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import { withRouter, Link } from "react-router-dom";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { FaUserCircle } from "react-icons/fa";
+import { Button } from "@material-ui/core";
+import { Store } from "../../store";
+import { logoutUser } from "../../store/actions/authActions";
+import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: '2rem',
-        display: 'flex',
-        alignContent: 'center',
+        marginBottom: "2rem",
+        display: "flex",
+        alignContent: "center",
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     headerOptions: {
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
     },
     button: {
         margin: "0px 8px",
@@ -43,25 +43,24 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
         fontSize: 25,
 
-        '&:focus': {
-            backgroundColor: 'transparent',
+        "&:focus": {
+            backgroundColor: "transparent",
         },
     },
     appBar: {
-        backgroundColor: '#999b84',
-        padding: '1rem',
+        backgroundColor: "#999b84",
+        padding: "1rem",
     },
 }));
 
 const Navbar = (props) => {
     const { state, dispatch } = useContext(Store);
-    console.log(state);
     const { history } = props;
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -80,7 +79,6 @@ const Navbar = (props) => {
         dispatch({
             type: ORDER_LIST_MY_RESET,
         });
-        // console.log(props.history)
         logoutUser(props.history)(dispatch);
     };
 
@@ -92,10 +90,10 @@ const Navbar = (props) => {
                         <Button
                             variant="text"
                             className={classes.button2}
-                            onClick={() => handleMenuClick('/')}
+                            onClick={() => handleMenuClick("/")}
                         >
-                            {' '}
-                            <b>Cedar House Candles</b>{' '}
+                            {" "}
+                            <b>Cedar House Candles</b>{" "}
                         </Button>
                     </Typography>
 
@@ -115,31 +113,31 @@ const Navbar = (props) => {
                                     id="menu-appbar"
                                     anchorEl={anchorEl}
                                     anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
+                                        vertical: "top",
+                                        horizontal: "right",
                                     }}
                                     keepMounted
                                     transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
+                                        vertical: "top",
+                                        horizontal: "right",
                                     }}
                                     open={open}
                                     onClose={() => setAnchorEl(null)}
                                 >
                                     <MenuItem
-                                        onClick={() => handleMenuClick('/shop')}
+                                        onClick={() => handleMenuClick("/shop")}
                                     >
                                         Shop
                                     </MenuItem>
                                     <MenuItem
                                         onClick={() =>
-                                            handleMenuClick('/about')
+                                            handleMenuClick("/about")
                                         }
                                     >
                                         About
                                     </MenuItem>
                                     <MenuItem
-                                        onClick={() => handleMenuClick('/cart')}
+                                        onClick={() => handleMenuClick("/cart")}
                                     >
                                         Cart
                                     </MenuItem>
@@ -148,11 +146,11 @@ const Navbar = (props) => {
                                             <MenuItem
                                                 onClick={() =>
                                                     handleMenuClick(
-                                                        '/dashboard'
+                                                        "/dashboard"
                                                     )
                                                 }
                                             >
-                                                Dashboard{' '}
+                                                Dashboard{" "}
                                             </MenuItem>
                                             <MenuItem
                                                 onClick={() => onLogoutClick()}
@@ -163,10 +161,10 @@ const Navbar = (props) => {
                                     ) : (
                                         <MenuItem
                                             onClick={() =>
-                                                handleMenuClick('/login')
+                                                handleMenuClick("/login")
                                             }
                                         >
-                                            {' '}
+                                            {" "}
                                             Login
                                         </MenuItem>
                                     )}
@@ -176,19 +174,19 @@ const Navbar = (props) => {
                             <div className={classes.headerOptions}>
                                 <Button
                                     className={classes.button}
-                                    onClick={() => handleButtonClick('/shop')}
+                                    onClick={() => handleButtonClick("/shop")}
                                 >
                                     Shop
                                 </Button>
                                 <Button
                                     className={classes.button}
-                                    onClick={() => handleButtonClick('/about')}
+                                    onClick={() => handleButtonClick("/about")}
                                 >
                                     About
                                 </Button>
                                 <Button
                                     className={classes.button}
-                                    onClick={() => handleButtonClick('/cart')}
+                                    onClick={() => handleButtonClick("/cart")}
                                 >
                                     Cart
                                 </Button>
@@ -198,10 +196,10 @@ const Navbar = (props) => {
                                         <Button
                                             className={classes.button}
                                             onClick={() =>
-                                                handleButtonClick('/dashboard')
+                                                handleButtonClick("/dashboard")
                                             }
                                         >
-                                            Dashboard{' '}
+                                            Dashboard{" "}
                                         </Button>
                                         <Button
                                             className={classes.button}
@@ -214,10 +212,10 @@ const Navbar = (props) => {
                                     <Button
                                         className={classes.button}
                                         onClick={() =>
-                                            handleButtonClick('/login')
+                                            handleButtonClick("/login")
                                         }
                                     >
-                                        {' '}
+                                        {" "}
                                         Login
                                     </Button>
                                 )}

@@ -29,19 +29,15 @@ export const reducer = function (state = initialState, action) {
             const existItem = state.cartItems.find((x) => x._id === item._id);
 
             if (existItem) {
-                // console.log(existItem);
                 if (itemCartQty + existItem.cartQty > existItem.countInStock) {
-                    console.log("if exist");
                     existItem.cartQty = existItem.countInStock;
                     return state;
                 } else {
-                    console.log("exists else");
                     existItem.cartQty = existItem.cartQty + itemCartQty;
                     return state;
                 }
             } else {
                 item.cartQty = itemCartQty;
-                console.log("else");
                 return {
                     ...state,
                     cartItems: [...state.cartItems, item],
@@ -71,7 +67,6 @@ export const reducer = function (state = initialState, action) {
             const itemExists = state.cartItems.find((x) => x._id === eItem._id);
 
             if (itemExists) {
-                // console.log(itemExists);
                 itemExists.cartQty = action.payload.qty;
                 return state;
             }
