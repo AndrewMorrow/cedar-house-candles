@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
     stepper: {
         padding: theme.spacing(3, 0, 5),
-        
     },
     buttons: {
         display: "flex",
@@ -56,19 +55,17 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-        color: 'white',
-        fontWeight: 'bold',
-        backgroundColor: '#999b84',
-        
+        color: "white",
+        fontWeight: "bold",
+        backgroundColor: "#999b84",
+
         // '&:focus': {
         //     backgroundColor: 'transparent',
         // },
-        '&:hover': {
-            backgroundColor: '#d8ac9c',
-            
+        "&:hover": {
+            backgroundColor: "#d8ac9c",
         },
     },
-
 }));
 
 const steps = ["Shipping address", "Payment method", "Complete Payment"];
@@ -127,6 +124,9 @@ export default function Checkout() {
                 shippingPrice: cart.shippingPrice,
                 totalPrice: cart.totalPrice,
             })(dispatch);
+            dispatch({
+                type: CLEAR_CART,
+            });
         }
     };
 
@@ -157,8 +157,10 @@ export default function Checkout() {
                         className={classes.stepper}
                     >
                         {steps.map((label) => (
-                            <Step  key={label}>
-                                <StepLabel className={classes.step}>{label}</StepLabel>
+                            <Step key={label}>
+                                <StepLabel className={classes.step}>
+                                    {label}
+                                </StepLabel>
                             </Step>
                         ))}
                     </Stepper>
