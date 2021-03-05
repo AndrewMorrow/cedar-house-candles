@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     },
     layout: {
         width: "auto",
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: "auto",
@@ -42,17 +42,22 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
-        marginBottom: theme.spacing(3),
+        marginBottom: theme.spacing(2),
         padding: theme.spacing(1),
         [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-          marginTop: theme.spacing(6),
-          marginBottom: theme.spacing(6),
-          padding: theme.spacing(4),
+            marginTop: theme.spacing(4),
+            marginBottom: theme.spacing(4),
+            padding: theme.spacing(2),
         },
-      },
+    },
     card: {
         borderRadius: "1.25rem",
-        padding: theme.spacing(4),
+        padding: theme.spacing(1),
+        [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+            marginTop: theme.spacing(2),
+            marginBottom: theme.spacing(2),
+            padding: theme.spacing(4),
+        },
     },
     stepper: {
         padding: theme.spacing(3, 0, 5),
@@ -162,220 +167,199 @@ export default function Checkout() {
     };
 
     return (
-       
-         
-
-            <main className={classes.layout}>
-                <Paper className={classes.paper}>
-                    <Card className={classes.card}>
-                        <Typography component="h1" variant="h4" align="center">
-                            Checkout
-                        </Typography>
-                        <Stepper
-                            activeStep={activeStep}
-                            className={classes.stepper}
-                        >
-                            {steps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel className={classes.step}>
-                                        {label}
-                                    </StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
-                        <React.Fragment>
-                            {activeStep === steps.length ? (
-                                order.loading || !order.order ? (
-                                    <BackdropComp />
-                                ) : (
-                                    <React.Fragment>
-                                        <Typography variant="h5" gutterBottom>
-                                            Please proceed with payment below to
-                                            complete order.
-                                        </Typography>
-
-                                        <Typography variant="h6" gutterBottom>
-                                            Order summary
-                                        </Typography>
-                                        <List disablePadding>
-                                            {order.order &&
-                                                order.order.orderItems.map(
-                                                    (product) => (
-                                                        <ListItem
-                                                            className={
-                                                                classes.listItem
-                                                            }
-                                                            key={product.name}
-                                                        >
-                                                            <ListItemText
-                                                                primary={
-                                                                    product.name
-                                                                }
-                                                                secondary={
-                                                                    product.itemProductType
-                                                                }
-                                                            />
-
-                                                            <Typography variant="body2">
-                                                                {
-                                                                    product.cartQty
-                                                                }{" "}
-                                                                x $
-                                                                {ccyFormat(
-                                                                    product.price
-                                                                )}
-                                                            </Typography>
-                                                        </ListItem>
-                                                    )
-                                                )}
-                                            <ListItem
-                                                className={classes.listItem}
-                                            >
-                                                <ListItemText primary="Shipping" />
-                                                <Typography variant="subtitle1">
-                                                    $
-                                                    {ccyFormat(
-                                                        cart.shippingPrice
-                                                    )}
-                                                </Typography>
-                                            </ListItem>
-                                            <ListItem
-                                                className={classes.listItem}
-                                            >
-                                                <ListItemText primary="Total" />
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    className={classes.total}
-                                                >
-                                                    $
-                                                    {ccyFormat(orderTotalPrice)}
-                                                </Typography>
-                                            </ListItem>
-                                        </List>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12} sm={7}>
-                                                <Typography
-                                                    variant="h6"
-                                                    gutterBottom
-                                                    className={classes.title}
-                                                >
-                                                    Shipping Info
-                                                </Typography>
-                                                <Typography gutterBottom>
-                                                    {cart.shippingAddress
-                                                        .firstName &&
-                                                        cart.shippingAddress
-                                                            .firstName}{" "}
-                                                    {cart.shippingAddress
-                                                        .lastName &&
-                                                        cart.shippingAddress
-                                                            .lastName}
-                                                </Typography>
-                                                <Typography gutterBottom>
-                                                    {!cart.shippingAddress
-                                                        .address1 && (
-                                                        <h6>
-                                                            No Shipping Address
-                                                            Available
-                                                        </h6>
-                                                    )}
-                                                    {
-                                                        cart.shippingAddress
-                                                            .address1
-                                                    }
-                                                    <br />
-                                                    {cart.shippingAddress
-                                                        .address2 &&
-                                                        cart.shippingAddress
-                                                            .address2}
-                                                    {cart.shippingAddress
-                                                        .address2 && <br />}
-                                                    {cart.shippingAddress
-                                                        .city &&
-                                                        `${cart.shippingAddress.city},`}{" "}
-                                                    {
-                                                        cart.shippingAddress
-                                                            .addressState
-                                                    }{" "}
-                                                    {
-                                                        cart.shippingAddress
-                                                            .postalCode
-                                                    }
-                                                    <br />
-                                                    {
-                                                        cart.shippingAddress
-                                                            .country
-                                                    }
-                                                </Typography>
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                container
-                                                direction="column"
-                                                xs={12}
-                                                sm={5}
-                                            >
-                                                <Typography
-                                                    variant="h6"
-                                                    gutterBottom
-                                                    className={classes.title}
-                                                >
-                                                    Proceed to Payment
-                                                </Typography>
-                                                <Grid container>
-                                                    {order.loading && (
-                                                        <BackdropComp />
-                                                    )}
-                                                    {order.order &&
-                                                    !order.order.isPaid ? (
-                                                        <PayPalButton
-                                                            amount={
-                                                                order.order &&
-                                                                order.order
-                                                                    .totalPrice
-                                                            }
-                                                            onSuccess={
-                                                                successPaymentHandler
-                                                            }
-                                                        />
-                                                    ) : (
-                                                        <h6>
-                                                            Order has been paid!
-                                                        </h6>
-                                                    )}
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    </React.Fragment>
-                                )
+        <main className={classes.layout}>
+            <Paper className={classes.paper}>
+                <Card className={classes.card}>
+                    <Typography component="h1" variant="h4" align="center">
+                        Checkout
+                    </Typography>
+                    <Stepper
+                        activeStep={activeStep}
+                        className={classes.stepper}
+                    >
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel className={classes.step}>
+                                    {label}
+                                </StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    <React.Fragment>
+                        {activeStep === steps.length ? (
+                            order.loading || !order.order ? (
+                                <BackdropComp />
                             ) : (
                                 <React.Fragment>
-                                    {getStepContent(activeStep)}
-                                    <div className={classes.buttons}>
-                                        {activeStep !== 0 && (
-                                            <Button
-                                                onClick={handleBack}
-                                                className={classes.button}
+                                    <Typography variant="h5" gutterBottom>
+                                        Please proceed with payment below to
+                                        complete order.
+                                    </Typography>
+
+                                    <Typography variant="h6" gutterBottom>
+                                        Order summary
+                                    </Typography>
+                                    <List disablePadding>
+                                        {order.order &&
+                                            order.order.orderItems.map(
+                                                (product) => (
+                                                    <ListItem
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                        key={product.name}
+                                                    >
+                                                        <ListItemText
+                                                            primary={
+                                                                product.name
+                                                            }
+                                                            secondary={
+                                                                product.itemProductType
+                                                            }
+                                                        />
+
+                                                        <Typography variant="body2">
+                                                            {product.cartQty} x
+                                                            $
+                                                            {ccyFormat(
+                                                                product.price
+                                                            )}
+                                                        </Typography>
+                                                    </ListItem>
+                                                )
+                                            )}
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText primary="Shipping" />
+                                            <Typography variant="subtitle1">
+                                                ${ccyFormat(cart.shippingPrice)}
+                                            </Typography>
+                                        </ListItem>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText primary="Total" />
+                                            <Typography
+                                                variant="subtitle1"
+                                                className={classes.total}
                                             >
-                                                <b> Back</b>
-                                            </Button>
-                                        )}
+                                                ${ccyFormat(orderTotalPrice)}
+                                            </Typography>
+                                        </ListItem>
+                                    </List>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12} sm={7}>
+                                            <Typography
+                                                variant="h6"
+                                                gutterBottom
+                                                className={classes.title}
+                                            >
+                                                Shipping Info
+                                            </Typography>
+                                            <Typography gutterBottom>
+                                                {cart.shippingAddress
+                                                    .firstName &&
+                                                    cart.shippingAddress
+                                                        .firstName}{" "}
+                                                {cart.shippingAddress
+                                                    .lastName &&
+                                                    cart.shippingAddress
+                                                        .lastName}
+                                            </Typography>
+                                            <Typography gutterBottom>
+                                                {!cart.shippingAddress
+                                                    .address1 && (
+                                                    <h6>
+                                                        No Shipping Address
+                                                        Available
+                                                    </h6>
+                                                )}
+                                                {cart.shippingAddress.address1}
+                                                <br />
+                                                {cart.shippingAddress
+                                                    .address2 &&
+                                                    cart.shippingAddress
+                                                        .address2}
+                                                {cart.shippingAddress
+                                                    .address2 && <br />}
+                                                {cart.shippingAddress.city &&
+                                                    `${cart.shippingAddress.city},`}{" "}
+                                                {
+                                                    cart.shippingAddress
+                                                        .addressState
+                                                }{" "}
+                                                {
+                                                    cart.shippingAddress
+                                                        .postalCode
+                                                }
+                                                <br />
+                                                {cart.shippingAddress.country}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            container
+                                            direction="column"
+                                            xs={12}
+                                            sm={5}
+                                        >
+                                            <Typography
+                                                variant="h6"
+                                                gutterBottom
+                                                className={classes.title}
+                                            >
+                                                Proceed to Payment
+                                            </Typography>
+                                            <Grid container>
+                                                {order.loading && (
+                                                    <BackdropComp />
+                                                )}
+                                                {order.order &&
+                                                !order.order.isPaid ? (
+                                                    <PayPalButton
+                                                        amount={
+                                                            order.order &&
+                                                            order.order
+                                                                .totalPrice
+                                                        }
+                                                        onSuccess={
+                                                            successPaymentHandler
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <h6>
+                                                        Order has been paid!
+                                                    </h6>
+                                                )}
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </React.Fragment>
+                            )
+                        ) : (
+                            <React.Fragment>
+                                {getStepContent(activeStep)}
+                                <div className={classes.buttons}>
+                                    {activeStep !== 0 && (
                                         <Button
-                                            variant="contained"
-                                            onClick={handleNext}
+                                            onClick={handleBack}
                                             className={classes.button}
                                         >
-                                            {activeStep === steps.length - 1
-                                                ? "Place order"
-                                                : "Next"}
+                                            <b> Back</b>
                                         </Button>
-                                    </div>
-                                </React.Fragment>
-                            )}
-                        </React.Fragment>
-                    </Card>
-                </Paper>
-            </main>
-       
+                                    )}
+                                    <Button
+                                        variant="contained"
+                                        onClick={handleNext}
+                                        className={classes.button}
+                                    >
+                                        {activeStep === steps.length - 1
+                                            ? "Place order"
+                                            : "Next"}
+                                    </Button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </React.Fragment>
+                </Card>
+            </Paper>
+        </main>
     );
 }
