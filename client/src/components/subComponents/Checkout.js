@@ -101,7 +101,6 @@ export default function Checkout() {
             .reduce((sum, i) => sum + i, cart.shippingPrice);
     }
 
-    const totalPrice = total(cart.cartItems);
     var orderTotalPrice = 0;
     if (order.order) {
         orderTotalPrice = total(order.order.orderItems);

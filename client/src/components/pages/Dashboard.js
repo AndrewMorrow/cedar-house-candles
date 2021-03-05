@@ -1,9 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Store } from "../../store";
-import { logoutUser } from "../../store/actions/authActions";
-import { ORDER_LIST_MY_RESET } from "../../store/actions/types";
 import API from "../../utils/apiHelper.js";
-import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -17,8 +14,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    IconButton,
-    Button,
 } from "@material-ui/core";
 import { listMyOrders } from "../../store/actions/orderActions";
 import BackdropComp from "../subComponents/BackdropComp";
@@ -44,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
     const classes = useStyles();
     const { state, dispatch } = useContext(Store);
-    const user = state.auth.user;
+    // const user = state.auth.user;
     const { order } = state;
 
     useEffect(() => {
@@ -64,12 +59,6 @@ const Dashboard = (props) => {
         }
         // eslint-disable-next-line
     }, []);
-
-    const onLogoutClick = (e) => {
-        e.preventDefault();
-
-        logoutUser(props.history)(dispatch);
-    };
 
     return (
         <main>
