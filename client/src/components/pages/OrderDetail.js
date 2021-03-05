@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     },
     layout: {
         width: "auto",
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: "auto",
@@ -28,15 +28,15 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(2),
         backgroundColor: "#efd9d1",
         borderRadius: "1.25rem",
-        marginBottom: theme.spacing(3),
+        marginBottom: theme.spacing(2),
         padding: theme.spacing(1),
         [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-          marginTop: theme.spacing(6),
-          marginBottom: theme.spacing(6),
-          padding: theme.spacing(4),
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(4),
         },
     },
     card: {
@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
+    },
+    listItem: {
+        paddingLeft: "0",
+        paddingRight: "0",
     },
 }));
 
@@ -87,7 +91,12 @@ const OrderDetail = ({ match }) => {
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
                     <Card className={classes.card}>
-                        <Typography component="h1" variant="h4" align="center">
+                        <Typography
+                            component="h1"
+                            variant="h4"
+                            align="center"
+                            style={{ marginBottom: "1rem" }}
+                        >
                             Order Detail
                         </Typography>
                         <React.Fragment>
@@ -97,7 +106,11 @@ const OrderDetail = ({ match }) => {
                                         Thank you for your order.
                                     </Typography>
                                 ) : (
-                                    <Typography variant="h5" gutterBottom>
+                                    <Typography
+                                        variant="h5"
+                                        gutterBottom
+                                        align="center"
+                                    >
                                         Please proceed with payment below to
                                         complete order.
                                     </Typography>
@@ -110,7 +123,11 @@ const OrderDetail = ({ match }) => {
                                 ) : (
                                     <></>
                                 )}
-                                <Typography variant="h6" gutterBottom>
+                                <Typography
+                                    variant="h6"
+                                    gutterBottom
+                                    align="center"
+                                >
                                     Order summary
                                 </Typography>
                                 <List disablePadding>
