@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
         border: "3px double",
         borderRadius: "15px",
         // padding: "1rem",
-        marginBottom: "2rem",
+
         backgroundColor: "#f4eeed",
         maxWidth: "800px",
     },
@@ -92,7 +92,12 @@ const Landing = (props) => {
         <main className={classes.main}>
             <Container>
                 <Paper className={classes.paper} elevation10>
-                    <Grid container spacing="2">
+                    <Grid
+                        container
+                        spacing="2"
+                        alignItems="center"
+                        alignContent="center"
+                    >
                         <Grid item md={6} className={classes.collectionWrapper}>
                             <div className={classes.infoWrapper}>
                                 <Container>
