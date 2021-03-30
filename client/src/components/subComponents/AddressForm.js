@@ -146,7 +146,7 @@ export default function AddressForm() {
                                 onChange={(e) => handleCheckboxChange(e)}
                             />
                         }
-                        label="Use this address for payment details"
+                        label="Save information for future purchases"
                     />
                 </Grid>
             </Grid>
